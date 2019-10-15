@@ -22,7 +22,7 @@
 DROP TABLE IF EXISTS "public"."admin";
 CREATE TABLE "public"."admin" (
   "id" int4 NOT NULL,
-  "system" varchar(50) COLLATE "pg_catalog"."default",
+  "username" varchar(50) COLLATE "pg_catalog"."default",
   "password" varchar(50) COLLATE "pg_catalog"."default",
   "name" varchar(50) COLLATE "pg_catalog"."default",
   "phone" varchar(11) COLLATE "pg_catalog"."default"
@@ -31,11 +31,14 @@ CREATE TABLE "public"."admin" (
 -- pgsql 自增id设置
 DROP TABLE IF EXISTS "public"."admin";
 CREATE TABLE "public"."admin" (
-  id SERIAL primary key,
+  "id" SERIAL primary key,
   "system" varchar(50) COLLATE "pg_catalog"."default",
   "password" varchar(50) COLLATE "pg_catalog"."default",
   "name" varchar(50) COLLATE "pg_catalog"."default",
-  "phone" varchar(11) COLLATE "pg_catalog"."default"
+  "phone" varchar(11) COLLATE "pg_catalog"."default",
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 -- ----------------------------
@@ -43,7 +46,7 @@ CREATE TABLE "public"."admin" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."advertisement";
 CREATE TABLE "public"."advertisement" (
-  "id" int4 NOT NULL,
+   "id" SERIAL primary key,
   "exam_type_id" int4,
   "ad_type" int4,
   "ad_title" varchar(50) COLLATE "pg_catalog"."default",
@@ -51,9 +54,9 @@ CREATE TABLE "public"."advertisement" (
   "ad_comment" varchar(255) COLLATE "pg_catalog"."default",
   "creater_admin_id" int4,
   "status" int4,
-  "createtime" time(6),
-  "updatetime" time(6),
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -62,15 +65,15 @@ CREATE TABLE "public"."advertisement" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."collection";
 CREATE TABLE "public"."collection" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "topic_id" int4,
   "exam_tips_id" int4,
   "person_id" int4,
   "advertisement_id" int4,
   "status" int4,
-  "createtime" time(6),
-  "updatetime" time(6),
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -79,14 +82,14 @@ CREATE TABLE "public"."collection" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."exam_note";
 CREATE TABLE "public"."exam_note" (
-  "id" int4 NOT NULL,
+   "id" SERIAL primary key,
   "my_exam_id" int4,
   "exam_user" varchar(50) COLLATE "pg_catalog"."default",
   "exam_pass" varchar(50) COLLATE "pg_catalog"."default",
   "note_comment" varchar(255) COLLATE "pg_catalog"."default",
-  "create_time" timestamp(6) NOT NULL,
-  "update_time" timestamp(6) NOT NULL,
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -95,19 +98,19 @@ CREATE TABLE "public"."exam_note" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."exam_tips";
 CREATE TABLE "public"."exam_tips" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "exam_type_id" int4,
   "exam_url" varchar(255) COLLATE "pg_catalog"."default",
   "exam_tips_title" varchar(255) COLLATE "pg_catalog"."default",
   "exam_comment" varchar(255) COLLATE "pg_catalog"."default",
-  "signup_begintime" time(6),
-  "signup_endtime" time(6),
-  "exam_begintime" time(6),
-  "exam_endtime" time(6),
-  "click_number" int4,
-  "create_time" timestamp(6) NOT NULL,
-  "update_time" timestamp(6) NOT NULL,
-  "deleted" int4
+  "signup_begintime" timestamp(6) NOT NULL,
+  "signup_endtime" timestamp(6) NOT NULL,
+  "exam_begintime" timestamp(6) NOT NULL,
+  "exam_endtime" timestamp(6) NOT NULL,
+  "click_number" int4 NOT NULL DEFAULT 0,
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -116,9 +119,12 @@ CREATE TABLE "public"."exam_tips" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."exam_type";
 CREATE TABLE "public"."exam_type" (
-  "id" int4 NOT NULL,
+   "id" SERIAL primary key,
   "exam_name" varchar(255) COLLATE "pg_catalog"."default",
-  "parent_id" int4
+  "parent_id" int4,
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -127,7 +133,7 @@ CREATE TABLE "public"."exam_type" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."forum";
 CREATE TABLE "public"."forum" (
-  "id" int4 NOT NULL,
+   "id" SERIAL primary key,
   "forum_name" varchar(50) COLLATE "pg_catalog"."default",
   "exam_type_id" int4,
   "forum_description" varchar(255) COLLATE "pg_catalog"."default",
@@ -135,9 +141,9 @@ CREATE TABLE "public"."forum" (
   "person_or_admin" int4,
   "join_number" int4,
   "click_number" int4,
-  "create_time" time(6),
-  "update_time" time(6),
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -146,13 +152,13 @@ CREATE TABLE "public"."forum" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."my_exam";
 CREATE TABLE "public"."my_exam" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "exam_id" int4,
   "person_id" int4,
   "status" int4,
-  "createtime" timestamp(6) NOT NULL,
-  "updatatime" timestamp(6) NOT NULL,
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -161,7 +167,7 @@ CREATE TABLE "public"."my_exam" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."person";
 CREATE TABLE "public"."person" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "name" varchar(50) COLLATE "pg_catalog"."default",
   "username" varchar(50) COLLATE "pg_catalog"."default",
   "password" varchar(50) COLLATE "pg_catalog"."default",
@@ -171,9 +177,9 @@ CREATE TABLE "public"."person" (
   "education" varchar(50) COLLATE "pg_catalog"."default",
   "industry" varchar(50) COLLATE "pg_catalog"."default",
   "employ_status" int4,
-  "create_time" timestamp(6) NOT NULL,
-  "update_time" timestamp(6) NOT NULL,
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -182,13 +188,13 @@ CREATE TABLE "public"."person" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."person_join_forum";
 CREATE TABLE "public"."person_join_forum" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "person_id" int4,
   "forum_id" int4,
   "join_status" int4,
-  "createtime" timestamp(6) NOT NULL,
-  "updatetime" timestamp(6) NOT NULL,
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -197,16 +203,16 @@ CREATE TABLE "public"."person_join_forum" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."record";
 CREATE TABLE "public"."record" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "person_id" int4,
   "topic_id" int4,
   "reply_id" int4,
   "forum_id" int4,
   "person_join_forum_id" int4,
   "join_status" int4,
-  "createtime" timestamp(6) NOT NULL,
-  "updatetime" timestamp(6) NOT NULL,
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -215,13 +221,16 @@ CREATE TABLE "public"."record" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."reply";
 CREATE TABLE "public"."reply" (
-  "id" int4 NOT NULL,
+  "id" SERIAL primary key,
   "topic_id" int4,
   "reply_comment" varchar(255) COLLATE "pg_catalog"."default",
   "reply_time" time(6),
   "replier_person_id" int4,
   "reply_praise_number" int4,
-  "status" int4
+  "status" int4,
+    "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -230,7 +239,7 @@ CREATE TABLE "public"."reply" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."topic";
 CREATE TABLE "public"."topic" (
-  "id" int4 NOT NULL,
+   "id" SERIAL primary key,
   "forum_id" int4,
   "exam_type_id" int4,
   "creater_person_id" int4,
@@ -239,9 +248,9 @@ CREATE TABLE "public"."topic" (
   "reply_number" int4,
   "praise_number" int4,
   "click_number" int4,
-  "create_time" time(6),
-  "update_time" time(6),
-  "deleted" int4
+  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 
@@ -250,9 +259,12 @@ CREATE TABLE "public"."topic" (
 -- ----------------------------
 DROP TABLE IF EXISTS "public"."topic_label";
 CREATE TABLE "public"."topic_label" (
-  "id" int4 NOT NULL,
+ "id" SERIAL primary key,
   "topic_id" int4,
-  "exam_type_id" int4
+  "exam_type_id" int4,
+    "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4  NOT NULL DEFAULT 0
 )
 ;
 

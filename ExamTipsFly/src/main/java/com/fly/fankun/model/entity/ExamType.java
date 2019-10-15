@@ -2,16 +2,12 @@ package com.fly.fankun.model.entity;
 
 import java.util.Date;
 
-public class Admin {
+public class ExamType {
     private Integer id;
 
-    private String username;
+    private String examName;
 
-    private String password;
-
-    private String name;
-
-    private String phone;
+    private Integer parentId;
 
     private Date createtime;
 
@@ -27,36 +23,20 @@ public class Admin {
         this.id = id;
     }
 
-    public String getUsername() {
-        return username;
+    public String getExamName() {
+        return examName;
     }
 
-    public void setUsername(String username) {
-        this.username = username;
+    public void setExamName(String examName) {
+        this.examName = examName;
     }
 
-    public String getPassword() {
-        return password;
+    public Integer getParentId() {
+        return parentId;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public String getPhone() {
-        return phone;
-    }
-
-    public void setPhone(String phone) {
-        this.phone = phone;
+    public void setParentId(Integer parentId) {
+        this.parentId = parentId;
     }
 
     public Date getCreatetime() {
