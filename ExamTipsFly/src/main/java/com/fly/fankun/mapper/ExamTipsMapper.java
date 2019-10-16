@@ -1,6 +1,8 @@
-package com.fly.fankun.dao;
+package com.fly.fankun.mapper;
 
 import com.fly.fankun.model.entity.ExamTips;
+import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
+import java.util.List;
 
 public interface ExamTipsMapper {
     int deleteByPrimaryKey(Integer id);
@@ -14,4 +16,6 @@ public interface ExamTipsMapper {
     int updateByPrimaryKeySelective(ExamTips record);
 
     int updateByPrimaryKey(ExamTips record);
+
+    List<ExamTipsOutVo> list();
 }

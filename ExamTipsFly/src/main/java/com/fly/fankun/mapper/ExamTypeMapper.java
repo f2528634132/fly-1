@@ -1,4 +1,4 @@
-package com.fly.fankun.dao;
+package com.fly.fankun.mapper;
 
 import com.fly.fankun.model.entity.ExamType;
 

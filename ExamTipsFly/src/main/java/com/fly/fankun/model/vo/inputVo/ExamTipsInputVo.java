@@ -1,135 +1,41 @@
-package com.fly.fankun.model.entity;
+package com.fly.fankun.model.vo.inputVo;
 
+import io.swagger.annotations.ApiModel;
+import io.swagger.annotations.ApiModelProperty;
+import java.io.Serializable;
 import java.util.Date;
+import javax.validation.constraints.NotNull;
+import lombok.Data;
 
-public class ExamTips {
+@Data
+@ApiModel(value = "考试信息编辑入参对象")
+public class ExamTipsInputVo implements Serializable {
+    private static final long serialVersionUID = 5534917385484045497L;
+    @ApiModelProperty("主键id,修改时传入")
     private Integer id;
-
+    @ApiModelProperty("考试类型id")
+    @NotNull(message = "考试类型不能为空")
     private Integer examTypeId;
-
+    @ApiModelProperty("考试网址url")
+    @NotNull(message = "考试网址url不能为空")
     private String examUrl;
-
+    @ApiModelProperty("考试信息标题")
+    @NotNull(message = "考试信息标题不能为空")
     private String examTipsTitle;
-
+    @ApiModelProperty("考试信息内容")
+    @NotNull(message = "考试信息内容不能为空")
     private String examComment;
-
+    @ApiModelProperty("报名开始时间")
+    @NotNull(message = "报名开始时间不能为空")
     private Date signupBegintime;
-
+    @ApiModelProperty("报名结束时间")
+    @NotNull(message = "报名结束时间不能为空")
     private Date signupEndtime;
-
+    @ApiModelProperty("考试开始时间")
+    @NotNull(message = "考试开始时间不能为空")
     private Date examBegintime;
-
+    @ApiModelProperty("考试结束时间")
+    @NotNull(message = "考试结束时间不能为空")
     private Date examEndtime;
 
-    private Integer clickNumber;
-
-    private Date createTime;
-
-    private Date updateTime;
-
-    private Integer deleted;
-
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public Integer getExamTypeId() {
-        return examTypeId;
-    }
-
-    public void setExamTypeId(Integer examTypeId) {
-        this.examTypeId = examTypeId;
-    }
-
-    public String getExamUrl() {
-        return examUrl;
-    }
-
-    public void setExamUrl(String examUrl) {
-        this.examUrl = examUrl;
-    }
-
-    public String getExamTipsTitle() {
-        return examTipsTitle;
-    }
-
-    public void setExamTipsTitle(String examTipsTitle) {
-        this.examTipsTitle = examTipsTitle;
-    }
-
-    public String getExamComment() {
-        return examComment;
-    }
-
-    public void setExamComment(String examComment) {
-        this.examComment = examComment;
-    }
-
-    public Date getSignupBegintime() {
-        return signupBegintime;
-    }
-
-    public void setSignupBegintime(Date signupBegintime) {
-        this.signupBegintime = signupBegintime;
-    }
-
-    public Date getSignupEndtime() {
-        return signupEndtime;
-    }
-
-    public void setSignupEndtime(Date signupEndtime) {
-        this.signupEndtime = signupEndtime;
-    }
-
-    public Date getExamBegintime() {
-        return examBegintime;
-    }
-
-    public void setExamBegintime(Date examBegintime) {
-        this.examBegintime = examBegintime;
-    }
-
-    public Date getExamEndtime() {
-        return examEndtime;
-    }
-
-    public void setExamEndtime(Date examEndtime) {
-        this.examEndtime = examEndtime;
-    }
-
-    public Integer getClickNumber() {
-        return clickNumber;
-    }
-
-    public void setClickNumber(Integer clickNumber) {
-        this.clickNumber = clickNumber;
-    }
-
-    public Date getCreateTime() {
-        return createTime;
-    }
-
-    public void setCreateTime(Date createTime) {
-        this.createTime = createTime;
-    }
-
-    public Date getUpdateTime() {
-        return updateTime;
-    }
-
-    public void setUpdateTime(Date updateTime) {
-        this.updateTime = updateTime;
-    }
-
-    public Integer getDeleted() {
-        return deleted;
-    }
-
-    public void setDeleted(Integer deleted) {
-        this.deleted = deleted;
-    }
 }

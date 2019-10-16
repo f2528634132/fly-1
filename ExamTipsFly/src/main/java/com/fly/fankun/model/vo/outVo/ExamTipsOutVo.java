@@ -1,4 +1,4 @@
-package com.fly.fankun.model.vo.inputVo;
+package com.fly.fankun.model.vo.outVo;
 
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
@@ -8,9 +8,9 @@ import javax.validation.constraints.NotNull;
 import lombok.Data;
 
 @Data
-@ApiModel(value = "考试信息编辑入参对象")
-public class ExamTipsInputVo implements Serializable {
-    private static final long serialVersionUID = 5534917385484045497L;
+@ApiModel(value = "考试信息编辑显示对象")
+public class ExamTipsOutVo implements Serializable {
+    private static final long serialVersionUID = -4902230193326317453L;
     @ApiModelProperty("主键id,修改时传入")
     private Integer id;
     @ApiModelProperty("考试类型id")

@@ -19,9 +19,9 @@ server:
 spring:
   datasource:
     driver-class-name: org.postgresql.Driver
-    url: jdbc:postgresql://127.0.0.1:5432/exam_notice_fly?allowMultiQueries=true
+    url: jdbc:postgresql://127.0.0.1:5432/exam_tips?allowMultiQueries=true
     username: postgres
-    password: root
+    password: 88888888
     # 以下为数据库连接池配置，比直接使用数据库的要好 https://blog.csdn.net/justlpf/article/details/80728529
 #    type: com.alibaba.druid.pool.DruidDataSource
     druid:

@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fly.fankun.dao.ExamTipsMapper" >
+<mapper namespace="com.fly.fankun.mapper.ExamTipsMapper" >
   <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.ExamTips" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="exam_type_id" property="examTypeId" jdbcType="INTEGER" />
@@ -30,7 +30,7 @@
     delete from exam_tips
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fly.fankun.model.entity.ExamTips" >
+  <insert id="insert" parameterType="com.fly.fankun.model.entity.ExamTips" useGeneratedKeys="true" keyProperty="id">
     insert into exam_tips (id, exam_type_id, exam_url, 
       exam_tips_title, exam_comment, signup_begintime, 
       signup_endtime, exam_begintime, exam_endtime, 
@@ -42,7 +42,7 @@
       #{clickNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=INTEGER})
   </insert>
-  <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.ExamTips" >
+  <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.ExamTips" useGeneratedKeys="true" keyProperty="id">
     insert into exam_tips
     <trim prefix="(" suffix=")" suffixOverrides="," >
       <if test="id != null" >
@@ -185,4 +185,9 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from exam_tips order by update_time desc
+  </select>
 </mapper>

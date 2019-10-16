@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fly.fankun.dao.ExamTypeMapper" >
+<mapper namespace="com.fly.fankun.mapper.ExamTypeMapper" >
   <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.ExamType" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="exam_name" property="examName" jdbcType="VARCHAR" />
