@@ -14,5 +14,5 @@ public interface ExamTipsService {
 
     void editDeleted(Integer id, Integer deleted);
 
-    PageBean<ExamTipsOutVo> queryPage(Integer pageNum, Integer pageSize);
+    PageBean<ExamTipsOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize);
 }

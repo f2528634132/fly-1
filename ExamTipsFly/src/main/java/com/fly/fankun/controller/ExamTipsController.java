@@ -57,8 +57,8 @@ public class ExamTipsController extends BaseController{
 
     @GetMapping("/queryPage")
     @ApiOperation(value = "分页查询考试信息",response = ExamTipsOutVo.class)
-    public BaseResult<PageBean<ExamTipsOutVo>> queryPage(@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
-        PageBean<ExamTipsOutVo> resp = examTipsService.queryPage(pageNum,pageSize);
+    public BaseResult<PageBean<ExamTipsOutVo>> queryPage(@RequestParam Integer deleted,@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
+        PageBean<ExamTipsOutVo> resp = examTipsService.queryPage(deleted,pageNum,pageSize);
         return BaseResult.success(resp);
     }
 }

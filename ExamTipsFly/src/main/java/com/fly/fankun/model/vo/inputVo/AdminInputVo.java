@@ -20,7 +20,7 @@ public class AdminInputVo implements Serializable {
     @ApiModelProperty("主键Id，新增是不需要传")
     private Integer id;
     @ApiModelProperty("系统？")
-    private String system;
+    private String username;
     @ApiModelProperty("密码")
     private String password;
     @ApiModelProperty("名称")

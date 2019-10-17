@@ -1,0 +1,12 @@
+PostgreSQL 9.6.3
+fly:
+IntelliJ IDEA 2019.1.2
+Java 1.8.0_151
+Apache Maven 3.2.2
+
+
+kk:
+
+
+
+

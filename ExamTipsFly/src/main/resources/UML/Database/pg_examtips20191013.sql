@@ -32,7 +32,7 @@ CREATE TABLE "public"."admin" (
 DROP TABLE IF EXISTS "public"."admin";
 CREATE TABLE "public"."admin" (
   "id" SERIAL primary key,
-  "system" varchar(50) COLLATE "pg_catalog"."default",
+  "username" varchar(50) COLLATE "pg_catalog"."default",
   "password" varchar(50) COLLATE "pg_catalog"."default",
   "name" varchar(50) COLLATE "pg_catalog"."default",
   "phone" varchar(11) COLLATE "pg_catalog"."default",

@@ -7,7 +7,6 @@ import com.fly.fankun.model.entity.ExamTips;
 import com.fly.fankun.model.entity.ExamType;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
-import com.fly.fankun.model.vo.outVo.AdminOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.service.ExamTipsService;
 import com.fly.fankun.util.BeanUtil;
@@ -15,7 +14,6 @@ import com.github.pagehelper.Page;
 import com.github.pagehelper.PageHelper;
 import java.util.Date;
 import java.util.List;
-import javax.validation.constraints.NotNull;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -69,9 +67,9 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     }
 
     @Override
-    public PageBean<ExamTipsOutVo> queryPage(Integer pageNum, Integer pageSize) {
+    public PageBean<ExamTipsOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize) {
         Page page = PageHelper.startPage(pageNum, pageSize);
-        List<ExamTipsOutVo> resultList = examTipsMapper.list();
+        List<ExamTipsOutVo> resultList = examTipsMapper.list(deleted);
         PageBean<ExamTipsOutVo> pageData = new PageBean<ExamTipsOutVo>(pageNum,
             pageSize, (int)page.getTotal());
         pageData.setItems(resultList);

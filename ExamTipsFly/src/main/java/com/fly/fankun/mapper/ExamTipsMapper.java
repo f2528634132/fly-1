@@ -17,5 +17,5 @@ public interface ExamTipsMapper {
 
     int updateByPrimaryKey(ExamTips record);
 
-    List<ExamTipsOutVo> list();
+    List<ExamTipsOutVo> list(Integer deleted);
 }

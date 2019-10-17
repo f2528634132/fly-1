@@ -51,9 +51,10 @@ public class BaseController {
 		getResponse().addHeader(headerName, headerValue);
 	}
 
-//	protected Long getUserId() {
-//		return TokenUtils.getTokenUser(getRequest()).getUserId();
-//	}
+	protected Integer getUserId() {
+		//TODO 返回操作人ID
+		return 2;
+	}
 //
 //	protected TokenUser getUserInfo() {
 //		return TokenUtils.getTokenUser(getRequest());

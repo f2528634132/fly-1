@@ -185,9 +185,15 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="list" resultMap="BaseResultMap">
+  <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
-    from exam_tips order by update_time desc
+    from exam_tips
+    <where>
+      <if test="null != deleted">
+       and deleted = #{deleted,jdbcType=INTEGER}
+      </if>
+    </where>
+    order by update_time desc
   </select>
 </mapper>
