@@ -48,7 +48,7 @@ public class MyExamServiceImpl implements MyExamService {
             throw new BizzException("考试信息已被删除，请重新选择");
         }
         //查看考试是否之前有加入过，如果有加入过 判断状态 如果是正常 则提示已添加，如果是删除 则修改状态未正常
-        MyExam dbMyExam = myExamMapper.queryByExamId(examId,userId);
+        MyExam dbMyExam = myExamMapper.queryByExamIdAndPersonId(examId,userId);
         //如果开始不存在则直接添加
         if(null == dbMyExam){
             MyExam myExam = new MyExam();
@@ -126,15 +126,15 @@ public class MyExamServiceImpl implements MyExamService {
         }
         Date dateNow = new Date();
         //报名 判断是否到了报名时间过了报名时间 状态是否为未报名
-        if(GlobalConstans.ONE.equals(status)){
+        if(MY_EXAM_STATUS_3.equals(status)){
             if(GlobalConstans.ZERO.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getSignupBegintime(),examTips.getSignupEndtime() )){
-                myExam.setStatus(GlobalConstans.ONE);
+                myExam.setStatus(MY_EXAM_STATUS_3);
                 myExam.setUpdatatime(new Date());
                 myExamMapper.updateByPrimaryKey(myExam);
                 return;
             }
         }
-        //考试 判断是否到了考试时间过了考试时间
+        //考试 判断是否到了考试时间过了考试时间 状态是否为未考试
         if(MY_EXAM_STATUS_4.equals(status)){
             if(MY_EXAM_STATUS_3.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getExamBegintime(),examTips.getExamEndtime() )){
                 myExam.setStatus(MY_EXAM_STATUS_4);

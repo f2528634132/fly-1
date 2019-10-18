@@ -129,9 +129,33 @@
     order by createtime desc
   </select>
 
-  <select id="queryByExamId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+  <select id="queryByExamIdAndPersonId" resultMap="BaseResultMap" parameterType="java.util.Map" >
     select
     <include refid="Base_Column_List" />
     from my_exam where person_id = #{personId,jdbcType=INTEGER} and exam_id = #{examId,jdbcType=INTEGER}
   </select>
+
+  <select id="queryByExamId" resultMap="BaseResultMap" parameterType="java.util.Map" >
+    select
+    <include refid="Base_Column_List" />
+    from my_exam
+    <where>
+      and  deleted = 0
+      <if test="list != null ">
+        and  exam_id in(
+        <foreach collection="list" item="list" separator=",">
+          #{list}
+        </foreach>
+      </if>)
+  </where>
+  </select>
+  <update id="updateBatchStatus" parameterType="java.util.List">
+    <foreach collection="list" item="item" separator=";">
+      update my_exam
+      set
+      status =  #{item.status,jdbcType=INTEGER},
+      update_time = now()
+      where id = #{item.id,jdbcType=INTEGER}
+    </foreach>
+  </update>
 </mapper>

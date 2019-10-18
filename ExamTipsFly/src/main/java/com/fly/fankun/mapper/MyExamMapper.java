@@ -20,5 +20,9 @@ public interface MyExamMapper {
 
     List<MyExamOutVo> queryMyExam(Integer userId);
 
-    MyExam queryByExamId(@Param(value = "examId") Integer examId,@Param(value = "personId") Integer personId);
+    MyExam queryByExamIdAndPersonId(@Param(value = "examId") Integer examId,@Param(value = "personId") Integer personId);
+
+    List<MyExam> queryByExamId(List<Integer> list);
+
+    void updateBatchStatus(List<MyExam> list);
 }
