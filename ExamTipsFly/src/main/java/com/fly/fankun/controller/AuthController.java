@@ -3,6 +3,7 @@ package com.fly.fankun.controller;
 import com.fly.fankun.model.result.BaseResult;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
+import com.fly.fankun.model.vo.inputVo.PersonInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
 import com.fly.fankun.service.AdminService;
 import com.fly.fankun.service.AuthService;
@@ -35,10 +36,17 @@ public class AuthController extends BaseController{
     private AuthService authService;
 
 
-//    @GetMapping("/login")
-//    @ApiOperation(value = "用户登录")
-//    public BaseResult login(@RequestParam String userName ,@RequestParam String passWord) {
-//        authService.login(userName,passWord);
-//        return BaseResult.success("删除成功");
-//    }
+    @GetMapping("/login")
+    @ApiOperation(value = "用户登录")
+    public BaseResult login(@RequestParam String username ,@RequestParam String passWord,@RequestParam Integer type) {
+        authService.login(username,passWord,type);
+        return BaseResult.success("登录成功");
+    }
+
+    @PostMapping("/register")
+    @ApiOperation(value = "用户注册")
+    public BaseResult register(@RequestBody PersonInputVo personInputVo) {
+        authService.register(personInputVo);
+        return BaseResult.success("注册成功");
+    }
 }

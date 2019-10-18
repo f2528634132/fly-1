@@ -65,7 +65,7 @@ public class MyExamServiceImpl implements MyExamService {
         //考试存在 并且被删除则 修改状态即可
         else if( GlobalConstans.ONE.equals(dbMyExam.getDeleted())){
             dbMyExam.setDeleted(GlobalConstans.ZERO);
-            dbMyExam.setUpdatatime(new Date());
+            dbMyExam.setUpdateTime(new Date());
             myExamMapper.updateByPrimaryKey(dbMyExam);
         }
         else {
@@ -98,7 +98,7 @@ public class MyExamServiceImpl implements MyExamService {
         //逻辑删除
         else{
             myExam.setDeleted(GlobalConstans.ONE);
-            myExam.setUpdatatime(new Date());
+            myExam.setUpdateTime(new Date());
             myExamMapper.updateByPrimaryKey(myExam);
         }
     }
@@ -129,7 +129,7 @@ public class MyExamServiceImpl implements MyExamService {
         if(MY_EXAM_STATUS_3.equals(status)){
             if(GlobalConstans.ZERO.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getSignupBegintime(),examTips.getSignupEndtime() )){
                 myExam.setStatus(MY_EXAM_STATUS_3);
-                myExam.setUpdatatime(new Date());
+                myExam.setUpdateTime(new Date());
                 myExamMapper.updateByPrimaryKey(myExam);
                 return;
             }
@@ -138,7 +138,7 @@ public class MyExamServiceImpl implements MyExamService {
         if(MY_EXAM_STATUS_4.equals(status)){
             if(MY_EXAM_STATUS_3.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getExamBegintime(),examTips.getExamEndtime() )){
                 myExam.setStatus(MY_EXAM_STATUS_4);
-                myExam.setUpdatatime(new Date());
+                myExam.setUpdateTime(new Date());
                 myExamMapper.updateByPrimaryKey(myExam);
                 return;
             }

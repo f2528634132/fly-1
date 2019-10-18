@@ -156,9 +156,9 @@ CREATE TABLE "public"."my_exam" (
   "exam_id" int4,
   "person_id" int4,
   "status" int4,
-  "create_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  "update_time" timestamp(0) NOT NULL DEFAULT CURRENT_TIMESTAMP ,
-  "deleted" int4  NOT NULL DEFAULT 0
+  "create_time" timestamp(0)  DEFAULT CURRENT_TIMESTAMP ,
+  "update_time" timestamp(0)  DEFAULT CURRENT_TIMESTAMP ,
+  "deleted" int4   DEFAULT 0
 )
 ;
 

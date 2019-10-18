@@ -25,5 +25,5 @@ public class MyExamOutVo implements Serializable {
     @ApiModelProperty("状态")
     private Integer status;
     @ApiModelProperty("加入时间")
-    private Date createtime;
+    private Date createTime;
 }
