@@ -1,5 +1,6 @@
 package com.fly.fankun.model.vo.outVo;
 
+import com.fly.fankun.model.entity.ExamTips;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
 import java.util.Date;
@@ -15,8 +16,8 @@ import lombok.Data;
 public class MyExamOutVo implements Serializable {
     private static final long serialVersionUID = -3218505432269217953L;
 
-    @ApiModelProperty("考试信息")
-    private List<ExamTipsOutVo> examTipsOutVoList;
+    @ApiModelProperty("考试信息(修改为outVO)")
+    private ExamTips examTipsOutVo;
     @ApiModelProperty("主键id")
     private Integer id;
     /**
@@ -26,4 +27,5 @@ public class MyExamOutVo implements Serializable {
     private Integer status;
     @ApiModelProperty("加入时间")
     private Date createTime;
+    private Integer examId;
 }

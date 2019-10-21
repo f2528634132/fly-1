@@ -158,14 +158,15 @@
     <result column="id"  property="id" jdbcType="INTEGER"/>
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
-    <collection property="examTipsOutVoList" column="person_id" ofType="com.fly.fankun.model.vo.outVo.ExamTipsOutVo"
+    <result column="exam_id" property="examId" jdbcType="INTEGER" />
+    <association property="examTipsOutVo" column="exam_id"
         select="com.fly.fankun.mapper.ExamTipsMapper.selectByPrimaryKey" />
   </resultMap>
   <select id="queryMyExam" resultMap="QueryMyExamResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from my_exam where person_id = #{userId,jdbcType=INTEGER} and deleted = 0
-    order by createtime desc
+    order by create_time desc
   </select>
 
   <select id="queryByExamIdAndPersonId" resultMap="BaseResultMap" parameterType="java.util.Map" >
