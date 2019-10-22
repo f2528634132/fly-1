@@ -10,5 +10,5 @@ import com.fly.fankun.model.vo.inputVo.PersonInputVo;
 public interface AuthService {
     void register(PersonInputVo personInputVo);
 
-    void login(String username, String passWord, Integer type);
+    void login(String userName, String passWord, Integer type);
 }

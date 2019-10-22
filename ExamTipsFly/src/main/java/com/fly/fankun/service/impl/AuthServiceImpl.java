@@ -38,7 +38,7 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void login(String username, String passWord, Integer type) {
+    public void login(String username, String password, Integer type) {
 
     }
 }

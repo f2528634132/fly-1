@@ -38,8 +38,8 @@ public class AuthController extends BaseController{
 
     @GetMapping("/login")
     @ApiOperation(value = "用户登录")
-    public BaseResult login(@RequestParam String username ,@RequestParam String passWord,@RequestParam Integer type) {
-        authService.login(username,passWord,type);
+    public BaseResult login(@RequestParam String userName ,@RequestParam String passWord,@RequestParam Integer type) {
+        authService.login(userName,passWord,type);
         return BaseResult.success("登录成功");
     }
 
