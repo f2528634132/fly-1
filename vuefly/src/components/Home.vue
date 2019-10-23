@@ -50,17 +50,6 @@
           </el-submenu>
         </el-submenu>
       </el-menu>
-
-
-
-
-
-
-
-
-
-
-
     </el-aside>
 
     <el-container>
@@ -73,6 +62,9 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
+        <el-form-item style="width: 100%">
+          <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
+        </el-form-item>
         <span>傅荔怡</span>
       </el-header>
 
@@ -122,6 +114,14 @@
       };
       return {
         tableData: Array(20).fill(item)
+      }
+      methods: {
+        submitClick: function () {
+          var _this = this;
+          this.loading = true;
+          this.$router.push({
+            path: '/Admin'
+          })
       }
     }
   };
