@@ -5,6 +5,7 @@ import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
 import com.fly.fankun.model.vo.inputVo.PersonInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
+import com.fly.fankun.model.vo.outVo.AuthOutVo;
 import com.fly.fankun.service.AdminService;
 import com.fly.fankun.service.AuthService;
 import io.swagger.annotations.Api;
@@ -39,8 +40,9 @@ public class AuthController extends BaseController{
     @GetMapping("/login")
     @ApiOperation(value = "用户登录")
     public BaseResult login(@RequestParam String userName ,@RequestParam String passWord,@RequestParam Integer type) {
-        authService.login(userName,passWord,type);
-        return BaseResult.success("登录成功");
+        AuthOutVo vo =authService.login(userName,passWord,type);
+        vo.setType(type);
+        return BaseResult.success(vo);
     }
 
     @PostMapping("/register")

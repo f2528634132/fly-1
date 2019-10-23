@@ -1,0 +1,58 @@
+<template>
+  <div>
+    <el-menu :default-active="this.$route.path"
+             router
+             mode="horizontal"
+             class="el-menu-demo" @select="handleSelect">
+      <el-menu-item v-for="(item,i) in navList"
+                    :key="i"
+                    :index="item.name">
+        <template slot="title">
+          <span> {{ item.navItem }}</span>
+        </template>
+      </el-menu-item>
+    </el-menu>
+    <router-view />
+  </div>
+</template>
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+
+  .el-aside {
+    color: #333;
+  }
+  .el-submenu [class^=el-icon-] {
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 24px;
+    text-align: right;
+    font-size: 20px;
+  }
+</style>
+
+<script>
+    export default {
+        data () {
+            return {
+                navList: [
+                    { name: '/', navItem: '节目发布' },
+                    { name: '/Content', navItem: '内容制作' },
+                    { name: '/Material', navItem: '素材管理' },
+                    { name: '/SplitScreen', navItem: '分屏模板' },
+                    { name: '/EmMa', navItem: '设备管理' },
+                    { name: '/Log', navItem: '日志管理' },
+                    { name: '/Emergency', navItem: '紧急发布记录' }
+                ]
+            }
+        },
+        methods: {
+            handleSelect(key, keyPath) {
+                console.log(key, keyPath);
+            }
+        }
+    }
+</script>

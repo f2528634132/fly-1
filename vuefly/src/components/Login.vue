@@ -10,10 +10,8 @@
       <el-input type="password" v-model="loginForm.password"
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-checkbox class="login_remember" v-model="checked"
-                 label-position="left">记住密码</el-checkbox>
-    <el-radio v-model="radio" label="1">管理员</el-radio>
-    <el-radio v-model="radio" label="2">个人</el-radio>
+    <el-radio v-model="radio" label="2"  >管理员</el-radio>
+    <el-radio v-model="radio" label="1" >个人</el-radio>
     <el-form-item style="width: 100%">
       <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
     </el-form-item>
@@ -23,7 +21,7 @@
   export default{
     data(){
       return {
-        radio: '1',
+        radio: '2',
         rules: {
           username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
@@ -40,20 +38,29 @@
       submitClick: function () {
         var _this = this;
         this.loading = true;
-        this.$router.push({
-          path: '/Home',
-          query: {'id': 111}
-        })
         // this.getRequest('/auth/login?userName='+this.loginForm.username+'&passWord='+this.loginForm.password+'&type='+this.radio).then(resp=> {
           this.getRequest(`/auth/login?userName=${this.loginForm.username}&passWord=${this.loginForm.password}&type=${this.radio}`).then(resp=> {
           _this.loading = false;
           if (resp && resp.status == 200) {
-            var data = resp.data;
-            _this.$store.commit('login', data.obj);
-            var path = _this.$route.query.redirect;
-            _this.$router
-              .replace({path: path == '/' || path == undefined ? '/home' : path});
-
+            let data = resp.data;
+            console.log(data.data.type);
+            if (1 === data.data.type){
+                console.log('aaaa');
+                this.$router.push({
+                    path: '/Home',
+                    query: {'id': 111}
+                })
+            }else{
+                console.log('bbb');
+                this.$router.push({
+                    path: '/Test',
+                    query: {'id': 222}
+                })
+            }
+            // _this.$store.commit('login', data.obj);
+            // var path = _this.$route.query.redirect;
+            /*_this.$router
+              .replace({path: path == '/' || path == undefined ? '/home' : path});*/
           }
         });
       }
@@ -79,5 +86,11 @@
   .login_remember {
     margin: 0px 0px 35px 0px;
     text-align: left;
+  }
+  .el-radio {
+    color: #606266;
+    cursor: pointer;
+    margin-right: 30px;
+    margin-bottom: 10px;
   }
 </style>

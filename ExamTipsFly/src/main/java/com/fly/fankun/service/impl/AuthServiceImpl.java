@@ -4,9 +4,9 @@ import com.fly.fankun.exception.BizzException;
 import com.fly.fankun.mapper.PersonMapper;
 import com.fly.fankun.model.entity.Person;
 import com.fly.fankun.model.vo.inputVo.PersonInputVo;
+import com.fly.fankun.model.vo.outVo.AuthOutVo;
 import com.fly.fankun.service.AuthService;
 import com.fly.fankun.util.BeanUtil;
-import java.util.Date;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -38,7 +38,8 @@ public class AuthServiceImpl implements AuthService {
     }
 
     @Override
-    public void login(String username, String password, Integer type) {
+    public AuthOutVo login(String username, String password, Integer type) {
 
+        return new AuthOutVo();
     }
 }

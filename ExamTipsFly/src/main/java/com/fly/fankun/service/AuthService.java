@@ -1,6 +1,7 @@
 package com.fly.fankun.service;
 
 import com.fly.fankun.model.vo.inputVo.PersonInputVo;
+import com.fly.fankun.model.vo.outVo.AuthOutVo;
 
 /**
  * @Title:
@@ -10,5 +11,5 @@ import com.fly.fankun.model.vo.inputVo.PersonInputVo;
 public interface AuthService {
     void register(PersonInputVo personInputVo);
 
-    void login(String userName, String passWord, Integer type);
+    AuthOutVo login(String userName, String passWord, Integer type);
 }
