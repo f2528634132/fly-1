@@ -1,4 +1,4 @@
-<template>
+<!--<template>
   <div>
     <el-menu :default-active="this.$route.path"
              router
@@ -14,7 +14,37 @@
     </el-menu>
     <router-view />
   </div>
+</template>-->
+
+<template>
+  <div>
+    <el-col :span="2">
+      <el-menu
+        :default-active="this.$route.path"
+        router mode="horizontal"
+        class="el-menu-vertical-demo"
+        @open="handleOpen"
+        @close="handleClose"
+        background-color="#545c64"
+        text-color="#fff"
+        active-text-color="#ffd04b">
+        <el-menu-item v-for="(item,i) in navList" :key="i" :index="item.name">
+          <template slot="title">
+            <i class="el-icon-s-platform"></i>
+            <span> {{ item.navItem }}</span>
+          </template>
+
+        </el-menu-item>
+
+
+      </el-menu>
+    </el-col>
+
+    <router-view     class="menu-right"/>
+
+  </div>
 </template>
+
 <style>
   .el-header {
     background-color: #B3C0D1;
@@ -25,12 +55,15 @@
   .el-aside {
     color: #333;
   }
-  .el-submenu [class^=el-icon-] {
+/*  .el-submenu [class^=el-icon-] {
     vertical-align: middle;
     margin-right: 5px;
     width: 24px;
     text-align: right;
     font-size: 20px;
+  }*/
+  .menu-right{
+    margin-left:200px;
   }
 </style>
 
@@ -50,7 +83,10 @@
             }
         },
         methods: {
-            handleSelect(key, keyPath) {
+            handleOpen(key, keyPath) {
+                console.log(key, keyPath);
+            },
+            handleClose(key, keyPath) {
                 console.log(key, keyPath);
             }
         }

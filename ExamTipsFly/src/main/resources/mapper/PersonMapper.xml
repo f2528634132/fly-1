@@ -26,6 +26,7 @@
     from person
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from person
     where id = #{id,jdbcType=INTEGER}
@@ -185,4 +186,10 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from person
+    where  username = #{username,jdbcType=VARCHAR} and deleted = 0
+  </select>
 </mapper>

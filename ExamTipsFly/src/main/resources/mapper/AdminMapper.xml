@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.fly.fankun.dao.AdminMapper" >
+<mapper namespace="com.fly.fankun.mapper.AdminMapper" >
   <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.Admin" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="username" property="username" jdbcType="VARCHAR" />
     <result column="password" property="password" jdbcType="VARCHAR" />
     <result column="name" property="name" jdbcType="VARCHAR" />
     <result column="phone" property="phone" jdbcType="VARCHAR" />
-    <result column="createtime" property="createtime" jdbcType="TIME" />
-    <result column="updatetime" property="updatetime" jdbcType="TIME" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="deleted" property="deleted" jdbcType="INTEGER" />
   </resultMap>
   <sql id="Base_Column_List" >
-    id, username, password, name, phone, createtime, updatetime, deleted
+    id, username, password, name, phone, create_time, update_time, deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select 
@@ -24,13 +24,13 @@
     delete from admin
     where id = #{id,jdbcType=INTEGER}
   </delete>
-  <insert id="insert" parameterType="com.fly.fankun.model.entity.Admin" useGeneratedKeys="true" keyProperty="id">
+  <insert id="insert" parameterType="com.fly.fankun.model.entity.Admin"  useGeneratedKeys="true" keyProperty="id">
     insert into admin (id, username, password, 
-      name, phone, createtime, 
-      updatetime, deleted)
+      name, phone, create_time, 
+      update_time, deleted)
     values (#{id,jdbcType=INTEGER}, #{username,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, 
-      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createtime,jdbcType=TIME}, 
-      #{updatetime,jdbcType=TIME}, #{deleted,jdbcType=INTEGER})
+      #{name,jdbcType=VARCHAR}, #{phone,jdbcType=VARCHAR}, #{createTime,jdbcType=TIMESTAMP}, 
+      #{updateTime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.Admin"  useGeneratedKeys="true" keyProperty="id">
     insert into admin
@@ -50,11 +50,11 @@
       <if test="phone != null" >
         phone,
       </if>
-      <if test="createtime != null" >
-        createtime,
+      <if test="createTime != null" >
+        create_time,
       </if>
-      <if test="updatetime != null" >
-        updatetime,
+      <if test="updateTime != null" >
+        update_time,
       </if>
       <if test="deleted != null" >
         deleted,
@@ -76,11 +76,11 @@
       <if test="phone != null" >
         #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        #{createtime,jdbcType=TIME},
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatetime != null" >
-        #{updatetime,jdbcType=TIME},
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="deleted != null" >
         #{deleted,jdbcType=INTEGER},
@@ -102,11 +102,11 @@
       <if test="phone != null" >
         phone = #{phone,jdbcType=VARCHAR},
       </if>
-      <if test="createtime != null" >
-        createtime = #{createtime,jdbcType=TIME},
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
-      <if test="updatetime != null" >
-        updatetime = #{updatetime,jdbcType=TIME},
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
       </if>
       <if test="deleted != null" >
         deleted = #{deleted,jdbcType=INTEGER},
@@ -120,14 +120,20 @@
       password = #{password,jdbcType=VARCHAR},
       name = #{name,jdbcType=VARCHAR},
       phone = #{phone,jdbcType=VARCHAR},
-      createtime = #{createtime,jdbcType=TIME},
-      updatetime = #{updatetime,jdbcType=TIME},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
   <select id="list" resultMap="BaseResultMap">
     select
     <include refid="Base_Column_List" />
-    from admin order by id
+    from admin order by create_time desc
+  </select>
+  <select id="selectByUserName" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select
+    <include refid="Base_Column_List" />
+    from admin
+    where  username = #{username,jdbcType=VARCHAR} and deleted = 0
   </select>
 </mapper>

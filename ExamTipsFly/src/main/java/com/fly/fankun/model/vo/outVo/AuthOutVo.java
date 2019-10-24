@@ -15,4 +15,10 @@ public class AuthOutVo implements Serializable {
      *
      */
     private Integer type;
+
+    private Integer id;
+
+    private String userName;
+
+    private String name;
 }

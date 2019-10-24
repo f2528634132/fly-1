@@ -7,7 +7,7 @@
           <template slot="title"><i class="el-icon-menu"></i>考试信息管理</template>
           <el-menu-item-group>
             <!--            <template slot="title">分组一</template>-->
-            <el-menu-item index="1-1">考试信息列表</el-menu-item>
+              <el-menu-item index="1-1" >考试信息列表</el-menu-item>
             <el-menu-item index="1-2">备忘录</el-menu-item>
           </el-menu-item-group>
           <!--          <el-menu-item-group title="分组2">-->
@@ -77,14 +77,33 @@
       </el-header>
 
       <el-main>
+        <el-row>
+          <el-button round @click.native="$router.push('/Content')">添加考试</el-button>
+          <el-button type="primary" round>主要按钮</el-button>
+          <el-button type="success" round>成功按钮</el-button>
+          <el-button type="info" round>信息按钮</el-button>
+          <el-button type="warning" round>警告按钮</el-button>
+          <el-button type="danger" round>危险按钮</el-button>
+        </el-row>
         <el-table :data="tableData">
+
           <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
           <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
           </el-table-column>
           <el-table-column prop="signupEndtime" label="报名结束时间"  width="150">
           </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址" >
+          <el-table-column prop="examUrl" label="报名地址"  width="150">
+          </el-table-column>
+          <el-table-column prop="operation" label="操作">
+            <el-row>
+              <el-button icon="el-icon-search" circle></el-button>
+              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button type="success" icon="el-icon-check" circle></el-button>
+              <el-button type="info" icon="el-icon-message" circle></el-button>
+              <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+              <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            </el-row>
           </el-table-column>
         </el-table>
       </el-main>

@@ -6,6 +6,7 @@ import Admin from "@/components/Admin";
 import Test from "@/components/Test";
 import Emma from "../components/Emma";
 import Content from "../components/Content";
+import ExamEdit from "../components/ExamEdit";
 Vue.use(Router)
 
 export default new Router({
@@ -47,6 +48,11 @@ export default new Router({
       path: '/Content',
       name: 'Content',
       component: Content
+    },
+    {
+      path: '/ExamEdit',
+      name: 'ExamEdit',
+      component: ExamEdit
     }
   ]
 })
