@@ -67,7 +67,7 @@
       <el-main>
         <el-row>
           <el-button round @click.native="$router.push('/Content')">添加考试</el-button>
-          <el-button type="primary" round>主要按钮</el-button>
+          <el-button type="primary" round @click="submitClick">主要按钮</el-button>
           <el-button type="success" round>成功按钮</el-button>
           <el-button type="info" round>信息按钮</el-button>
           <el-button type="warning" round>警告按钮</el-button>
@@ -139,7 +139,22 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-      }
+      },
+        submitClick: function () {
+            // console.log(this.filterForm);
+            return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+                .then(
+                    res => {
+                        console.log(res.data.data.items);
+                        this.tableData = res.data.data.items || [];
+                        console.log(this.tableData);
+                        this.totalMessage = res.data.totalCount || 0;
+                    },
+                    err => {
+                        // console.log(err);
+                    }
+                );
+        }
     },
     data() {
       const item = {
@@ -153,7 +168,7 @@
       let arr = Array(20).fill(2)
       // let arr = [1, 2, 3]
       // arr.fill = Array.fill
-      console.log(arr)
+      // console.log(arr)
       return {
         tableData: Array(6).fill(item),
         currentPage1: 5,
