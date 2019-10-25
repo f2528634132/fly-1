@@ -95,6 +95,19 @@
             </el-row>
           </el-table-column>
         </el-table>
+        <el-row>
+          <div class="block">
+            <el-pagination
+              @size-change="handleSizeChange"
+              @current-change="handleCurrentChange"
+              :current-page="currentPage4"
+              :page-sizes="[100, 200, 300, 400]"
+              :page-size="100"
+              layout="total, sizes, prev, pager, next, jumper"
+              :total="400">
+            </el-pagination>
+          </div>
+        </el-row>
       </el-main>
     </el-container>
   </el-container>
@@ -120,6 +133,14 @@
 
 <script>
   export default {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
     data() {
       const item = {
         examTipsTitle: '全国计算机等级考试1111',
@@ -128,12 +149,17 @@
         examUrl:'www.baidu.com'
       };
 
+
       let arr = Array(20).fill(2)
       // let arr = [1, 2, 3]
       // arr.fill = Array.fill
       console.log(arr)
       return {
-        tableData: Array(6).fill(item)
+        tableData: Array(6).fill(item),
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
       }
     }
   };

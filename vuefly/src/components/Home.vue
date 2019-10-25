@@ -1,9 +1,9 @@
 <template>
 
-  <el-container style="height: 900px; border: 0px solid #eee">
+  <el-container style="height: 945px; border: 0px solid #eee">
 
       <el-header style="text-align: right; font-size: 15px">
-        
+
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
@@ -29,7 +29,7 @@
             <template slot="title"><i class="el-icon-user"></i>考试管理</template>
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
-              <el-menu-item index="1-1">我的报名</el-menu-item>
+              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
               <el-menu-item index="1-2">备忘录</el-menu-item>
             </el-menu-item-group>
             <!--          <el-menu-item-group title="分组2">-->
@@ -99,6 +99,19 @@
               </el-row>
             </el-table-column>
           </el-table>
+          <el-row>
+            <div class="block">
+              <el-pagination
+                @size-change="handleSizeChange"
+                @current-change="handleCurrentChange"
+                :current-page="currentPage4"
+                :page-sizes="[100, 200, 300, 400]"
+                :page-size="100"
+                layout="total, sizes, prev, pager, next, jumper"
+                :total="400">
+              </el-pagination>
+            </div>
+          </el-row>
         </el-main>
 
     </el-container>
@@ -122,10 +135,25 @@
     text-align: right;
     font-size: 20px;
   }
+
+  .el-pagination {
+    white-space: nowrap;
+    padding: 30px 300px;
+    color: #303133;
+    font-weight: 700;
+  }
 </style>
 
 <script>
   export default {
+    methods: {
+      handleSizeChange(val) {
+        console.log(`每页 ${val} 条`);
+      },
+      handleCurrentChange(val) {
+        console.log(`当前页: ${val}`);
+      }
+    },
     data() {
       const item = {
         examTipsTitle: '全国计算机等级考试',
@@ -135,7 +163,11 @@
 
       };
       return {
-        tableData: Array(20).fill(item)
+        tableData: Array(20).fill(item),
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4
       }
     }
   };

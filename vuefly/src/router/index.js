@@ -9,6 +9,7 @@ import Content from "../components/Content";
 import ExamEdit from "../components/ExamEdit";
 import TopicEdit from "../components/TopicEdit";
 import MyExam from "../components/MyExam";
+import MyExamDetails from "../components/MyExamDetails";
 Vue.use(Router)
 
 export default new Router({
@@ -65,6 +66,11 @@ export default new Router({
       path: '/MyExam',
       name: 'MyExam',
       component: MyExam
+    },
+    {
+      path: '/MyExamDetails',
+      name: 'MyExamDetails',
+      component: MyExamDetails
     }
   ]
 })

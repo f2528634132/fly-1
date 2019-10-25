@@ -91,6 +91,7 @@
     color: #606266;
     cursor: pointer;
     margin-right: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 20px;
+    margin-left: 60px;
   }
 </style>
