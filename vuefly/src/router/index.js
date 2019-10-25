@@ -8,6 +8,7 @@ import Emma from "../components/Emma";
 import Content from "../components/Content";
 import ExamEdit from "../components/ExamEdit";
 import TopicEdit from "../components/TopicEdit";
+import MyExam from "../components/MyExam";
 Vue.use(Router)
 
 export default new Router({
@@ -59,6 +60,11 @@ export default new Router({
       path: '/TopicEdit',
       name: 'TopicEdit',
       component: TopicEdit
+    },
+    {
+      path: '/MyExam',
+      name: 'MyExam',
+      component: MyExam
     }
   ]
 })
