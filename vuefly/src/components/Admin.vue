@@ -1,5 +1,4 @@
 <template>
-
   <el-container style="height: 900px; border: 0px solid #eee">
     <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
       <el-menu :default-openeds="['1', '3']">
@@ -50,17 +49,6 @@
           </el-submenu>
         </el-submenu>
       </el-menu>
-
-
-
-
-
-
-
-
-
-
-
     </el-aside>
 
     <el-container>
@@ -137,10 +125,14 @@
         signupBegintime: '2019-11-2',
         signupEndtime: '2019-11-12',
         examUrl:'www.baidu.com'
-
       };
+
+      let arr = Array(20).fill(2)
+      // let arr = [1, 2, 3]
+      // arr.fill = Array.fill
+      console.log(arr)
       return {
-        tableData: Array(20).fill(item)
+        tableData: Array(6).fill(item)
       }
     }
   };

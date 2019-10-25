@@ -62,9 +62,6 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <el-form-item style="width: 100%">
-          <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
-        </el-form-item>
         <span>傅荔怡</span>
       </el-header>
 
@@ -76,7 +73,17 @@
           </el-table-column>
           <el-table-column prop="signupEndtime" label="报名结束时间"  width="150">
           </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址" >
+          <el-table-column prop="examUrl" label="报名地址" width="150">
+          </el-table-column>
+          <el-table-column prop="operation" label="操作">
+            <el-row>
+              <el-button icon="el-icon-search" circle></el-button>
+              <el-button type="primary" icon="el-icon-edit" circle></el-button>
+              <el-button type="success" icon="el-icon-check" circle></el-button>
+              <el-button type="info" icon="el-icon-message" circle></el-button>
+              <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+              <el-button type="danger" icon="el-icon-delete" circle></el-button>
+            </el-row>
           </el-table-column>
         </el-table>
       </el-main>
@@ -114,14 +121,6 @@
       };
       return {
         tableData: Array(20).fill(item)
-      }
-      methods: {
-        submitClick: function () {
-          var _this = this;
-          this.loading = true;
-          this.$router.push({
-            path: '/Admin'
-          })
       }
     }
   };

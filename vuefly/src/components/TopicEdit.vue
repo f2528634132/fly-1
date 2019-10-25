@@ -1,49 +1,17 @@
 <template>
   <el-form ref="form" class="forum" :model="form" label-width="80px">
-    <el-form-item label="考试标题">
+    <el-form-item label="话题标题">
       <el-input v-model="examtitle"></el-input>
     </el-form-item>
-    <el-form-item label="报名入口">
-      <el-input v-model="examurl"></el-input>
-    </el-form-item>
-    <el-form-item label="考试类目">
-      <el-select v-model="form.region" placeholder="请选择考试类目">
+    <el-form-item label="所属论坛">
+      <el-select v-model="form.region" placeholder="请选择所属论坛">
         <el-option label="全国计算机等级考试" value="1"></el-option>
         <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
         <el-option label="CET大学英语考试" value="3"></el-option>
         <el-option label="全国会计从业资格考试" value="4"></el-option>
       </el-select>
     </el-form-item>
-    <el-form-item label="报名时间">
-      <el-col :span="11">
-        <el-date-picker
-          v-model="value2"
-          type="daterange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions">
-        </el-date-picker>
-      </el-col>
-    </el-form-item>
-    <el-form-item label="考试时间">
-      <el-col :span="11">
-        <el-date-picker
-          v-model="value2"
-          type="daterange"
-          align="right"
-          unlink-panels
-          range-separator="至"
-          start-placeholder="开始日期"
-          end-placeholder="结束日期"
-          :picker-options="pickerOptions">
-        </el-date-picker>
-      </el-col>
-    </el-form-item>
-
-    <el-form-item label="活动性质">
+    <el-form-item label="话题标签">
       <el-checkbox-group v-model="form.type">
         <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
         <el-checkbox label="地推活动" name="type"></el-checkbox>
@@ -51,13 +19,13 @@
         <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
       </el-checkbox-group>
     </el-form-item>
-    <el-form-item label="特殊资源">
+    <el-form-item label="是否推广">
       <el-radio-group v-model="form.resource">
-        <el-radio label="线上品牌商赞助"></el-radio>
-        <el-radio label="线下场地免费"></el-radio>
+        <el-radio label="是"></el-radio>
+        <el-radio label="否"></el-radio>
       </el-radio-group>
     </el-form-item>
-    <el-form-item label="考试详情">
+    <el-form-item label="话题描述">
       <el-input type="textarea" v-model="form.desc"></el-input>
     </el-form-item>
     <el-form-item label="发布">

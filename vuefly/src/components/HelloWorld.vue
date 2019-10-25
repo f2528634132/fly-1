@@ -1,272 +1,103 @@
-<template>
-  <div class="new-topic-wrapper new-wrapper">
-    <div style="width: 100%;height: 26px;"></div>
-    <!-- <el-breadcrumb separator="/">
-      <el-breadcrumb-item center :to="{ path: '/index' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item center>内容管理</el-breadcrumb-item>
-      <el-breadcrumb-item center :to="{ path: '/topic-manage' }">话题管理</el-breadcrumb-item>
-      <el-breadcrumb-item center>{{topicId ? "编辑话题" : "创建话题"}}</el-breadcrumb-item>
-    </el-breadcrumb>-->
-    <div class="offer-b-card new-topic-card">
-      <div class="offer-b-title new-topic-title">{{topicId ? "编辑话题" : "创建话题"}}</div>
-      <el-form
-        label-position="left"
-        ref="newTopicForm"
-        :model="newTopicForm"
-        label-width="80px"
-        v-loading="detailLoading"
-        :rules="newTopicFormRules"
-      >
-        <el-form-item label="标题" prop="title">
-          <el-input placeholder="请输入标题" v-model="newTopicForm.title" :disabled="ifEdit"></el-input>
-        </el-form-item>
-        <el-form-item prop="content" class="new-description" label="介绍">
-          <el-input
-            type="textarea"
-            placeholder="请输入话题介绍"
-            v-model="newTopicForm.content"
-            max-length="120"
-            class="h136"
-          ></el-input>
-          <span class="counter">{{newTopicForm.content.length}}/120</span>
-        </el-form-item>
-        <el-form-item label="图片" prop="picUrl">
-          <upload-image
-            referenceWidth="366px"
-            referenceHeight="210px"
-            :ratio="366 / 210"
-            cropperName="topic"
-            v-model="picUrl"
-            :imageArr="imageArr"
-            selectDialogClass="new-topic"
-          ></upload-image>
-        </el-form-item>
-        <!-- <el-form-item label="发布范围" prop="rangeId">
-          <el-select v-model="newTopicForm.rangeId" placeholder="请选择" multiple class="w375">
-            <el-option label="上海" value="444:上海"></el-option>
-            <el-option label="北京" value="333:北京"></el-option>
-            <el-option label="深圳" value="111:深圳"></el-option>
-            <el-option label="广州" value="222:广州"></el-option>
-          </el-select>
-        </el-form-item>-->
-        <el-form-item label="启用" prop="isShow">
-          <el-switch
-            v-model="newTopicForm.isShow"
-            active-color="#FFCF10"
-            inactive-color="#ececec"
-            :active-value="1"
-            :inactive-value="0"
-          ></el-switch>
-        </el-form-item>
-        <el-form-item class="releasing">
-          <el-button
-            type="primary"
-            :loading="releasing"
-            @click="releaseTopic('newTopicForm')"
-          >{{releasing ? '发布中' : '发布'}}</el-button>
-          <router-link :to="{ path: '/topic-manage'}">
-            <el-button>取消</el-button>
-          </router-link>
-        </el-form-item>
-      </el-form>
-    </div>
-  </div>
-</template>
-<script>
-    import { mapState } from "vuex";
-    import UploadImage from "base/upload-image";
+<el-container style="height: 500px; border: 1px solid #eee">
+  <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-menu :default-openeds="['1', '3']">
+      <el-submenu index="1">
+        <template slot="title"><i class="el-icon-message"></i>导航一</template>
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="1-1">选项1</el-menu-item>
+          <el-menu-item index="1-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="1-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="1-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="1-4-1">选项4-1</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+      <el-submenu index="2">
+        <template slot="title"><i class="el-icon-menu"></i>导航二</template>
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="2-1">选项1</el-menu-item>
+          <el-menu-item index="2-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="2-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="2-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="2-4-1">选项4-1</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+      <el-submenu index="3">
+        <template slot="title"><i class="el-icon-setting"></i>导航三</template>
+        <el-menu-item-group>
+          <template slot="title">分组一</template>
+          <el-menu-item index="3-1">选项1</el-menu-item>
+          <el-menu-item index="3-2">选项2</el-menu-item>
+        </el-menu-item-group>
+        <el-menu-item-group title="分组2">
+          <el-menu-item index="3-3">选项3</el-menu-item>
+        </el-menu-item-group>
+        <el-submenu index="3-4">
+          <template slot="title">选项4</template>
+          <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+        </el-submenu>
+      </el-submenu>
+    </el-menu>
+  </el-aside>
 
-    export default {
-        name: "offer-new-topic",
-        data() {
-            return {
-                newTopicForm: {
-                    content: "", // (string, optional): 内容 ,
-                    id: "", // (string, optional): 主键ID：新增无，编辑必传 ,
-                    isShow: "", // (integer, optional): 是否启用：0-否，1-是 ,
-                    picUrl: "", // (string, optional): 图片链接 ,
-                    // rangeId: [], // (string, optional): 发布范围-组织机构ID，用逗号隔开 ,
-                    // rangeName: "", // (string, optional): 发布范围-组织机构名称，用逗号隔开 ,
-                    title: "", // (string, optional): 标题 ,
-                    typeId: "" // (integer, optional): 类型：1-链接，2-图文
-                },
-                picUrl: "",
-                // 新增资讯表单验证规则
-                newTopicFormRules: {
-                    title: [
-                        { required: true, message: "请输入话题标题", trigger: "blur" },
-                        { min: 1, max: 32, message: "长度不多于32个字符", trigger: "blur" }
-                    ],
-                    picUrl: [
-                        { required: true, message: "请选择或上传图片", trigger: "change" }
-                    ],
-                    content: [
-                        // { required: true, message: "请输入话题介绍", trigger: "blur" },
-                        { min: 1, max: 120, message: "长度不多于120个字符", trigger: "blur" }
-                    ],
-                    // rangeId: [
-                    //   { required: true, message: "请选择发布范围", trigger: "blur" }
-                    // ],
-                    isShow: [{ required: true, message: "请选择是否启用", trigger: "blur" }]
-                },
-                imageArr: [
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214887575543006185.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片1"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214888574781006405.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片2"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214889843164003821.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片3"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214896451347003684.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片4"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214898199223009500.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片5"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214899535689003432.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片6"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214909061130007925.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片7"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/214912417160005753.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片8"
-                    },
-                    {
-                        pic:
-                            "https://offer-oss.zhaopin.com/sz-offer/picture/2019/9/25/215710075653002068.jpg?x-oss-process=image/resize,w_960/auto-orient,1/quality,q_90/format,jpg",
-                        title: "图片9"
-                    }
-                ],
-                detailLoading: false, // 详情数据获取状态
-                releasing: false // 发布中状态
-            };
-        },
-        components: {
-            UploadImage
-        },
-        activated() {
-            if (this.topicId) {
-                this.detailLoading = true;
-                this.$http
-                    .get(`${this.domain}getTopic`, {
-                        id: this.topicId
-                    })
-                    .then(res => {
-                        let topicDetail = res.data;
-                        Object.entries(this.newTopicForm).forEach(([key, value]) => {
-                            this.newTopicForm[key] = topicDetail[key];
-                        });
-                        // let rangeIdArr = topicDetail.rangeId.split(",");
-                        // let rangeNameArr = topicDetail.rangeName.split(",");
-                        // this.newTopicForm.rangeId = rangeIdArr.map((i, index) => {
-                        //   return `${i}:${rangeNameArr[index]}`;
-                        // });
-                        this.detailLoading = false;
-                        this.picUrl = this.newTopicForm.picUrl;
-                        this.$refs.newTopicForm.clearValidate();
-                    });
-            } else {
-                this.resetForm();
-            }
-        },
-        methods: {
-            releaseTopic(formName) {
-                this.$refs[formName].validate(valid => {
-                    if (valid) {
-                        this.releasing = true;
-                        // let rangeIdArr = this.newTopicForm.rangeId.map(i => {
-                        //   return i.split(":")[0];
-                        // });
-                        // let rangeNameArr = this.newTopicForm.rangeId.map(i => {
-                        //   return i.split(":")[1];
-                        // });
-                        // let newTopicForm = Object.assign({}, this.newTopicForm, {
-                        //   rangeId: rangeIdArr.join(","),
-                        //   rangeName: rangeNameArr.join(",")
-                        // });
-                        this.$http.post(`${this.domain}saveTopic`, this.newTopicForm).then(
-                            res => {
-                                // console.log(res);
-                                this.releasing = false;
-                                this.$notify({
-                                    type: "success",
-                                    message: "发布成功。"
-                                });
-                                this.resetForm();
-                                this.$router.push("/topic-manage");
-                            },
-                            err => {
-                                this.releasing = false;
-                            }
-                        );
-                    } else {
-                        // console.log("error submit!!");
-                        return false;
-                    }
-                });
-            },
-            // 重置表单数据
-            resetForm() {
-                Object.entries(this.newTopicForm).forEach(([key, value]) => {
-                    this.newTopicForm[key] = "";
-                });
-                this.newTopicForm.isShow = 1;
-                this.picUrl = "";
-                this.$nextTick(_ => {
-                    this.$refs.newTopicForm.clearValidate();
-                });
-            }
-        },
-        computed: {
-            ...mapState(["domain"]),
-            // 被编辑的资讯id
-            topicId() {
-                return this.$route.params.id || null;
-            },
-            // 是否编辑
-            ifEdit() {
-                return !(this.topicId == undefined);
-            }
-        },
-        watch: {
-            picUrl() {
-                this.newTopicForm.picUrl = this.picUrl;
-                this.$refs.newTopicForm.validateField("picUrl");
-            }
-        }
-    };
-</script>
+  <el-container>
+    <el-header style="text-align: right; font-size: 12px">
+      <el-dropdown>
+        <i class="el-icon-setting" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>查看</el-dropdown-item>
+          <el-dropdown-item>新增</el-dropdown-item>
+          <el-dropdown-item>删除</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <span>王小虎</span>
+    </el-header>
 
-<style lang="stylus">
-  .select-image-dialog.new-topic {
-    .el-dialog__body {
-      .image-container {
-        .el-radio-group {
-          .image {
-            height: 90px;
-          }
-        }
-      }
-    }
+    <el-main>
+      <el-table :data="tableData">
+        <el-table-column prop="date" label="日期" width="140">
+        </el-table-column>
+        <el-table-column prop="name" label="姓名" width="120">
+        </el-table-column>
+        <el-table-column prop="address" label="地址">
+        </el-table-column>
+      </el-table>
+    </el-main>
+  </el-container>
+</el-container>
+
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+
+  .el-aside {
+    color: #333;
   }
 </style>
 
+<script>
+  export default {
+    data() {
+      const item = {
+        date: '2016-05-02',
+        name: '王小虎',
+        address: '上海市普陀区金沙江路 1518 弄'
+      };
+      return {
+        tableData: Array(20).fill(item)
+      }
+    }
+  };
+</script>

@@ -1,205 +1,133 @@
 <template>
-  <div class="new-topic-wrapper new-wrapper">
-    <div style="width: 100%;height: 26px;"></div>
-    <!-- <el-breadcrumb separator="/">
-      <el-breadcrumb-item center :to="{ path: '/index' }">首页</el-breadcrumb-item>
-      <el-breadcrumb-item center>内容管理</el-breadcrumb-item>
-      <el-breadcrumb-item center :to="{ path: '/topic-manage' }">话题管理</el-breadcrumb-item>
-      <el-breadcrumb-item center>{{topicId ? "编辑话题" : "创建话题"}}</el-breadcrumb-item>
-    </el-breadcrumb>-->
-    <div class="offer-b-card new-topic-card">
-      <div class="offer-b-title new-topic-title"> 创建话题</div>
-      <el-form
-        label-position="left"
-        ref="newTopicForm"
-        label-width="80px"
-      >
-        <el-form-item label="标题" prop="title">
-          <el-input placeholder="请输入标题" v-model="newTopicForm.title" :disabled="ifEdit"></el-input>
-        </el-form-item>
-        <el-form-item prop="content" class="new-description" label="介绍">
-          <el-input
-            type="textarea"
-            placeholder="请输入话题介绍"
-            max-length="120"
-            class="h136"
-          ></el-input>
-         <!-- <span class="counter">{{newTopicForm.content.length}}/120</span>-->
-        </el-form-item>
-        <!-- <el-form-item label="发布范围" prop="rangeId">
-          <el-select v-model="newTopicForm.rangeId" placeholder="请选择" multiple class="w375">
-            <el-option label="上海" value="444:上海"></el-option>
-            <el-option label="北京" value="333:北京"></el-option>
-            <el-option label="深圳" value="111:深圳"></el-option>
-            <el-option label="广州" value="222:广州"></el-option>
-          </el-select>
-        </el-form-item>-->
-        <el-form-item label="启用" prop="isShow">
-          <el-switch
-            v-model="newTopicForm.isShow"
-            active-color="#FFCF10"
-            inactive-color="#ececec"
-            :active-value="1"
-            :inactive-value="0"
-          ></el-switch>
-        </el-form-item>
-        <el-form-item class="releasing">
-          <el-button
-            type="primary">
-<!--            :loading="releasing"
-            @click="releaseTopic('newTopicForm')"-->
-           发布</el-button>
-          <router-link :to="{ path: '/Home'}">
-            <el-button>取消</el-button>
-          </router-link>
-        </el-form-item>
-      </el-form>
-    </div>
-  </div>
+  <el-form ref="form" class="forum" :model="form" label-width="80px">
+    <el-form-item label="考试标题">
+      <el-input v-model="examtitle"></el-input>
+    </el-form-item>
+    <el-form-item label="报名入口">
+      <el-input v-model="examurl"></el-input>
+    </el-form-item>
+    <el-form-item label="考试类目">
+      <el-select v-model="form.region" placeholder="请选择考试类目">
+        <el-option label="全国计算机等级考试" value="1"></el-option>
+        <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
+        <el-option label="CET大学英语考试" value="3"></el-option>
+        <el-option label="全国会计从业资格考试" value="4"></el-option>
+      </el-select>
+    </el-form-item>
+    <el-form-item label="报名时间">
+      <el-col :span="11">
+        <el-date-picker
+          v-model="value2"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions">
+        </el-date-picker>
+      </el-col>
+    </el-form-item>
+    <el-form-item label="考试时间">
+      <el-col :span="11">
+        <el-date-picker
+          v-model="value2"
+          type="daterange"
+          align="right"
+          unlink-panels
+          range-separator="至"
+          start-placeholder="开始日期"
+          end-placeholder="结束日期"
+          :picker-options="pickerOptions">
+        </el-date-picker>
+      </el-col>
+    </el-form-item>
+
+    <el-form-item label="活动性质">
+      <el-checkbox-group v-model="form.type">
+        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
+        <el-checkbox label="地推活动" name="type"></el-checkbox>
+        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
+        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
+      </el-checkbox-group>
+    </el-form-item>
+    <el-form-item label="特殊资源">
+      <el-radio-group v-model="form.resource">
+        <el-radio label="线上品牌商赞助"></el-radio>
+        <el-radio label="线下场地免费"></el-radio>
+      </el-radio-group>
+    </el-form-item>
+    <el-form-item label="考试详情">
+      <el-input type="textarea" v-model="form.desc"></el-input>
+    </el-form-item>
+    <el-form-item label="发布">
+      <el-switch v-model="form.delivery"></el-switch>
+    </el-form-item>
+    <el-form-item>
+      <el-button type="primary" @click="onSubmit">立即创建</el-button>
+      <el-button>取消</el-button>
+    </el-form-item>
+  </el-form>
 </template>
-<!--<script>
 
-    export default {
-        name: "offer-new-topic",
-        data() {
-            return {
-                newTopicForm: {
-                    content: "", // (string, optional): 内容 ,
-                    id: "", // (string, optional): 主键ID：新增无，编辑必传 ,
-                    isShow: "", // (integer, optional): 是否启用：0-否，1-是 ,
-                    picUrl: "", // (string, optional): 图片链接 ,
-                    // rangeId: [], // (string, optional): 发布范围-组织机构ID，用逗号隔开 ,
-                    // rangeName: "", // (string, optional): 发布范围-组织机构名称，用逗号隔开 ,
-                    title: "", // (string, optional): 标题 ,
-                    typeId: "" // (integer, optional): 类型：1-链接，2-图文
-                },
-                picUrl: "",
-                // 新增资讯表单验证规则
-                newTopicFormRules: {
-                    title: [
-                        { required: true, message: "请输入话题标题", trigger: "blur" },
-                        { min: 1, max: 32, message: "长度不多于32个字符", trigger: "blur" }
-                    ],
-                    content: [
-                        // { required: true, message: "请输入话题介绍", trigger: "blur" },
-                        { min: 1, max: 120, message: "长度不多于120个字符", trigger: "blur" }
-                    ],
-                    // rangeId: [
-                    //   { required: true, message: "请选择发布范围", trigger: "blur" }
-                    // ],
-                    isShow: [{ required: true, message: "请选择是否启用", trigger: "blur" }]
-                },
-                detailLoading: false, // 详情数据获取状态
-                releasing: false // 发布中状态
-            };
-        },
-        components: {
-            UploadImage
-        },
-        activated() {
-            if (this.topicId) {
-                this.detailLoading = true;
-                this.$http
-                    .get(`${this.domain}getTopic`, {
-                        id: this.topicId
-                    })
-                    .then(res => {
-                        let topicDetail = res.data;
-                        Object.entries(this.newTopicForm).forEach(([key, value]) => {
-                            this.newTopicForm[key] = topicDetail[key];
-                        });
-                        // let rangeIdArr = topicDetail.rangeId.split(",");
-                        // let rangeNameArr = topicDetail.rangeName.split(",");
-                        // this.newTopicForm.rangeId = rangeIdArr.map((i, index) => {
-                        //   return `${i}:${rangeNameArr[index]}`;
-                        // });
-                        this.detailLoading = false;
-                        this.picUrl = this.newTopicForm.picUrl;
-                        this.$refs.newTopicForm.clearValidate();
-                    });
-            } else {
-                this.resetForm();
-            }
-        },
-        methods: {
-            releaseTopic(formName) {
-                this.$refs[formName].validate(valid => {
-                    if (valid) {
-                        this.releasing = true;
-                        // let rangeIdArr = this.newTopicForm.rangeId.map(i => {
-                        //   return i.split(":")[0];
-                        // });
-                        // let rangeNameArr = this.newTopicForm.rangeId.map(i => {
-                        //   return i.split(":")[1];
-                        // });
-                        // let newTopicForm = Object.assign({}, this.newTopicForm, {
-                        //   rangeId: rangeIdArr.join(","),
-                        //   rangeName: rangeNameArr.join(",")
-                        // });
-                        this.$http.post(`${this.domain}saveTopic`, this.newTopicForm).then(
-                            res => {
-                                // console.log(res);
-                                this.releasing = false;
-                                this.$notify({
-                                    type: "success",
-                                    message: "发布成功。"
-                                });
-                                this.resetForm();
-                                this.$router.push("/Home");
-                            },
-                            err => {
-                                this.releasing = false;
-                            }
-                        );
-                    } else {
-                        // console.log("error submit!!");
-                        return false;
-                    }
-                });
-            },
-            // 重置表单数据
-            resetForm() {
-                Object.entries(this.newTopicForm).forEach(([key, value]) => {
-                    this.newTopicForm[key] = "";
-                });
-                this.newTopicForm.isShow = 1;
-                this.picUrl = "";
-                this.$nextTick(_ => {
-                    this.$refs.newTopicForm.clearValidate();
-                });
-            }
-        },
-        computed: {
-            ...mapState(["domain"]),
-            // 被编辑的资讯id
-            topicId() {
-                return this.$route.params.id || null;
-            },
-            // 是否编辑
-            ifEdit() {
-                return !(this.topicId == undefined);
-            }
-        },
-        watch: {
-            picUrl() {
-                this.newTopicForm.picUrl = this.picUrl;
-                this.$refs.newTopicForm.validateField("picUrl");
-            }
-        }
-    };
-</script>-->
+<style>
+  .forum {
+    margin: 80px;
+    width: 800px;
+    padding: 35px 35px 15px 35px;
+    background: #fff;
+    border: 1px solid #eaeaea;
+    -webkit-box-shadow: 0 0 25px #cac6c6;
+    box-shadow: 0 0 25px #cac6c6;
+  }
+  .el-input {
+    position: relative;
+    font-size: 14px;
+    /* display: inline-block; */
+    width: 80%;
+  }
+  .el-select {
+    /* display: inline-block; */
+    /* position: relative; */
+    width: 500px;
+  }
+  .el-form-item {
+    margin-bottom: 22px;
+    width: 60%;
+  }
+  .el-textarea {
+    position: relative;
+    display: inline-block;
+    width: 100%;
+    vertical-align: bottom;
+    font-size: 14px;
+    height: 100px;
+  }
+  .el-textarea__inner {
+    height: 100px;
+  }
+  </style>
 
-<!--<style lang="stylus">
-  .select-image-dialog.new-topic {
-    .el-dialog__body {
-      .image-container {
-        .el-radio-group {
-          .image {
-            height: 90px;
-          }
+<script>
+  export default {
+    data() {
+      return {
+        form: {
+          name: '',
+          region: '',
+          date1: '',
+          date2: '',
+          delivery: false,
+          type: [],
+          resource: '',
+          desc: ''
         }
+      }
+    },
+    methods: {
+      onSubmit() {
+        console.log('submit!');
       }
     }
   }
-</style>-->
-
+</script>

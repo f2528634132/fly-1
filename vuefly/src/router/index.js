@@ -1,12 +1,13 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import Login from '@/components/Login'
-import Home from '@/components/Home'
-import Admin from "@/components/Admin";
-import Test from "@/components/Test";
+import Login from '../components/Login'
+import Home from '../components/Home'
+import Admin from "../components/Admin";
+import Test from "../components/Test";
 import Emma from "../components/Emma";
 import Content from "../components/Content";
 import ExamEdit from "../components/ExamEdit";
+import TopicEdit from "../components/TopicEdit";
 Vue.use(Router)
 
 export default new Router({
@@ -17,13 +18,13 @@ export default new Router({
       component: Login,
       hidden:true
     },{
-    	path:'/Home',
-    	name:'主页',
-    	component:Home,
-    	hidden:true,
-    	meta:{
-    		requireAyth:true
-    	}
+      path:'/Home',
+      name:'主页',
+      component:Home,
+      hidden:true,
+      meta:{
+        requireAyth:true
+      }
     },
     {
       path: '/Admin',
@@ -53,6 +54,11 @@ export default new Router({
       path: '/ExamEdit',
       name: 'ExamEdit',
       component: ExamEdit
+    },
+    {
+      path: '/TopicEdit',
+      name: 'TopicEdit',
+      component: TopicEdit
     }
   ]
 })
