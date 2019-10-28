@@ -6,11 +6,15 @@ import com.fly.fankun.mapper.ExamTipsMapper;
 import com.fly.fankun.mapper.MyExamMapper;
 import com.fly.fankun.model.entity.ExamTips;
 import com.fly.fankun.model.entity.MyExam;
+import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.outVo.MyExamOutVo;
 import com.fly.fankun.service.MyExamService;
 import com.fly.fankun.util.DateUtil;
 import java.util.Date;
 import java.util.List;
+
+import com.github.pagehelper.Page;
+import com.github.pagehelper.PageHelper;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +22,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Title:
- * @author: fan.kun
+ * @author: fly
  * @date: 2019/10/17
  */
 @Service
@@ -35,6 +39,16 @@ public class MyExamServiceImpl implements MyExamService {
      */
     private static final Integer MY_EXAM_STATUS_4 =4;
     private static final Integer MY_EXAM_STATUS_3 =3;
+
+    @Override
+    public PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize) {
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<MyExamOutVo> resultList =myExamMapper.list(deleted);
+        PageBean<MyExamOutVo> pageData = new PageBean<MyExamOutVo>(pageNum,
+                pageSize, (int)page.getTotal());
+        pageData.setItems(resultList);
+        return pageData;
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

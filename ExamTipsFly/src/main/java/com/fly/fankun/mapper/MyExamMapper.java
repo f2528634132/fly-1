@@ -24,5 +24,7 @@ public interface MyExamMapper {
 
     List<MyExam> queryByExamId(List<Integer> list);
 
+    List<MyExamOutVo> list(@Param(value = "deleted") Integer deleted);
+
     void updateBatchStatus(List<MyExam> list);
 }

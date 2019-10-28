@@ -6,7 +6,7 @@ import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 
 /**
  * @Title:
- * @author: fan.kun
+ * @author: fly
  * @date: 2019/10/15
  */
 public interface ExamTipsService {

@@ -23,7 +23,7 @@ import org.springframework.web.bind.annotation.RestController;
  * The type Admin controller.
  *
  * @Title: 管理人员控制层
- * @author: fan.kun
+ * @author: fly
  * @date: 2019 /10/14
  */
 @RestController

@@ -53,7 +53,7 @@
             }else{
                 console.log('bbb');
                 this.$router.push({
-                    path: '/Test',
+                    path: '/Admin',
                     query: {'id': 222}
                 })
             }

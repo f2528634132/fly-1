@@ -9,7 +9,7 @@ import lombok.Data;
 
 /**
  * @Title:
- * @author: fan.kun
+ * @author: fly
  * @date: 2019/10/17
  */
 @Data
@@ -28,4 +28,11 @@ public class MyExamOutVo implements Serializable {
     @ApiModelProperty("加入时间")
     private Date createTime;
     private Integer examId;
+
+    private String examTipsTitle;
+    private Date signupBegintime;
+    private Date  signupEndtime;
+    private Date examBegintime;
+    private Date examEndtime;
+    private String examUrl;
 }

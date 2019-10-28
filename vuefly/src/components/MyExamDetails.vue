@@ -2,7 +2,7 @@
 
 <div id="app" style="width: 100%;height: 100%">
   <el-row><el-col :span="12">
-  <el-page-header @back="goBack" content="详情页面">
+  <el-page-header @back="goBack" content="详情页面" @click.native="$router.push('/MyExam')">
   </el-page-header>
   </el-col>
   </el-row>

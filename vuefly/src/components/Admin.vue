@@ -165,7 +165,7 @@
       };
 
 
-      let arr = Array(20).fill(2)
+//      let arr = Array(20).fill(2)
       // let arr = [1, 2, 3]
       // arr.fill = Array.fill
       // console.log(arr)

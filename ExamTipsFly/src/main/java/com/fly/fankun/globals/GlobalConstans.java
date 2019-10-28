@@ -2,7 +2,7 @@ package com.fly.fankun.globals;
 
 /**
  * @Title: 全局常量配置
- * @author: fan.kun
+ * @author: fly
  * @date: 2019/10/15
  */
 public class GlobalConstans {

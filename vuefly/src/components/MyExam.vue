@@ -74,6 +74,9 @@
       </el-aside>
 
       <el-main>
+        <el-row>
+          <el-button type="primary" round @click="submitClick">主要按钮</el-button>
+        </el-row>
         <el-table :data="tableData">
           <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
@@ -87,10 +90,13 @@
           </el-table-column>
           <el-table-column prop="examUrl" label="报名地址" width="150">
           </el-table-column>
+          <el-table-column prop="status" label="考试状态" width="150">
+          </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <el-row>
               <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
               <el-button type="info" icon="el-icon-folder-add" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+              <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
               <el-button type="danger" icon="el-icon-delete" circle></el-button>
             </el-row>
           </el-table-column>
@@ -155,15 +161,31 @@
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
-      }
+      },
+
+    submitClick: function () {
+      // console.log(this.filterForm);
+      return  this.getRequest(`/myExam/queryPage?deleted=0&pageNum=1&pageSize=10`)
+        .then(
+          res => {
+            console.log(res.data.data.items);
+            this.tableData = res.data.data.items || [];
+            console.log(this.tableData);
+            this.totalMessage = res.data.totalCount || 0;
+          },
+          err => {
+            // console.log(err);
+          }
+        );
+    },
     },
     data() {
       const item = {
         examTipsTitle: '全国计算机等级考试',
         signupBegintime: '2019-11-2',
         signupEndtime: '2019-11-12',
-        examUrl: 'www.baidu.com'
-
+        examUrl: 'www.baidu.com',
+        status:'待考试'
       };
       return {
         tableData: Array(20).fill(item),
