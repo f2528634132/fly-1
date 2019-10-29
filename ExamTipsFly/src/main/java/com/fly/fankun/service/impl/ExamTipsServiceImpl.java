@@ -34,15 +34,16 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     private ExamTypeMapper examTypeMapper;
 
 
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public ExamTipsOutVo editExamTips(ExamTipsInputVo examTipsInputVo) {
         //查询考试类型是否存在
         Integer examTypeId = examTipsInputVo.getExamTypeId();
         ExamType examType = examTypeMapper.selectByPrimaryKey(examTypeId);
-        if(null == examType){
-            throw  new BizzException("考试类型不存在");
-        }
+//        if(null == examType){
+//            throw  new BizzException("考试类型不存在");
+//        }
         ExamTips examTips = BeanUtil.copy(examTipsInputVo, ExamTips.class);
         //新增
         if(null == examTipsInputVo.getId()){

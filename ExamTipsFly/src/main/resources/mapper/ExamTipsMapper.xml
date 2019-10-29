@@ -26,10 +26,12 @@
     from exam_tips
     where id = #{id,jdbcType=INTEGER}
   </select>
+
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
     delete from exam_tips
     where id = #{id,jdbcType=INTEGER}
   </delete>
+
   <insert id="insert" parameterType="com.fly.fankun.model.entity.ExamTips" useGeneratedKeys="true" keyProperty="id">
     insert into exam_tips (id, exam_type_id, exam_url, 
       exam_tips_title, exam_comment, signup_begintime, 

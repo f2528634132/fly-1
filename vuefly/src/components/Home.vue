@@ -88,10 +88,13 @@
             </el-table-column>
             <el-table-column prop="examUrl" label="报名地址" width="150">
             </el-table-column>
+            <el-table-column prop="clickNumber" label="热度" width="150">
+            </el-table-column>
             <el-table-column prop="operation" label="操作">
               <el-row>
                 <el-button icon="el-icon-search" circle></el-button>
-                <el-button type="primary" icon="el-icon-plus" circle></el-button>
+                <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="counter += 1"></el-button>
                 <el-button type="success" icon="el-icon-check" circle></el-button>
                 <el-button type="info" icon="el-icon-message" circle></el-button>
                 <el-button type="warning" icon="el-icon-star-off" circle></el-button>
@@ -154,14 +157,18 @@
         console.log(`当前页: ${val}`);
       }
     },
+
     data() {
+
       const item = {
         examTipsTitle: '全国计算机等级考试',
         signupBegintime: '2019-11-2',
         signupEndtime: '2019-11-12',
-        examUrl: 'www.baidu.com'
+        examUrl: 'www.baidu.com',
+        counter:0
 
       };
+
       return {
         tableData: Array(20).fill(item),
         currentPage1: 5,

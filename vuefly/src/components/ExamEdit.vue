@@ -1,13 +1,13 @@
 <template>
-  <el-form ref="form" class="forum" :model="form" label-width="80px">
+  <el-form ref="form" class="forum" :model="examTipsInputVo" label-width="80px">
     <el-form-item label="考试标题">
-      <el-input v-model="examtitle"></el-input>
+      <el-input v-model="examTipsInputVo.examTipsTitle"></el-input>
     </el-form-item>
     <el-form-item label="报名入口">
-      <el-input v-model="examurl"></el-input>
+      <el-input v-model="examTipsInputVo.examUrl"></el-input>
     </el-form-item>
     <el-form-item label="考试类目">
-      <el-select v-model="form.region" placeholder="请选择考试类目">
+      <el-select v-model="examTipsInputVo.examTypeId" placeholder="请选择考试类目">
         <el-option label="全国计算机等级考试" value="1"></el-option>
         <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
         <el-option label="CET大学英语考试" value="3"></el-option>
@@ -17,51 +17,51 @@
     <el-form-item label="报名时间">
       <el-col :span="11">
         <el-date-picker
-          v-model="value2"
+          v-model="examTipsInputVo.value1"
           type="daterange"
           align="right"
           unlink-panels
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-          :picker-options="pickerOptions">
+          >
         </el-date-picker>
       </el-col>
     </el-form-item>
     <el-form-item label="考试时间">
       <el-col :span="11">
         <el-date-picker
-          v-model="value2"
+          v-model="examTipsInputVo.value2"
           type="daterange"
           align="right"
           unlink-panels
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-          :picker-options="pickerOptions">
+          >
         </el-date-picker>
       </el-col>
     </el-form-item>
 
-    <el-form-item label="活动性质">
-      <el-checkbox-group v-model="form.type">
-        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>
-        <el-checkbox label="地推活动" name="type"></el-checkbox>
-        <el-checkbox label="线下主题活动" name="type"></el-checkbox>
-        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>
-      </el-checkbox-group>
-    </el-form-item>
-    <el-form-item label="特殊资源">
-      <el-radio-group v-model="form.resource">
-        <el-radio label="线上品牌商赞助"></el-radio>
-        <el-radio label="线下场地免费"></el-radio>
-      </el-radio-group>
-    </el-form-item>
+<!--    <el-form-item label="活动性质">-->
+<!--      <el-checkbox-group v-model="form.type">-->
+<!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
+<!--        <el-checkbox label="地推活动" name="type"></el-checkbox>-->
+<!--        <el-checkbox label="线下主题活动" name="type"></el-checkbox>-->
+<!--        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>-->
+<!--      </el-checkbox-group>-->
+<!--    </el-form-item>-->
+<!--    <el-form-item label="特殊资源">-->
+<!--      <el-radio-group v-model="form.resource">-->
+<!--        <el-radio label="线上品牌商赞助"></el-radio>-->
+<!--        <el-radio label="线下场地免费"></el-radio>-->
+<!--      </el-radio-group>-->
+<!--    </el-form-item>-->
     <el-form-item label="考试详情">
-      <el-input type="textarea" v-model="form.desc"></el-input>
+      <el-input type="textarea" v-model="examTipsInputVo.examComment"></el-input>
     </el-form-item>
     <el-form-item label="发布">
-      <el-switch v-model="form.delivery"></el-switch>
+      <el-switch v-model="examTipsInputVo.deleted"></el-switch>
     </el-form-item>
     <el-form-item>
       <el-button type="primary" @click="onSubmit">立即创建</el-button>
@@ -112,21 +112,55 @@
   export default {
     data() {
       return {
-        form: {
-          name: '',
-          region: '',
-          date1: '',
-          date2: '',
-          delivery: false,
-          type: [],
-          resource: '',
-          desc: ''
+        examTipsInputVo: {
+          value2:'',
+          value1:'',
+          examTipsTitle: '',
+          examUrl:'',
+          examTypeId: '',
+          signupBegintime: '',
+          signupEndtime: '',
+          examBegintime: '',
+          examEndtime: '',
+          deleted: false,
+          examComment: '',
         }
       }
     },
     methods: {
-      onSubmit() {
-        console.log('submit!');
+      onSubmit: function () {
+        // let examTipsInputVo = new FormData();
+        // for (var key in this.formData) {
+        //   examTipsInputVo.append(key, this.formData[key]);
+        // }
+        // console.log( examTipsInputVo.keys().next());
+        let inputVo = this.examTipsInputVo;
+        inputVo.signupBegintime = inputVo.value1[0];
+        inputVo.signupEndtime = inputVo.value1[1];
+        inputVo.examBegintime = inputVo.value2[0];
+        inputVo.examEndtime = inputVo.value2[1];
+        this.$axios({
+          method: "post",
+          url: "/examTips/editExamTips",
+          headers: {
+            //"Content-Type": "multipart/form-data"
+            'Content-Type': 'application/json;charset=UTF-8'
+          },
+          withCredentials: true,
+           data: JSON.stringify(inputVo)
+        //   data: JSON.stringify({
+        //     "examBegintime": "2019-10-29T09:54:10.912Z",
+        //     "examComment": "test",
+        //     "examEndtime": "2019-10-29T09:54:10.912Z",
+        //     "examTipsTitle": "test",
+        //     "examTypeId": 0,
+        //     "examUrl": "test",
+        //     "signupBegintime": "2019-10-29T09:54:10.912Z",
+        //     "signupEndtime": "2019-10-29T09:54:10.912Z"
+        //   })
+         }).then((res) => {
+          console.log(res);
+        });
       }
     }
   }

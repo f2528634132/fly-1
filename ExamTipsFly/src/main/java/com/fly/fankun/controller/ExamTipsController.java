@@ -26,7 +26,7 @@ import org.springframework.web.bind.annotation.RestController;
  * The type Admin controller.
  *
  * @Title: 考试信息控制层
- * @author: fan.kun
+ * @author: fly
  * @date: 2019 /10/14
  */
 @RestController
@@ -38,7 +38,8 @@ public class ExamTipsController extends BaseController{
     @Autowired
     private ExamTipsService examTipsService;
 
-    @PostMapping("/editExamTips")
+    @PostMapping(value = "/editExamTips",produces="application/json;charset=UTF-8")
+
     @ApiOperation(value = "编辑考试信息",response = ExamTipsOutVo.class)
     public BaseResult editExamTips(@Valid  @RequestBody ExamTipsInputVo examTipsInputVo) {
         ExamTipsOutVo resp=  examTipsService.editExamTips(examTipsInputVo);
