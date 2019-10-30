@@ -24,12 +24,26 @@
   export default {
     data() {
       return {
-        active: 0
+        active: this.$route.query.status,
+        examId: this.$route.query.id
       };
     },
     methods: {
       next() {
-        if (this.active++ > 2) this.active = 0;
+        if (this.active++ > 2) {
+            this.active = 3;
+        }else{
+            return  this.postRequest(`/myExam/editMyExamStatus?id=${this.examId}&status=${this.active++}`)
+                .then(
+                    () => {
+                        console.log(this.data.data);
+                    }).catch(() => {
+                    alert("error");
+                    this.active = this.$route.query.status
+                })
+                ;
+        }
+
       },
       goBack() {
         console.log('go back');

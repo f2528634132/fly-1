@@ -226,7 +226,7 @@
                  select="com.fly.fankun.mapper.ExamTipsMapper.selectByPrimaryKey" />
   </resultMap>
   <select id="list" resultMap="MyExamResultMap" parameterType="java.lang.Integer" >
-    select exam_tips_title,signup_begintime,signup_endtime,exam_begintime,exam_endtime,exam_url,status
+    select a.id,exam_tips_title,signup_begintime,signup_endtime,exam_begintime,exam_endtime,exam_url,status
     from my_exam a
     left JOIN exam_tips b  on a.exam_id=b.id
     <where>

@@ -93,12 +93,14 @@
           <el-table-column prop="status" label="考试状态" width="150">
           </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
+            <template slot-scope="scope">
             <el-row>
               <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-              <el-button type="info" icon="el-icon-folder-add" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+              <el-button type="info" icon="el-icon-folder-add" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
               <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
               <el-button type="danger" icon="el-icon-delete" circle></el-button>
             </el-row>
+            </template>
           </el-table-column>
         </el-table>
         <el-row>

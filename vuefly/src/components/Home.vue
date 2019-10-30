@@ -80,7 +80,7 @@
             <el-button type="warning" round>热门考试</el-button>
             <el-button type="danger" round>提示考试</el-button>
           </el-row>
-          <el-table :data="tableData">
+          <el-table :data="tableData" ref="tableData">
             <el-table-column prop="examTipsTitle" label="考试名称" width="200">
             </el-table-column>
             <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
@@ -95,16 +95,20 @@
             </el-table-column>
             <el-table-column prop="clickNumber" label="热度" width="150">
             </el-table-column>
+            <el-table-column prop="id" label="22" width="150">
+            </el-table-column>
             <el-table-column prop="operation" label="操作">
-              <el-row>
+              <template slot-scope="scope">
+                <el-row>
                 <el-button icon="el-icon-search" circle></el-button>
                 <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="say('添加成功！')"></el-button>
-<!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
+                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>
+                <!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
 <!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
                 <el-button type="warning" icon="el-icon-star-off" circle v-on:click="counter += 1"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
               </el-row>
+              </template>
             </el-table-column>
           </el-table>
           <el-row>
@@ -154,8 +158,8 @@
 
 <script>
 
-  import { mapState } from "vuex";
-  import $axios from "vue-resource";
+  // import { mapState } from "vuex";
+  // import $axios from "vue-resource";
 
   export default {
 
@@ -179,24 +183,39 @@
         examUrl: '',
         totalMessage:0,
         tableData: [],
-        projectForm: {
-          deleted:0,
-          size: 10,
-          page: 1
-        },
+        // projectForm: {
+        //   deleted:0,
+        //   size: 10,
+        //   page: 1
+        // },
         counter:0
       }
     },
-    computed: {
-      ...mapState(["domain", "userInfo"])
-    },
-    components: {},
-    activated() {
-      this.initDatas();
-    },
+    // computed: {
+    //   ...mapState(["domain", "userInfo"])
+    // },
+    // components: {},
+    // activated() {
+    //   this.initDatas();
+    // },
+      mounted:function(){
+          this.submitClick();
+      },
     methods: {
-      say: function (message) {
-        alert(message)
+        joinMyExam: function (examId) {
+        alert(examId);
+            return  this.postRequest(`/myExam/joinMyExam?examId=${examId}`)
+                .then(
+                    res => {
+                        console.log(res.data.data.items);
+                        this.tableData = res.data.data.items || [];
+                        console.log(this.tableData);
+                        this.totalMessage = res.data.totalNum || 0;
+                    },
+                    err => {
+                        // console.log(err);
+                    }
+                );
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -204,38 +223,38 @@
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
       },
-       initDatas(){
-        this.$http
-          .get(`${this.domain}examTips/queryPage`,this.projectForm)
-          .then(
-            res=>{
-              console.log(res.data.data.items);
-              this.tableData = res.data.data.items || [];
-              console.log(this.tableData);
-              this.totalMessage = res.data.totalNum || 0;
-            })
-      //   $axios.get(
-      //     `/examTips/queryPage?deleted=0&pageNum=1&pageSize=10` ).then(
-      //            res=>{
-      //              console.log(res.data.data.items);
-      //              this.tableData = res.data.data.items || [];
-      //              console.log(this.tableData);
-      //              this.totalMessage = res.data.totalNum || 0;
-      //            })
-      //    return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
-      //      .then(
-      //        res => {
-      //          console.log(res.data.data.items);
-      //          this.tableData = res.data.data.items || [];
-      //          console.log(this.tableData);
-      //          this.totalMessage = res.data.totalNum || 0;
-      //        },
-      //        err => {
-      //          // console.log(err);
-      //        }
-      //      );
-
-      },
+      //  initDatas(){
+      //   this.$http
+      //     .get(`${this.domain}examTips/queryPage`,this.projectForm)
+      //     .then(
+      //       res=>{
+      //         console.log(res.data.data.items);
+      //         this.tableData = res.data.data.items || [];
+      //         console.log(this.tableData);
+      //         this.totalMessage = res.data.totalNum || 0;
+      //       })
+      // //   $axios.get(
+      // //     `/examTips/queryPage?deleted=0&pageNum=1&pageSize=10` ).then(
+      // //            res=>{
+      // //              console.log(res.data.data.items);
+      // //              this.tableData = res.data.data.items || [];
+      // //              console.log(this.tableData);
+      // //              this.totalMessage = res.data.totalNum || 0;
+      // //            })
+      // //    return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+      // //      .then(
+      // //        res => {
+      // //          console.log(res.data.data.items);
+      // //          this.tableData = res.data.data.items || [];
+      // //          console.log(this.tableData);
+      // //          this.totalMessage = res.data.totalNum || 0;
+      // //        },
+      // //        err => {
+      // //          // console.log(err);
+      // //        }
+      // //      );
+      //
+      // },
       submitClick: function () {
         // console.log(this.filterForm);
         return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
