@@ -5,20 +5,26 @@ import App from './App'
 import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
+import  VueResource  from 'vue-resource'
+
+
 import 'element-ui/lib/theme-chalk/index.css'
 import {getRequest} from './utils/api'
 import {postRequest} from './utils/api'
 import {deleteRequest} from './utils/api'
 import {putRequest} from './utils/api'
 Vue.use(ElementUI)
+Vue.use(VueResource)
 //Vue.use({axios,VueAxios})
 // axios.defaults.headers.common['Content-Type'] = 'application/json;charset=UTF-8'
 
 Vue.prototype.$axios = axios;
+
 Vue.prototype.getRequest=getRequest;
 Vue.prototype.postRequest=postRequest;
 Vue.prototype.deleteRequest=deleteRequest;
 Vue.prototype.putRequest=putRequest;
+
 
 Vue.config.productionTip = false
 

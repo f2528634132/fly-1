@@ -75,6 +75,11 @@
       </el-aside>
 
         <el-main>
+          <el-row>
+            <el-button type="primary" round @click="submitClick">主要按钮</el-button>
+            <el-button type="warning" round>热门考试</el-button>
+            <el-button type="danger" round>提示考试</el-button>
+          </el-row>
           <el-table :data="tableData">
             <el-table-column prop="examTipsTitle" label="考试名称" width="200">
             </el-table-column>
@@ -94,10 +99,10 @@
               <el-row>
                 <el-button icon="el-icon-search" circle></el-button>
                 <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="counter += 1"></el-button>
-                <el-button type="success" icon="el-icon-check" circle></el-button>
-                <el-button type="info" icon="el-icon-message" circle></el-button>
-                <el-button type="warning" icon="el-icon-star-off" circle></el-button>
+                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="say('添加成功！')"></el-button>
+<!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
+<!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
+                <el-button type="warning" icon="el-icon-star-off" circle v-on:click="counter += 1"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
               </el-row>
             </el-table-column>
@@ -148,34 +153,104 @@
 </style>
 
 <script>
+
+  import { mapState } from "vuex";
+  import $axios from "vue-resource";
+
   export default {
+
+    data() {
+      // const item = {
+      //   examTipsTitle: '全国计算机等级考试',
+      //   signupBegintime: '2019-11-2',
+      //   signupEndtime: '2019-11-12',
+      //   examUrl: 'www.baidu.com',
+      //   counter:0
+      // };
+      return {
+        //tableData: Array(20).fill(item),
+        currentPage1: 5,
+        currentPage2: 5,
+        currentPage3: 5,
+        currentPage4: 4,
+        examTipsTitle: '',
+        signupBegintime: '',
+        signupEndtime: '',
+        examUrl: '',
+        totalMessage:0,
+        tableData: [],
+        projectForm: {
+          deleted:0,
+          size: 10,
+          page: 1
+        },
+        counter:0
+      }
+    },
+    computed: {
+      ...mapState(["domain", "userInfo"])
+    },
+    components: {},
+    activated() {
+      this.initDatas();
+    },
     methods: {
+      say: function (message) {
+        alert(message)
+      },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+      },
+       initDatas(){
+        this.$http
+          .get(`${this.domain}examTips/queryPage`,this.projectForm)
+          .then(
+            res=>{
+              console.log(res.data.data.items);
+              this.tableData = res.data.data.items || [];
+              console.log(this.tableData);
+              this.totalMessage = res.data.totalNum || 0;
+            })
+      //   $axios.get(
+      //     `/examTips/queryPage?deleted=0&pageNum=1&pageSize=10` ).then(
+      //            res=>{
+      //              console.log(res.data.data.items);
+      //              this.tableData = res.data.data.items || [];
+      //              console.log(this.tableData);
+      //              this.totalMessage = res.data.totalNum || 0;
+      //            })
+      //    return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+      //      .then(
+      //        res => {
+      //          console.log(res.data.data.items);
+      //          this.tableData = res.data.data.items || [];
+      //          console.log(this.tableData);
+      //          this.totalMessage = res.data.totalNum || 0;
+      //        },
+      //        err => {
+      //          // console.log(err);
+      //        }
+      //      );
+
+      },
+      submitClick: function () {
+        // console.log(this.filterForm);
+        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+          .then(
+            res => {
+              console.log(res.data.data.items);
+              this.tableData = res.data.data.items || [];
+              console.log(this.tableData);
+              this.totalMessage = res.data.totalNum || 0;
+            },
+            err => {
+              // console.log(err);
+            }
+          );
       }
     },
-
-    data() {
-
-      const item = {
-        examTipsTitle: '全国计算机等级考试',
-        signupBegintime: '2019-11-2',
-        signupEndtime: '2019-11-12',
-        examUrl: 'www.baidu.com',
-        counter:0
-
-      };
-
-      return {
-        tableData: Array(20).fill(item),
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
-      }
-    }
   };
 </script>

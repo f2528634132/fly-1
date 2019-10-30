@@ -45,16 +45,15 @@
             let data = resp.data;
             console.log(data.data.type);
             if (1 === data.data.type){
-                console.log('aaaa');
                 this.$router.push({
                     path: '/Home',
-                    query: {'id': 111}
+                    query: {'id':data.data.id}
                 })
             }else{
-                console.log('bbb');
                 this.$router.push({
                     path: '/Admin',
-                    query: {'id': 222}
+                    query: {'id': data.data.id}
+
                 })
             }
             // _this.$store.commit('login', data.obj);
