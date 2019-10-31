@@ -73,7 +73,7 @@
           <el-button type="warning" round>警告按钮</el-button>
           <el-button type="danger" round>危险按钮</el-button>
         </el-row>
-        <el-table :data="tableData">
+        <el-table :data="tableData" >
 
           <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
@@ -96,7 +96,7 @@
           </el-table-column>
         </el-table>
         <el-row>
-          <div class="block">
+<!--          <div class="block">
             <el-pagination
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
@@ -106,7 +106,19 @@
               layout="total, sizes, prev, pager, next, jumper"
               :total="400">
             </el-pagination>
+          </div>-->
+           <div >
+          <div class="block" style="text-align:right;">
+            <el-pagination @size-change="sizeChange"
+                           @current-change="currentChange"
+                           :current-page="currentPage"
+                           :page-sizes="[10, 20, 30, 40]"
+                           :page-size="pageSize"
+                           layout="total, sizes, prev, pager, next, jumper"
+                           :total="totalNum">
+            </el-pagination>
           </div>
+        </div>
         </el-row>
       </el-main>
     </el-container>
@@ -133,22 +145,57 @@
 
 <script>
   export default {
+      mounted() {
+          this.submitClick();
+      },
     methods: {
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      },
+        // computed: {
+        //     params() {
+        //         let param = {
+        //             currentPage: this.currentPage,
+        //             pageSize: this.pageSize,
+        //             totalNum: this.totalNum,
+        //             deleted: this.deleted
+        //         }
+        //         //拷贝，
+        //         return Object.assign({}, param);
+        //     },
+        // },
+        sizeChange(val) {
+            console.log(`每页 ${val} 条`);
+            this.pageSize = val;
+            this.submitClick();
+        },
+        currentChange(val) {
+           console.log(`当前页: ${val}`);
+            this.currentPage = val;
+            this.submitClick();
+        },
+        // queryPage() {
+        //     this._后台方法名(自己命名).(this.params).then(result => {
+        //         // 一般后天用字符串，前段用json所以这里涉及到字符串的转换
+        //         //这个语法就将后台传来的字符串转换成前段可以截取的json
+        //         let data = JSON.parse(result);
+        //         // 看后台的返回值，一般出现0就是成功，出现500就是失败了
+        //         if (data.status == 0) {//上面自己定义的一个数组将这个数组接收我们后台传入的数据
+        //             this.tableData = data.result.list;//这个地方不一定有list,要看数据反馈的是否有层级
+        //             this.tableData.forEach(item => {
+        //                 item.RQ = item.RQ.substr(0, 10)
+        //             })
+        //             this.page.totalRecords = data.result.totalRecords;//分页
+        //
+        //         }
+        //
+        //     })
+        // },
         submitClick: function () {
             // console.log(this.filterForm);
-            return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+            return  this.getRequest(`/examTips/queryPage?pageNum=${this.currentPage}&pageSize=${this.pageSize}&deleted=${this.deleted}`)
                 .then(
                     res => {
-                        console.log(res.data.data.items);
                         this.tableData = res.data.data.items || [];
                         console.log(this.tableData);
-                        this.totalMessage = res.data.totalCount || 0;
+                        this.totalNum = res.data.data.totalNum || 0;
                     },
                     err => {
                         // console.log(err);
@@ -170,11 +217,18 @@
       // arr.fill = Array.fill
       // console.log(arr)
       return {
-        tableData: Array(6).fill(item),
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
+        // tableData: Array(6).fill(item),
+          currentPage: 1, // 当前页
+          pageSize: 10, // 每页回答数量
+          deleted: 0, // 回答总数
+          totalNum: 0,
+         tableData: [],
+          page: {
+              currentPage: 1, //当前页
+              pageSize: 10, //每页条数,  默认10条
+              totalNum: 0, //总条数
+              totalPages: 0, //总页数
+          }
       }
     }
   };
