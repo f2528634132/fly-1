@@ -14,6 +14,7 @@ public interface MyExamService {
     void joinMyExam(Integer examId, Integer userId);
 
     List<MyExamOutVo> queryMyExam(Integer userId);
+//    MyExamOutVo queryMyExam(Integer userId);
 
     void delMyExam(Integer id, Integer userId);
 

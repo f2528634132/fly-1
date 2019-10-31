@@ -17,7 +17,8 @@
 
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
+<!--        <el-menu :default-openeds="['1', '3']">-->
+        <el-menu >
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-menu"></i>首页</template>
             <el-menu-item-group>
@@ -76,33 +77,33 @@
 
         <el-main>
           <el-row>
-            <el-button type="primary" round @click="submitClick">主要按钮</el-button>
+<!--            <el-button type="primary" round @click="submitClick()">主要按钮</el-button>-->
             <el-button type="warning" round>热门考试</el-button>
             <el-button type="danger" round>提示考试</el-button>
           </el-row>
           <el-table :data="tableData" ref="tableData">
             <el-table-column prop="examTipsTitle" label="考试名称" width="200">
             </el-table-column>
-            <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
+            <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
             </el-table-column>
-            <el-table-column prop="signupEndtime" label="报名结束时间" width="150">
+            <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
             </el-table-column>
-            <el-table-column prop="signupBegintime" label="考试开始时间" width="150">
+            <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
             </el-table-column>
-            <el-table-column prop="signupEndtime" label="考试结束时间" width="150">
+            <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
             </el-table-column>
-            <el-table-column prop="examUrl" label="报名地址" width="150">
+            <el-table-column prop="examUrl" label="报名地址" width="350">
             </el-table-column>
-            <el-table-column prop="clickNumber" label="热度" width="150">
-            </el-table-column>
-            <el-table-column prop="id" label="22" width="150">
-            </el-table-column>
+<!--            <el-table-column prop="clickNumber" label="热度" width="160">-->
+<!--            </el-table-column>-->
+<!--            <el-table-column prop="id" label="考试Id" width="160">-->
+<!--            </el-table-column>-->
             <el-table-column prop="operation" label="操作">
               <template slot-scope="scope">
                 <el-row>
                 <el-button icon="el-icon-search" circle></el-button>
                 <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-                <el-button id="clickNumber" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>
+                <el-button id="examId" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>
                 <!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
 <!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
                 <el-button type="warning" icon="el-icon-star-off" circle v-on:click="counter += 1"></el-button>
@@ -116,11 +117,11 @@
               <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage4"
-                :page-sizes="[100, 200, 300, 400]"
-                :page-size="100"
+                :current-page="currentPage1"
+                :page-sizes="[5,10, 20, 50, 100]"
+                :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
-                :total="400">
+                :total="totalNum">
               </el-pagination>
             </div>
           </el-row>
@@ -173,7 +174,7 @@
       // };
       return {
         //tableData: Array(20).fill(item),
-        currentPage1: 5,
+        currentPage1: 1,
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
@@ -182,7 +183,9 @@
         signupEndtime: '',
         examUrl: '',
         totalMessage:0,
+        totalNum:0,
         tableData: [],
+        pageSize:5,
         // projectForm: {
         //   deleted:0,
         //   size: 10,
@@ -210,7 +213,7 @@
                         console.log(res.data.data.items);
                         this.tableData = res.data.data.items || [];
                         console.log(this.tableData);
-                        this.totalMessage = res.data.totalNum || 0;
+                        this.totalNum= res.data.totalNum || 0;
                     },
                     err => {
                         // console.log(err);
@@ -257,13 +260,15 @@
       // },
       submitClick: function () {
         // console.log(this.filterForm);
-        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
+        //alert(currentPage1,pageSize);
+        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=${this.currentPage1}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);
               this.tableData = res.data.data.items || [];
               console.log(this.tableData);
-              this.totalMessage = res.data.totalNum || 0;
+              console.log(res.data.data.totalNum );
+              this.totalNum = res.data.data.totalNum || 0;
             },
             err => {
               // console.log(err);

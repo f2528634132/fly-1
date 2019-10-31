@@ -16,7 +16,7 @@
 
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['1', '3']">
+        <el-menu :default-openeds="['2']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-menu"></i>首页</template>
             <el-menu-item-group>
@@ -74,32 +74,33 @@
       </el-aside>
 
       <el-main>
-        <el-row>
-          <el-button type="primary" round @click="submitClick">主要按钮</el-button>
-        </el-row>
+<!--        <el-row>-->
+<!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
+<!--        </el-row>-->
         <el-table :data="tableData">
           <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
+          <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="报名结束时间" width="150">
+          <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="考试开始时间" width="150">
+          <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="考试结束时间" width="150">
+          <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
           </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址" width="150">
+          <el-table-column prop="examUrl" label="报名地址" width="350">
           </el-table-column>
-          <el-table-column prop="status" label="考试状态" width="150">
+          <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">
           </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <template slot-scope="scope">
-            <el-row>
-              <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-              <el-button type="info" icon="el-icon-folder-add" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
-              <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
-              <el-button type="danger" icon="el-icon-delete" circle></el-button>
-            </el-row>
+              <el-row>
+                <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+                <el-button type="info" icon="el-icon-folder-add" circle
+                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
+                <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
+                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+              </el-row>
             </template>
           </el-table-column>
         </el-table>
@@ -143,7 +144,7 @@
   /*[class*=" el-icon-"], [class^=el-icon-] {*/
   /*  font-size: larger;*/
   /*}*/
-  .el-icon-folder-add{
+  .el-icon-folder-add {
     font-size: larger;
   }
 
@@ -156,7 +157,14 @@
 </style>
 
 <script>
+  import {isObject} from "element-ui";
+
   export default {
+    mounted: function () {
+      this.submitClick();
+
+    },
+
     methods: {
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
@@ -165,32 +173,78 @@
         console.log(`当前页: ${val}`);
       },
 
-    submitClick: function () {
-      // console.log(this.filterForm);
-      return  this.getRequest(`/myExam/queryPage?deleted=0&pageNum=1&pageSize=10`)
-        .then(
-          res => {
-            console.log(res.data.data.items);
-            this.tableData = res.data.data.items || [];
-            console.log(this.tableData);
-            this.totalMessage = res.data.totalCount || 0;
-          },
-          err => {
-            // console.log(err);
-          }
-        );
-    },
+      submitClick: function () {
+        // console.log(this.filterForm);
+        // let str='';
+        return this.getRequest(`/myExam/queryPage?deleted=0&pageNum=1&pageSize=10`)
+          .then(
+            res => {
+              console.log(res.data.data.items);
+              this.tableData = res.data.data.items || [];
+              // console.log(isObject(this.tableData[0]));
+              // return str;
+              // console.log(str);
+                console.log(this.tableData);
+              this.totalMessage = res.data.totalCount || 0;
+            },
+            err => {
+              // console.log(err);
+            }
+          );
+      },
+
+      statusFormat: function (row,column) {
+        // let status =row.status();
+        // let statusW="未缴费";
+        // if (status==0){
+        //   statusW='未报名';
+        // }else if(status==1){
+        //   statusW='已报名';
+        // }else if(status==2){
+        //   statusW='已过期';
+        // }else if(status==3){
+        //   statusW='待考试';
+        // }else if(status==4){
+        //   statusW='已考试';
+        // }else{
+        //   statusW='未考试';
+        // }
+        switch (row.status) {
+          case 0:
+            return '未缴费';
+            break;
+          case 1:
+            return '未报名';
+            break;
+          case 2:
+            return '已报名';
+            break;
+          case 3:
+            return '已过期';
+            break;
+          case 4:
+            return '待考试';
+            break;
+          case 5:
+            return '未考试';
+            break;
+        }
+        // return statusW;
+      }
+
+
     },
     data() {
-      const item = {
-        examTipsTitle: '全国计算机等级考试',
-        signupBegintime: '2019-11-2',
-        signupEndtime: '2019-11-12',
-        examUrl: 'www.baidu.com',
-        status:'待考试'
-      };
+      // const item = {
+      //   examTipsTitle: '全国计算机等级考试',
+      //   signupBegintime: '2019-11-2',
+      //   signupEndtime: '2019-11-12',
+      //   examUrl: 'www.baidu.com',
+      //   status: '待考试'
+      // };
       return {
-        tableData: Array(20).fill(item),
+        tableData:[],
+        str:'',
         currentPage1: 5,
         currentPage2: 5,
         currentPage3: 5,

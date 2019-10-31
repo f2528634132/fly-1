@@ -92,6 +92,11 @@ public class MyExamServiceImpl implements MyExamService {
             //查询我的考试信息
         return myExamMapper.queryMyExam(userId);
     }
+//    @Override
+//    public MyExamOutVo queryMyExam(Integer userId) {
+//        //查询我的考试信息
+//        return myExamMapper.queryMyExam(userId);
+//    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)

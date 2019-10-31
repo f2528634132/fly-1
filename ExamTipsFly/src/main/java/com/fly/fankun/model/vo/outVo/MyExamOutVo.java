@@ -1,5 +1,6 @@
 package com.fly.fankun.model.vo.outVo;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fly.fankun.model.entity.ExamTips;
 import io.swagger.annotations.ApiModelProperty;
 import java.io.Serializable;
@@ -30,9 +31,18 @@ public class MyExamOutVo implements Serializable {
     private Integer examId;
 
     private String examTipsTitle;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date signupBegintime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date  signupEndtime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date examBegintime;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date examEndtime;
+
     private String examUrl;
 }

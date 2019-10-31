@@ -187,7 +187,19 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
-  <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+  <resultMap id="ExamBaseResultMap" type="com.fly.fankun.model.vo.outVo.ExamTipsOutVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_type_id" property="examTypeId" jdbcType="INTEGER" />
+    <result column="exam_url" property="examUrl" jdbcType="VARCHAR" />
+    <result column="exam_tips_title" property="examTipsTitle" jdbcType="VARCHAR" />
+    <result column="exam_comment" property="examComment" jdbcType="VARCHAR" />
+    <result column="signup_begintime" property="signupBegintime" jdbcType="TIMESTAMP" />
+    <result column="signup_endtime" property="signupEndtime" jdbcType="TIMESTAMP" />
+    <result column="exam_begintime" property="examBegintime" jdbcType="TIMESTAMP" />
+    <result column="exam_endtime" property="examEndtime" jdbcType="TIMESTAMP" />
+    <result column="click_number" property="clickNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <select id="list" resultMap="ExamBaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />
     from exam_tips

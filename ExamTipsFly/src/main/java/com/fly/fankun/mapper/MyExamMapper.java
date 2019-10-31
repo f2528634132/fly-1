@@ -18,7 +18,9 @@ public interface MyExamMapper {
 
     int updateByPrimaryKey(MyExam record);
 
-    List<MyExamOutVo> queryMyExam(Integer userId);
+   List<MyExamOutVo> queryMyExam(Integer userId);
+
+//    MyExamOutVo queryMyExam(Integer userId);
 
     MyExam queryByExamIdAndPersonId(@Param(value = "examId") Integer examId,@Param(value = "personId") Integer personId);
 

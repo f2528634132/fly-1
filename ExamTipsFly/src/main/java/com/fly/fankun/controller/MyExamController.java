@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import java.util.List;
+import java.util.Map;
 
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -44,8 +45,13 @@ public class MyExamController extends BaseController{
     @PostMapping("/queryMyExam")
     @ApiOperation(value = "查询我的考试信息",response = ExamTipsOutVo.class)
     public BaseResult queryMyExam() {
-       List<MyExamOutVo> resp = myExamService.queryMyExam(this.getUserId());
-        return BaseResult.success(resp);
+//       String a="待考试";
+      List<MyExamOutVo> resp = myExamService.queryMyExam(this.getUserId());
+      //  MyExamOutVo resp = myExamService.queryMyExam(this.getUserId());
+//       if(0==resp.getStatus())
+//           Integer.toString(resp.status);
+//           Integer.toString(resp.setStatus());
+       return BaseResult.success(resp);
     }
 
     @PostMapping("/delMyExam")
