@@ -91,6 +91,16 @@
           <el-table-column prop="examUrl" label="报名地址" width="350">
           </el-table-column>
           <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">
+<!--            <template slot-scope="scope">-->
+<!--              <router-link  to={`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`}>-->
+<!--             <router-link  to="{path:'/MyExamDetails',query:{id:scope.row.id,status:scope.row.status}}">-->
+<!--                <span v-if="scope.row.status===1">未报名</span>-->
+<!--                <span v-if="scope.row.status===2">已报名</span>-->
+<!--                <span v-if="scope.row.status===3">已考试</span>-->
+<!--                <span v-if="scope.row.status===4">已过期</span>-->
+<!--                <span v-if="scope.row.status===5">未考试</span>-->
+<!--              </router-link>-->
+<!--            </template>-->
           </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <template slot-scope="scope">
@@ -100,7 +110,7 @@
                            @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"
                             v-if:="showStatus"></el-button>
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>
           </el-table-column>
@@ -110,11 +120,11 @@
             <el-pagination
               @size-change="handleSizeChange"
               @current-change="handleCurrentChange"
-              :current-page="currentPage4"
-              :page-sizes="[100, 200, 300, 400]"
-              :page-size="100"
+              :current-page="currentPage"
+              :page-sizes="[5,10, 20, 30, 40]"
+              :page-size="pageSize"
               layout="total, sizes, prev, pager, next, jumper"
-              :total="400">
+              :total="totalNum">
             </el-pagination>
           </div>
         </el-row>
@@ -169,15 +179,25 @@
     methods: {
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        this.pageSize=val;
+        this.submitClick()
+
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+        this.currentPage=val;
+        this.submitClick()
       },
 
+      delMyExam: function (Id) {
+        alert(Id);
+        return this.postRequest(`/myExam/delMyExam?id=${Id}`).then( res => {
+        this.submitClick()  })
+      },
       submitClick: function () {
         // console.log(this.filterForm);
         // let str='';
-        return this.getRequest(`/myExam/queryPage?deleted=0&pageNum=1&pageSize=10`)
+        return this.getRequest(`/myExam/queryPage?deleted=0&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);
@@ -186,7 +206,7 @@
               // return str;
               // console.log(str);
                 console.log(this.tableData);
-              this.totalMessage = res.data.totalCount || 0;
+              this.totalNum = res.data.data.totalNum || 0;
             },
             err => {
               // console.log(err);
@@ -211,9 +231,6 @@
         //   statusW='未考试';
         // }
         switch (row.status) {
-          case 0:
-            return '未缴费';
-            break;
           case 1:
             return '未报名';
             break;
@@ -221,35 +238,33 @@
             return '已报名';
             break;
           case 3:
-            return '已过期';
+            return '已考试';
             break;
           case 4:
-            return '待考试';
+            return '已过期';
             break;
           case 5:
             return '未考试';
             break;
         }
         // return statusW;
-      }
-
+      },
+      open(){
+        this.$message({
+          message:'收藏成功！',
+          type: 'success'
+        });
+      },
 
     },
+
     data() {
-      // const item = {
-      //   examTipsTitle: '全国计算机等级考试',
-      //   signupBegintime: '2019-11-2',
-      //   signupEndtime: '2019-11-12',
-      //   examUrl: 'www.baidu.com',
-      //   status: '待考试'
-      // };
       return {
         tableData:[],
-        str:'',
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
+        // str:'',
+        currentPage: 1,
+        pageSize:5,
+        totalNum:0
       }
     }
   };

@@ -73,33 +73,40 @@
           <el-button type="warning" round>警告按钮</el-button>
           <el-button type="danger" round>危险按钮</el-button>
         </el-row>
-        <el-table :data="tableData" >
-
+        <el-table :data="tableData" ref="tableData">
+          <el-table-column prop="id" label="考试编号" width="120">
+          </el-table-column>
           <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
+          <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="报名结束时间"  width="150">
+          <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
           </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址"  width="150">
+          <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
+          </el-table-column>
+          <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
+          </el-table-column>
+          <el-table-column prop="examUrl" label="报名地址" width="350">
           </el-table-column>
           <el-table-column prop="operation" label="操作">
+            <template slot-scope="scope">
             <el-row>
               <el-button icon="el-icon-search" circle></el-button>
               <el-button type="primary" icon="el-icon-edit" circle @click.native="$router.push('/ExamEdit')"></el-button>
+<!--              <el-button id="examId" type="primary" icon="el-icon-edit" circle v-on:click="editMyExam(scope.row.id)" ></el-button>-->
               <el-button type="success" icon="el-icon-check" circle></el-button>
               <el-button type="info" icon="el-icon-message" circle></el-button>
               <el-button type="warning" icon="el-icon-star-off" circle></el-button>
               <el-button type="danger"  icon="el-icon-delete" circle></el-button>
 
             </el-row>
+            </template>
           </el-table-column>
         </el-table>
         <el-row>
 <!--          <div class="block">
             <el-pagination
               @size-change="handleSizeChange"
-              @current-change="handleCurrentChange"
               :current-page="currentPage4"
               :page-sizes="[100, 200, 300, 400]"
               :page-size="100"
@@ -107,18 +114,16 @@
               :total="400">
             </el-pagination>
           </div>-->
-           <div >
-          <div class="block" style="text-align:right;">
+          <div class="block" style="text-align:center;">
             <el-pagination @size-change="sizeChange"
                            @current-change="currentChange"
                            :current-page="currentPage"
-                           :page-sizes="[10, 20, 30, 40]"
+                           :page-sizes="[5,10, 20, 30, 40]"
                            :page-size="pageSize"
                            layout="total, sizes, prev, pager, next, jumper"
                            :total="totalNum">
             </el-pagination>
           </div>
-        </div>
         </el-row>
       </el-main>
     </el-container>
@@ -188,6 +193,10 @@
         //
         //     })
         // },
+      // editMyExam:function(examId){
+      //
+      //
+      // },
         submitClick: function () {
             // console.log(this.filterForm);
             return  this.getRequest(`/examTips/queryPage?pageNum=${this.currentPage}&pageSize=${this.pageSize}&deleted=${this.deleted}`)
@@ -204,14 +213,12 @@
         }
     },
     data() {
-      const item = {
-        examTipsTitle: '全国计算机等级考试1111',
-        signupBegintime: '2019-11-2',
-        signupEndtime: '2019-11-12',
-        examUrl:'www.baidu.com'
-      };
-
-
+      // const item = {
+      //   examTipsTitle: '全国计算机等级考试1111',
+      //   signupBegintime: '2019-11-2',
+      //   signupEndtime: '2019-11-12',
+      //   examUrl:'www.baidu.com'
+      // };
 //      let arr = Array(20).fill(2)
       // let arr = [1, 2, 3]
       // arr.fill = Array.fill
@@ -219,16 +226,15 @@
       return {
         // tableData: Array(6).fill(item),
           currentPage: 1, // 当前页
-          pageSize: 10, // 每页回答数量
+          pageSize: 5, // 每页回答数量
           deleted: 0, // 回答总数
           totalNum: 0,
          tableData: [],
-          page: {
-              currentPage: 1, //当前页
-              pageSize: 10, //每页条数,  默认10条
-              totalNum: 0, //总条数
-              totalPages: 0, //总页数
-          }
+          // page: {
+          //     currentPage: 1, //当前页
+          //     pageSize: 5, //每页条数,  默认10条
+          //     totalNum: 0, //总条数
+          // }
       }
     }
   };

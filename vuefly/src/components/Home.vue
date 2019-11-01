@@ -82,6 +82,8 @@
             <el-button type="danger" round>提示考试</el-button>
           </el-row>
           <el-table :data="tableData" ref="tableData">
+            <el-table-column prop="id" label="考试编号" width="120">
+            </el-table-column>
             <el-table-column prop="examTipsTitle" label="考试名称" width="200">
             </el-table-column>
             <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
@@ -117,7 +119,7 @@
               <el-pagination
                 @size-change="handleSizeChange"
                 @current-change="handleCurrentChange"
-                :current-page="currentPage1"
+                :current-page="currentPage"
                 :page-sizes="[5,10, 20, 50, 100]"
                 :page-size="pageSize"
                 layout="total, sizes, prev, pager, next, jumper"
@@ -174,7 +176,7 @@
       // };
       return {
         //tableData: Array(20).fill(item),
-        currentPage1: 1,
+        currentPage: 1,
         currentPage2: 5,
         currentPage3: 5,
         currentPage4: 4,
@@ -222,9 +224,13 @@
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);
+        this.pageSize=val;
+        this.submitClick();
       },
       handleCurrentChange(val) {
         console.log(`当前页: ${val}`);
+        this.currentPage=val;
+        this.submitClick();
       },
       //  initDatas(){
       //   this.$http
@@ -261,7 +267,7 @@
       submitClick: function () {
         // console.log(this.filterForm);
         //alert(currentPage1,pageSize);
-        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=${this.currentPage1}&pageSize=${this.pageSize}`)
+        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);
