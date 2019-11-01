@@ -22,7 +22,7 @@ public class MyExamOutVo implements Serializable {
     @ApiModelProperty("主键id")
     private Integer id;
     /**
-     * 0:未报名，1：已报名，2：已过期，3：待考试，4：已考试，5：未考试
+     * 0:未报名，1：已报名，2：已考试，3：已过期，4：未考试
      */
     @ApiModelProperty("状态")
     private Integer status;

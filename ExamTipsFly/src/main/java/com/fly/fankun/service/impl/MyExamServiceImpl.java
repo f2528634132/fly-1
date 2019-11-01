@@ -35,10 +35,13 @@ public class MyExamServiceImpl implements MyExamService {
     @Autowired
     private ExamTipsMapper examTipsMapper;
     /**
-     * 我的考试 状态 status 4
+     * 1:未报名，2：已报名，3：已考试，4：已过期，5：未考试
      */
-    private static final Integer MY_EXAM_STATUS_4 =4;
-    private static final Integer MY_EXAM_STATUS_3 =3;
+    private static final Integer MY_EXAM_STATUS_2 =2;
+    private static final Integer MY_EXAM_STATUS_1 =1;
+    private static final Integer MY_EXAM_STATUS_3=3;
+    private static final Integer MY_EXAM_STATUS_4=4;
+    private static final Integer MY_EXAM_STATUS_5=5;
 
     @Override
     public PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize) {
@@ -68,7 +71,7 @@ public class MyExamServiceImpl implements MyExamService {
             MyExam myExam = new MyExam();
             myExam.setExamId(examId);
             myExam.setPersonId(userId);
-            myExam.setStatus(GlobalConstans.ZERO);
+            myExam.setStatus(GlobalConstans.ONE);
             try {
                 myExamMapper.insertSelective(myExam);
             } catch (org.springframework.dao.DuplicateKeyException e) {
@@ -76,10 +79,12 @@ public class MyExamServiceImpl implements MyExamService {
                 throw new BizzException("考试信息已经存在，不能重复添加");
             }
         }
-        //考试存在 并且被删除则 修改状态即可
+        //考试存在 并且被逻辑删除则 修改状态即可
         else if( GlobalConstans.ONE.equals(dbMyExam.getDeleted())){
             dbMyExam.setDeleted(GlobalConstans.ZERO);
             dbMyExam.setUpdateTime(new Date());
+            //重新添加的考试可以重新编辑我的考试的状态
+            dbMyExam.setStatus(GlobalConstans.ONE);
             myExamMapper.updateByPrimaryKey(dbMyExam);
         }
         else {
@@ -111,10 +116,10 @@ public class MyExamServiceImpl implements MyExamService {
             throw new BizzException("只能删除自己的考试");
         }
         //未报名状态做物理删除
-        if(GlobalConstans.ZERO.equals(myExam.getStatus())){
+        if(GlobalConstans.ONE.equals(myExam.getStatus())){
             myExamMapper.deleteByPrimaryKey(id);
         }
-        //逻辑删除
+        //逻辑删除，作为统计分析数据的样本
         else{
             myExam.setDeleted(GlobalConstans.ONE);
             myExam.setUpdateTime(new Date());
@@ -143,25 +148,44 @@ public class MyExamServiceImpl implements MyExamService {
         if(!GlobalConstans.ZERO.equals(examTips.getDeleted())){
             throw new BizzException("考试信息已被删除，不能操作");
         }
+
+
+        /**
+         * 1:未报名，2：已报名，3：已考试，4：已过期，5：未考试
+         */
         Date dateNow = new Date();
         //报名 判断是否到了报名时间过了报名时间 状态是否为未报名
+        /**
+         * 判断当前日期是否在[startDate, endDate]区间
+         *
+         * @param startDate 开始日期
+         * @param endDate 结束日期
+         * @return
+         */
+        //这里是接口传过来的值  即  修改后的值  操作为 由未报名（已过期）更改为已报名 即传 1
+        if(MY_EXAM_STATUS_2.equals(status)){
+            //状态为 未报名（已过期） 且 当前时间在这个区间内
+//            if((GlobalConstans.ZERO.equals(myExam.getStatus())|| (MY_EXAM_STATUS_3.equals(myExam.getStatus())))&& DateUtil.isEffectiveDate(dateNow, examTips.getSignupBegintime(),examTips.getSignupEndtime() )){
+            //状态为 未报名（已过期） 且 当前时间只能到了报名开始时间之后和 考试开始时间之前才能修改
+            if((GlobalConstans.ONE.equals(myExam.getStatus())|| (MY_EXAM_STATUS_4.equals(myExam.getStatus())))&& DateUtil.isEffectiveDate(dateNow, examTips.getSignupBegintime(),examTips.getExamBegintime())){
+                myExam.setStatus(MY_EXAM_STATUS_2);
+                myExam.setUpdateTime(new Date());
+                myExamMapper.updateByPrimaryKey(myExam);
+                return;
+            }
+            throw new BizzException("已过考试开始时间，不能更改状态！");
+        }
+        //考试 判断是否到了考试时间过了考试时间 状态是否为未考试
+        //一定要是已报名（未考试）的状态   才能改成已考试    在考试开始时间之后就可以修改
         if(MY_EXAM_STATUS_3.equals(status)){
-            if(GlobalConstans.ZERO.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getSignupBegintime(),examTips.getSignupEndtime() )){
+            if((MY_EXAM_STATUS_2.equals(myExam.getStatus())||(MY_EXAM_STATUS_5.equals(myExam.getStatus()))) && examTips.getExamBegintime().after(dateNow) ){
                 myExam.setStatus(MY_EXAM_STATUS_3);
                 myExam.setUpdateTime(new Date());
                 myExamMapper.updateByPrimaryKey(myExam);
                 return;
-            }
+           }
+            throw new BizzException("考试开始时间未到，不能更改状态！");
         }
-        //考试 判断是否到了考试时间过了考试时间 状态是否为未考试
-        if(MY_EXAM_STATUS_4.equals(status)){
-            if(MY_EXAM_STATUS_3.equals(myExam.getStatus()) && DateUtil.isEffectiveDate(dateNow, examTips.getExamBegintime(),examTips.getExamEndtime() )){
-                myExam.setStatus(MY_EXAM_STATUS_4);
-                myExam.setUpdateTime(new Date());
-                myExamMapper.updateByPrimaryKey(myExam);
-                return;
-            }
-        }
-        throw new BizzException("考试状态不正确");
+
     }
 }

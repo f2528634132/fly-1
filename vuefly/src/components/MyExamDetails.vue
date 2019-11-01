@@ -23,6 +23,12 @@
 <script>
   export default {
     data() {
+
+      if ("4"===this.$route.query.status) {
+        this.$route.query.status="1";
+      }else if("5"===this.$route.query.status){
+        this.$route.query.status="1";
+      }
       return {
         active: this.$route.query.status,
         examId: this.$route.query.id
@@ -33,13 +39,14 @@
         if (this.active++ > 2) {
             this.active = 3;
         }else{
-            return  this.postRequest(`/myExam/editMyExamStatus?id=${this.examId}&status=${this.active++}`)
+          alert(this.active)
+            return  this.postRequest(`/myExam/editMyExamStatus?id=${this.examId}&status=${this.active}`)
                 .then(
                     () => {
                         console.log(this.data.data);
                     }).catch(() => {
-                    alert("error");
-                    this.active = this.$route.query.status
+                console.log('err');
+                    // this.active = this.$route.query.status
                 })
                 ;
         }
