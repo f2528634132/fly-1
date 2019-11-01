@@ -1,5 +1,9 @@
 package com.fly.fankun.controller;
 
+import com.fly.fankun.globals.AuthConstant;
+import com.fly.fankun.globals.CacheConsts;
+import com.fly.fankun.help.JwtHelper;
+import com.fly.fankun.help.RedisHelp;
 import com.fly.fankun.model.result.BaseResult;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
@@ -12,6 +16,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -35,7 +40,10 @@ public class AuthController extends BaseController{
 
     @Autowired
     private AuthService authService;
-
+    @Autowired
+    JwtHelper jwtHelper;
+    @Autowired
+    RedisHelp redisHelp;
 
     @GetMapping("/login")
     @ApiOperation(value = "用户登录")
@@ -50,5 +58,15 @@ public class AuthController extends BaseController{
     public BaseResult register(@RequestBody PersonInputVo personInputVo) {
         authService.register(personInputVo);
         return BaseResult.success("注册成功");
+    }
+
+    @GetMapping("/logout")
+    public BaseResult logout() {
+        //清除token
+        String token = this.getRequest().getHeader(AuthConstant.HEADER_NAME_TOKEN_REQUEST);
+        if(StringUtils.isNotBlank(token)){
+            redisHelp.del("JWT-SESSION-" + jwtHelper.getJwtIdByToken(token));
+        }
+        return BaseResult.success();
     }
 }

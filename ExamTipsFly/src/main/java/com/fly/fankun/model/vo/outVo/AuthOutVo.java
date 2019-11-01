@@ -21,4 +21,6 @@ public class AuthOutVo implements Serializable {
     private String userName;
 
     private String name;
+
+    private String token;
 }

@@ -7,6 +7,10 @@
  */
 package com.fly.fankun.controller;
 
+import com.alibaba.fastjson.JSONObject;
+import com.fly.fankun.exception.BizzException;
+import com.fly.fankun.globals.AuthConstant;
+import com.fly.fankun.model.vo.TokenUserVo;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
@@ -52,8 +56,12 @@ public class BaseController {
 	}
 
 	protected Integer getUserId() {
-		//TODO 返回操作人ID
-		return 2;
+		TokenUserVo tokenUserVo = (TokenUserVo) getRequest().getAttribute(AuthConstant.HEADER_NAME_TOKEN_RESPONSE);
+		System.out.println(JSONObject.toJSONString(tokenUserVo));
+		if(null == tokenUserVo){
+			throw  new BizzException("暂未登录");
+		}
+		return tokenUserVo.getId();
 	}
 //
 //	protected TokenUser getUserInfo() {

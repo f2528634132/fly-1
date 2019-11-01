@@ -50,7 +50,11 @@ spring:
         # 登录名、密码
         login-username: admin
         login-password: admin
-
+  redis:
+     host: 106.15.249.213
+     port: 6379
+     database: 0
+     timeout: 10000
 swagger:
   enabled: true
   request:

@@ -2,6 +2,7 @@ package com.fly.fankun.service.impl;
 
 import com.fly.fankun.exception.BizzException;
 import com.fly.fankun.globals.GlobalConstans;
+import com.fly.fankun.help.JwtHelper;
 import com.fly.fankun.mapper.AdminMapper;
 import com.fly.fankun.mapper.PersonMapper;
 import com.fly.fankun.model.entity.Admin;
@@ -29,6 +30,8 @@ public class AuthServiceImpl implements AuthService {
     private PersonMapper personMapper;
     @Autowired
     private AdminMapper adminMapper;
+    @Autowired
+    private JwtHelper jwtHelper;
 
 
     @Override
@@ -47,7 +50,7 @@ public class AuthServiceImpl implements AuthService {
     public AuthOutVo login(String username, String password, Integer type) {
         AuthOutVo authOutVo = new AuthOutVo();
         //用户/
-        if(GlobalConstans.ONE.equals(type)){
+        if(GlobalConstans.ZERO.equals(type)){
           Person person =  personMapper.selectByUserName(username);
           if(null == person){
               throw  new BizzException("用户不存在");
@@ -61,7 +64,7 @@ public class AuthServiceImpl implements AuthService {
             authOutVo.setName(person.getName());
         }
         //管理员
-        else{
+        else if(GlobalConstans.ONE.equals(type)){
             Admin admin =  adminMapper.selectByUserName(username);
             if(null == admin){
                 throw  new BizzException("管理员不存在");
@@ -73,7 +76,11 @@ public class AuthServiceImpl implements AuthService {
             authOutVo.setId(admin.getId());
             authOutVo.setUserName(admin.getUsername());
             authOutVo.setName(admin.getName());
+        }else{
+            throw  new BizzException("用户类型不正确");
         }
+        //换取token
+        authOutVo.setToken(jwtHelper.createEnterpriseToken(authOutVo.getId(),authOutVo.getType()));
         return authOutVo;
     }
 }

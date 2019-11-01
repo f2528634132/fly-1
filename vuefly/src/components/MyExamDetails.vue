@@ -35,8 +35,8 @@
         }else{
             return  this.postRequest(`/myExam/editMyExamStatus?id=${this.examId}&status=${this.active++}`)
                 .then(
-                    () => {
-                        console.log(this.data.data);
+                    res => {
+                        console.log(res.data.data);
                     }).catch(() => {
                     alert("error");
                     this.active = this.$route.query.status
