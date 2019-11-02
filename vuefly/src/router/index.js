@@ -12,14 +12,20 @@ import MyExam from "../components/MyExam";
 import MyExamDetails from "../components/MyExamDetails";
 Vue.use(Router)
 
-export default new Router({
+const router =  new Router({
   routes: [
     {
       path: '/',
       name: 'Login',
       component: Login,
       hidden:true
-    },{
+    },
+    {
+      path: '/Login',
+      name: '登录',
+      component: Login
+    },
+    {
       path:'/Home',
       name:'主页',
       component:Home,
@@ -72,5 +78,22 @@ export default new Router({
       name: 'MyExamDetails',
       component: MyExamDetails
     }
+
   ]
-})
+});
+
+// 使用 router.beforeEach 注册一个全局前置守卫，判断用户是否登陆
+router.beforeEach((to, from, next) => {
+  if (to.path === '/Login') {
+    next();
+  } else {
+    let token = localStorage.getItem('Authorization');
+
+    if (token === null || token === '') {
+      next('/Login');
+    } else {
+      next();
+    }
+  }
+});
+export default router;

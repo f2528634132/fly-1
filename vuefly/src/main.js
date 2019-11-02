@@ -6,7 +6,7 @@ import router from './router'
 import ElementUI from 'element-ui'
 import axios from 'axios'
 import  VueResource  from 'vue-resource'
-
+import store  from "./store"
 
 import 'element-ui/lib/theme-chalk/index.css'
 import {getRequest} from './utils/api'
@@ -40,6 +40,7 @@ Vue.config.productionTip = false
 new Vue({
   el: '#app',
   router,
+ store:store,
   components: { App },
   template: '<App/>'
 })

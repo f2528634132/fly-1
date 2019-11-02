@@ -18,6 +18,8 @@
   </el-form>
 </template>
 <script>
+
+    import { mapMutations } from 'vuex';
   export default{
     data(){
       return {
@@ -28,23 +30,29 @@
         },
         checked: true,
         loginForm: {
-          username: 'admin',
-          password: '123'
+          username: 'fk',
+          password: '123456'
         },
+         userToken:'',
         loading: false
       }
     },
     methods: {
+        ...mapMutations(['changeLogin']),
       submitClick: function () {
-        var _this = this;
+        let _this = this;
         this.loading = true;
         // this.getRequest('/auth/login?userName='+this.loginForm.username+'&passWord='+this.loginForm.password+'&type='+this.radio).then(resp=> {
           this.getRequest(`/auth/login?userName=${this.loginForm.username}&passWord=${this.loginForm.password}&type=${this.type}`).then(resp=> {
           _this.loading = false;
           if (resp && resp.status == 200) {
             let data = resp.data;
-            console.log(data.data.type);
-            if (1 === data.data.type){
+              _this.userToken = data.data.token;
+              // 将用户token保存到vuex中
+
+              // this.$store.commit('changeLogin', _this.userToken);
+              _this.changeLogin({ Authorization: _this.userToken });
+              if (0 === data.data.type){
                 this.$router.push({
                     path: '/Home',
                     query: {'id':data.data.id}

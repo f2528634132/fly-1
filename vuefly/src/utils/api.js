@@ -1,6 +1,9 @@
 import axios from 'axios'
 import {Message} from 'element-ui'
 axios.interceptors.request.use(config => {
+  if (localStorage.getItem('Authorization')) {
+    config.headers.Authorization = localStorage.getItem('Authorization');
+  }
   return config;
 }, err => {
   Message.error({message: '请求超时!'});
@@ -9,6 +12,14 @@ axios.interceptors.request.use(config => {
 axios.interceptors.response.use(data => {
   if (data.status && data.status == 200 && data.data.status == 500) {
     Message.error({message: data.data.msg});
+    return;
+  }
+
+  if (data.data.code === 401) {
+    localStorage.removeItem('Authorization');
+    this.$router.push({
+      path: '/Login'
+    });
     return;
   }
   if (data.data.msg) {
@@ -22,6 +33,8 @@ axios.interceptors.response.use(data => {
     Message.error({message: '权限不足,请联系管理员!'});
   } else if (err.response.status == 401) {
     Message.error({message: err.response.data.msg});
+    localStorage.removeItem('Authorization');
+    this.$router.push('/Login');
   } else {
     if (err.response.data.msg) {
       Message.error({message: err.response.data.msg});
