@@ -190,6 +190,7 @@
       </if>)
     </where>
   </select>
+
   <update id="updateBatchStatus" parameterType="java.util.List">
     <foreach collection="list" item="item" separator=";">
       update my_exam
@@ -212,9 +213,11 @@
 <!--  </select>-->
   <resultMap id="MyExamResultMap" type="com.fly.fankun.model.vo.outVo.MyExamOutVo" >
     <result column="id"  property="id" jdbcType="INTEGER"/>
+
     <result column="status" property="status" jdbcType="INTEGER" />
     <result column="exam_tips_title" property="examTipsTitle" jdbcType="VARCHAR" />
     <result column="exam_id" property="examId" jdbcType="INTEGER" />
+    <result column="person_id" property="personId" jdbcType="INTEGER" />
     <result column="signup_begintime" property="signupBegintime" jdbcType="TIMESTAMP" />
     <result column="signup_endtime" property="signupEndtime" jdbcType="TIMESTAMP" />
     <result column="exam_begintime" property="examBegintime" jdbcType="TIMESTAMP" />
@@ -225,13 +228,16 @@
     <association property="examTipsOutVo" column="exam_id"
                  select="com.fly.fankun.mapper.ExamTipsMapper.selectByPrimaryKey" />
   </resultMap>
-  <select id="list" resultMap="MyExamResultMap" parameterType="java.lang.Integer" >
+  <select id="queryPage" resultMap="MyExamResultMap" parameterType="java.util.Map" >
     select a.id,exam_tips_title,signup_begintime,signup_endtime,exam_begintime,exam_endtime,exam_url,status
     from my_exam a
     left JOIN exam_tips b  on a.exam_id=b.id
     <where>
       <if test="null != deleted">
-        and a.deleted = #{deleted,jdbcType=INTEGER}
+      and a.deleted = #{deleted,jdbcType=INTEGER}
+      </if>
+      <if test="null != personId">
+        and a.person_id = #{personId,jdbcType=INTEGER}
       </if>
     </where>
     order by a.update_time desc

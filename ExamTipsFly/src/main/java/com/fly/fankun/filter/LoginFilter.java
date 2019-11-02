@@ -26,7 +26,7 @@ import org.springframework.web.method.HandlerMethod;
 
 /**
  * @Title:
- * @author: fan.kun
+ * @author: fly
  * @date: 2019/11/1
  */
 @Slf4j
@@ -103,9 +103,9 @@ public class LoginFilter implements Filter {
     }
 
     /**
-     * @Author: wdd
+     * @Author: fly
      * @Description: 是否需要过滤
-     * @Date: 2019-02-21 13:20:54
+     * @Date: 2019-11-1
      * @param uri
      */
     private boolean isNeedFilter(String uri) {

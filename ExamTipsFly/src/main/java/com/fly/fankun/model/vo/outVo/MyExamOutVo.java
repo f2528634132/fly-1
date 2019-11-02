@@ -28,6 +28,7 @@ public class MyExamOutVo implements Serializable {
     private Integer status;
     @ApiModelProperty("加入时间")
     private Date createTime;
+    private Integer personId;
     private Integer examId;
 
     private String examTipsTitle;

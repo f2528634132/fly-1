@@ -44,9 +44,9 @@ public class MyExamServiceImpl implements MyExamService {
     private static final Integer MY_EXAM_STATUS_5=5;
 
     @Override
-    public PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize) {
+    public PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize,Integer userId) {
         Page page = PageHelper.startPage(pageNum, pageSize);
-        List<MyExamOutVo> resultList =myExamMapper.list(deleted);
+        List<MyExamOutVo> resultList =myExamMapper.queryPage(deleted,userId);
         PageBean<MyExamOutVo> pageData = new PageBean<MyExamOutVo>(pageNum,
                 pageSize, (int)page.getTotal());
         pageData.setItems(resultList);

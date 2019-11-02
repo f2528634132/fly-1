@@ -26,7 +26,7 @@ public interface MyExamMapper {
 
     List<MyExam> queryByExamId(List<Integer> list);
 
-    List<MyExamOutVo> list(@Param(value = "deleted") Integer deleted);
+    List<MyExamOutVo> queryPage(@Param(value = "deleted") Integer deleted,@Param(value = "personId")Integer userId);
 
     void updateBatchStatus(List<MyExam> list);
 }

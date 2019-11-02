@@ -12,7 +12,7 @@
             <el-dropdown-item>删除</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span>傅荔怡</span>
+        <span aria-label="userId">傅荔怡</span>
       </el-header>
 
     <el-container>
@@ -193,7 +193,8 @@
         //   size: 10,
         //   page: 1
         // },
-        counter:0
+        counter:0,
+        userId :this.$route.query.id,
       }
     },
     // computed: {

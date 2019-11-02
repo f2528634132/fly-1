@@ -20,6 +20,6 @@ public interface MyExamService {
 
     void editMyExamStatus(Integer id, Integer userId, Integer status);
 
-    PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize);
+    PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize,Integer userId);
 
 }

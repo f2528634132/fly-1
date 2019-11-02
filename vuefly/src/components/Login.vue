@@ -10,8 +10,8 @@
       <el-input type="password" v-model="loginForm.password"
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
-    <el-radio v-model="type" label="1"  >管理员</el-radio>
     <el-radio v-model="type" label="0" >个人</el-radio>
+    <el-radio v-model="type" label="1"  >管理员</el-radio>
     <el-form-item style="width: 100%">
       <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
     </el-form-item>
@@ -30,7 +30,7 @@
         },
         checked: true,
         loginForm: {
-          username: 'fk',
+          username: 'fly',
           password: '123456'
         },
          userToken:'',
