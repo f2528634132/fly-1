@@ -21,7 +21,7 @@
     exam_begintime, exam_endtime, click_number, create_time, update_time, deleted
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
-    select 
+    select
     <include refid="Base_Column_List" />
     from exam_tips
     where id = #{id,jdbcType=INTEGER}
@@ -187,6 +187,9 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+
+
+
   <resultMap id="ExamBaseResultMap" type="com.fly.fankun.model.vo.outVo.ExamTipsOutVo" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="exam_type_id" property="examTypeId" jdbcType="INTEGER" />
@@ -199,6 +202,14 @@
     <result column="exam_endtime" property="examEndtime" jdbcType="TIMESTAMP" />
     <result column="click_number" property="clickNumber" jdbcType="INTEGER" />
   </resultMap>
+
+  <select id="selectByExamId" resultMap="ExamBaseResultMap" parameterType="java.lang.Integer" >
+    select
+    <include refid="Base_Column_List" />
+    from exam_tips
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
   <select id="list" resultMap="ExamBaseResultMap" parameterType="java.lang.Integer" >
     select
     <include refid="Base_Column_List" />

@@ -29,6 +29,7 @@
       }else if("5"===this.$route.query.status){
         this.$route.query.status="1";
       }
+
       return {
         active: this.$route.query.status,
         examId: this.$route.query.id

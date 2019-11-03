@@ -10,6 +10,7 @@ import ExamEdit from "../components/ExamEdit";
 import TopicEdit from "../components/TopicEdit";
 import MyExam from "../components/MyExam";
 import MyExamDetails from "../components/MyExamDetails";
+import AddExam from "../components/AddExam";
 Vue.use(Router)
 
 const router =  new Router({
@@ -62,6 +63,11 @@ const router =  new Router({
       path: '/ExamEdit',
       name: 'ExamEdit',
       component: ExamEdit
+    },
+    {
+      path: '/AddExam',
+      name: 'AddExam',
+      component: AddExam
     },
     {
       path: '/TopicEdit',

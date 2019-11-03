@@ -14,6 +14,9 @@ public interface ExamTipsMapper {
 
     ExamTips selectByPrimaryKey(Integer id);
 
+    ExamTipsOutVo selectByExamId(Integer id);
+
+
     int updateByPrimaryKeySelective(ExamTips record);
 
     int updateByPrimaryKey(ExamTips record);

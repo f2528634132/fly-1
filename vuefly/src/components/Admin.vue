@@ -66,7 +66,7 @@
 
       <el-main>
         <el-row>
-          <el-button round @click.native="$router.push('/Content')">添加考试</el-button>
+          <el-button round @click.native="$router.push('/AddExam')">添加考试</el-button>
           <el-button type="primary" round @click="submitClick">主要按钮</el-button>
           <el-button type="success" round>成功按钮</el-button>
           <el-button type="info" round>信息按钮</el-button>
@@ -88,23 +88,17 @@
           <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
           </el-table-column>
           <el-table-column prop="examUrl" label="报名地址" width="350">
-
-          </el-table-column>
-          <el-table-column prop="signupEndtime" label="报名结束时间"  width="160">
-          </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址"  width="350">
-
           </el-table-column>
           <el-table-column prop="operation" label="操作">
             <template slot-scope="scope">
             <el-row>
               <el-button icon="el-icon-search" circle></el-button>
-              <el-button type="primary" icon="el-icon-edit" circle @click.native="$router.push('/ExamEdit')"></el-button>
+              <el-button type="primary" icon="el-icon-edit" circle @click.native="$router.push({path:'/ExamEdit',query:{examId:scope.row.id}})"></el-button>
 <!--              <el-button id="examId" type="primary" icon="el-icon-edit" circle v-on:click="editMyExam(scope.row.id)" ></el-button>-->
               <el-button type="success" icon="el-icon-check" circle></el-button>
               <el-button type="info" icon="el-icon-message" circle></el-button>
-              <el-button type="warning" icon="el-icon-star-off" circle></el-button>
-              <el-button type="danger"  icon="el-icon-delete" circle></el-button>
+<!--              <el-button type="danger"  icon="el-icon-delete" circle></el-button>-->
+              <el-button type="danger" icon="el-icon-delete" circle v-on:click="deleteExam(scope.row.id)"></el-button>
 
             </el-row>
             </template>
@@ -201,9 +195,19 @@
         //     })
         // },
       // editMyExam:function(examId){
-      //
+      //   alert(examId);
+      //   this.$router.push({
+      //     path: '/ExamEdit',
+      //     query: {'id':examId}
+      //   })
       //
       // },
+      deleteExam: function (Id) {
+        alert(Id);
+        return this.getRequest(`/examTips/editDeleted?deleted=1&id=${Id}`).then( res => {
+          this.submitClick()  })
+      },
+
         submitClick: function () {
             // console.log(this.filterForm);
             return  this.getRequest(`/examTips/queryPage?pageNum=${this.currentPage}&pageSize=${this.pageSize}&deleted=${this.deleted}`)

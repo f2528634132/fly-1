@@ -24,8 +24,8 @@
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-          @input="testClick"
-          >
+          @input="testClickSignup"
+        >
         </el-date-picker>
       </el-col>
     </el-form-item>
@@ -39,26 +39,26 @@
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-
-          >
+          @input="testClickExam"
+        >
         </el-date-picker>
       </el-col>
     </el-form-item>
 
-<!--    <el-form-item label="活动性质">-->
-<!--      <el-checkbox-group v-model="form.type">-->
-<!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="地推活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="线下主题活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>-->
-<!--      </el-checkbox-group>-->
-<!--    </el-form-item>-->
-<!--    <el-form-item label="特殊资源">-->
-<!--      <el-radio-group v-model="form.resource">-->
-<!--        <el-radio label="线上品牌商赞助"></el-radio>-->
-<!--        <el-radio label="线下场地免费"></el-radio>-->
-<!--      </el-radio-group>-->
-<!--    </el-form-item>-->
+    <!--    <el-form-item label="活动性质">-->
+    <!--      <el-checkbox-group v-model="form.type">-->
+    <!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
+    <!--        <el-checkbox label="地推活动" name="type"></el-checkbox>-->
+    <!--        <el-checkbox label="线下主题活动" name="type"></el-checkbox>-->
+    <!--        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>-->
+    <!--      </el-checkbox-group>-->
+    <!--    </el-form-item>-->
+    <!--    <el-form-item label="特殊资源">-->
+    <!--      <el-radio-group v-model="form.resource">-->
+    <!--        <el-radio label="线上品牌商赞助"></el-radio>-->
+    <!--        <el-radio label="线下场地免费"></el-radio>-->
+    <!--      </el-radio-group>-->
+    <!--    </el-form-item>-->
     <el-form-item label="考试详情">
       <el-input type="textarea" v-model="examTipsInputVo.examComment"></el-input>
     </el-form-item>
@@ -66,24 +66,22 @@
       <el-switch v-model="examTipsInputVo.deleted"></el-switch>
     </el-form-item>
     <el-form-item>
-      <el-button type="primary" @click="onSubmit">保存修改</el-button>
+      <el-button type="primary" @click="onSubmit">立即创建</el-button>
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
 </template>
-
 
 <script>
   export default {
     data() {
       return {
         examTipsInputVo: {
-          value2:[],
-          value1:[],
+          value2:'',
+          value1:'',
           examTipsTitle: '',
           examUrl:'',
-          examTypeId:'',
-          id:this.$route.query.examId,
+          examTypeId: '',
           signupBegintime: '',
           signupEndtime: '',
           examBegintime: '',
@@ -93,59 +91,7 @@
         }
       }
     },
-    mounted:function(){
-      this.initMyExamDetails();
-    },
-
     methods: {
-      testClick(e){
-        this.$nextTick(() => {
-          this.$set(this.examTipsInputVo, "value1", [e[0], e[1]]);
-          console.log(this.examTipsInputVo.value1)
-        });
-      },
-
-      initMyExamDetails:function(){
-       return this.getRequest(`/examTips/queryExam?examId=${this.examTipsInputVo.id}`)
-         .then(
-           res => {
-             console.log(res.data.data);
-             //重新定义的examTipsInputVo
-             // this.examTipsInputVo = res.data.data || [];
-             this.examTipsInputVo.examTipsTitle=res.data.data.examTipsTitle;
-             this.examTipsInputVo.examUrl=res.data.data.examUrl;
-             // this.examTipsInputVo.examTypeId=res.data.data.examTypeId;
-             this.examTipsInputVo.examComment=res.data.data.examComment;
-
-             this.examTipsInputVo.examTypeId=String(res.data.data.examTypeId);
-             // console.log(this.examTipsInputVo.examTypeId);
-
-             // this.examTipsInputVo.value1[0]=res.data.data.signupBegintime;
-             // this.examTipsInputVo.value1[1]=res.data.data.signupEndtime ;
-             // this.examTipsInputVo.value2[0]=res.data.data.examBegintime ;
-             // this.examTipsInputVo.value2[1]=res.data.data.examEndtime;
-
-
-             // console.log(this.examTipsInputVo.signupBegintime);
-
-             this.$set(self.examTipsInputVo, "value1", [
-               res.data.data.signupBegintime,
-               res.data.data.signupEndtime
-             ]);
-
-             // console.log(this.examTipsInputVo.value1[0]);
-             // console.log(this.examTipsInputVo.value2[1]);
-             // console.log(this.examTipsInputVo.value1);
-             // console.log(this.examTipsInputVo.value2);
-
-           },
-           err => {
-             // console.log(err);
-           }
-         );
-     },
-
-
       onSubmit: function () {
         // let examTipsInputVo = new FormData();
         // for (var key in this.formData) {
@@ -157,6 +103,8 @@
         inputVo.signupEndtime = inputVo.value1[1];
         inputVo.examBegintime = inputVo.value2[0];
         inputVo.examEndtime = inputVo.value2[1];
+
+
         this.$axios({
           method: "post",
           url: "/examTips/editExamTips",
@@ -165,25 +113,24 @@
             'Content-Type': 'application/json;charset=UTF-8'
           },
           withCredentials: true,
-           data: JSON.stringify(inputVo)
-        //   data: JSON.stringify({
-        //     "examBegintime": "2019-10-29T09:54:10.912Z",
-        //     "examComment": "test",
-        //     "examEndtime": "2019-10-29T09:54:10.912Z",
-        //     "examTipsTitle": "test",
-        //     "examTypeId": 0,
-        //     "examUrl": "test",
-        //     "signupBegintime": "2019-10-29T09:54:10.912Z",
-        //     "signupEndtime": "2019-10-29T09:54:10.912Z"
-        //   })
-         }).then((res) => {
+          data: JSON.stringify(inputVo)
+          //   data: JSON.stringify({
+          //     "examBegintime": "2019-10-29T09:54:10.912Z",
+          //     "examComment": "test",
+          //     "examEndtime": "2019-10-29T09:54:10.912Z",
+          //     "examTipsTitle": "test",
+          //     "examTypeId": 0,
+          //     "examUrl": "test",
+          //     "signupBegintime": "2019-10-29T09:54:10.912Z",
+          //     "signupEndtime": "2019-10-29T09:54:10.912Z"
+          //   })
+        }).then((res) => {
           console.log(res);
         });
       }
     }
   }
 </script>
-
 <style>
   .forum {
     margin: 80px;

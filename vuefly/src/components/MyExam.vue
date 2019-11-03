@@ -107,8 +107,10 @@
               <el-row>
                 <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
                 <el-button type="info" icon="el-icon-folder-add" circle
-                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"
-                            v-if:="showStatus"></el-button>
+                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
+<!--                <el-button type="info" icon="el-icon-folder-add" circle-->
+<!--                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"-->
+<!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
@@ -133,39 +135,6 @@
     </el-container>
   </el-container>
 </template>
-<style>
-  .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-
-  .el-aside {
-    color: #333;
-  }
-
-  .el-submenu [class^=el-icon-] {
-    vertical-align: middle;
-    margin-right: 5px;
-    width: 24px;
-    text-align: right;
-    font-size: 20px;
-  }
-
-  /*[class*=" el-icon-"], [class^=el-icon-] {*/
-  /*  font-size: larger;*/
-  /*}*/
-  .el-icon-folder-add {
-    font-size: larger;
-  }
-
-  .el-pagination {
-    white-space: nowrap;
-    padding: 30px 300px;
-    color: #303133;
-    font-weight: 700;
-  }
-</style>
 
 <script>
   import {isObject} from "element-ui";
@@ -269,3 +238,36 @@
     }
   };
 </script>
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+
+  .el-aside {
+    color: #333;
+  }
+
+  .el-submenu [class^=el-icon-] {
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 24px;
+    text-align: right;
+    font-size: 20px;
+  }
+
+  /*[class*=" el-icon-"], [class^=el-icon-] {*/
+  /*  font-size: larger;*/
+  /*}*/
+  .el-icon-folder-add {
+    font-size: larger;
+  }
+
+  .el-pagination {
+    white-space: nowrap;
+    padding: 30px 300px;
+    color: #303133;
+    font-weight: 700;
+  }
+</style>

@@ -62,4 +62,11 @@ public class ExamTipsController extends BaseController{
         PageBean<ExamTipsOutVo> resp = examTipsService.queryPage(deleted,pageNum,pageSize);
         return BaseResult.success(resp);
     }
+
+    @GetMapping("/queryExam")
+    @ApiOperation(value = "查询考试信息",response = ExamTipsOutVo.class)
+    public BaseResult queryExam(@RequestParam@ApiParam(value = "考试ID",required = true) Integer examId) {
+        ExamTipsOutVo resp = examTipsService.queryExam(examId);
+        return BaseResult.success(resp);
+    }
 }

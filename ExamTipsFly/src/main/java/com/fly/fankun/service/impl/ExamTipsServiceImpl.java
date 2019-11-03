@@ -39,8 +39,8 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     @Transactional(rollbackFor = Exception.class)
     public ExamTipsOutVo editExamTips(ExamTipsInputVo examTipsInputVo) {
         //查询考试类型是否存在
-        Integer examTypeId = examTipsInputVo.getExamTypeId();
-        ExamType examType = examTypeMapper.selectByPrimaryKey(examTypeId);
+//        Integer examTypeId = examTipsInputVo.getExamTypeId();
+//        ExamType examType = examTypeMapper.selectByPrimaryKey(examTypeId);
 //        if(null == examType){
 //            throw  new BizzException("考试类型不存在");
 //        }
@@ -65,6 +65,17 @@ public class ExamTipsServiceImpl implements ExamTipsService {
         examTips.setDeleted(deleted);
         examTips.setUpdateTime(new Date());
         examTipsMapper.updateByPrimaryKeySelective(examTips);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public ExamTipsOutVo queryExam(Integer id) {
+//        ExamTips examTips = examTipsMapper.selectByPrimaryKey(id);
+        ExamTipsOutVo examTipsOutVo=examTipsMapper.selectByExamId(id);
+        if(null  == examTipsOutVo){
+            throw  new BizzException("考试不存在");
+        }
+        return examTipsOutVo;
     }
 
     @Override
