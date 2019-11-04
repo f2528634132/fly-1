@@ -22,4 +22,6 @@ public interface MyExamService {
 
     PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize,Integer userId);
 
+    PageBean<MyExamOutVo> ExamScores(Integer deleted, Integer pageNum, Integer pageSize,Integer userId,Integer status);
+
 }

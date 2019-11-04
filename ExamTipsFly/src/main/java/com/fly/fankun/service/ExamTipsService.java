@@ -17,4 +17,5 @@ public interface ExamTipsService {
     ExamTipsOutVo queryExam(Integer id);
 
     PageBean<ExamTipsOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize);
+
 }

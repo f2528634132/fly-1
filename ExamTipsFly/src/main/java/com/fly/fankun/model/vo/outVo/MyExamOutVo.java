@@ -46,4 +46,11 @@ public class MyExamOutVo implements Serializable {
     private Date examEndtime;
 
     private String examUrl;
+
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private Date exam_scores_time;
+
+    private String exam_scores_url;
+
+    private String exam_scores_comment;
 }

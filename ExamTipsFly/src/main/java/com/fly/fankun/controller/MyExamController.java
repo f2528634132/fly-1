@@ -74,4 +74,11 @@ public class MyExamController extends BaseController{
         PageBean<MyExamOutVo> resp = myExamService.queryPage(deleted,pageNum,pageSize,this.getUserId());
         return BaseResult.success(resp);
     }
+
+    @GetMapping("/ExamScores")
+    @ApiOperation(value = "分页查询考试公布",response = MyExamOutVo.class)
+    public BaseResult<PageBean<MyExamOutVo>> ExamScores(@ApiParam(value = "当前页", required = true) @RequestParam Integer pageNum, @RequestParam @ApiParam(value = "分页大小", required = true) Integer pageSize, Integer deleted,Integer status) {
+        PageBean<MyExamOutVo> resp = myExamService.ExamScores(deleted,pageNum,pageSize,this.getUserId(),status);
+        return BaseResult.success(resp);
+    }
 }

@@ -69,4 +69,5 @@ public class ExamTipsController extends BaseController{
         ExamTipsOutVo resp = examTipsService.queryExam(examId);
         return BaseResult.success(resp);
     }
+
 }

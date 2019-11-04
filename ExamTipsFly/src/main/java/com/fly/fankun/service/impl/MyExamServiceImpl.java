@@ -53,6 +53,15 @@ public class MyExamServiceImpl implements MyExamService {
         return pageData;
     }
 
+    public PageBean<MyExamOutVo> ExamScores(Integer deleted, Integer pageNum, Integer pageSize,Integer userId,Integer status) {
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<MyExamOutVo> resultList =myExamMapper.ExamScores(deleted,userId,status);
+        PageBean<MyExamOutVo> pageData = new PageBean<MyExamOutVo>(pageNum,
+                pageSize, (int)page.getTotal());
+        pageData.setItems(resultList);
+        return pageData;
+    }
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinMyExam(Integer examId, Integer userId) {
