@@ -41,10 +41,11 @@
             this.active = 3;
         }else{
           alert(this.active)
+          console.log(this.active);
             return  this.postRequest(`/myExam/editMyExamStatus?id=${this.examId}&status=${this.active}`)
                 .then(
                     res => {
-                        console.log(res.data.data);
+                      console.log(res.data.data);
                     }).catch(() => {
                 console.log('err');
                     // this.active = this.$route.query.status

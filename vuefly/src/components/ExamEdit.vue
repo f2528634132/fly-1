@@ -12,6 +12,7 @@
         <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
         <el-option label="CET大学英语考试" value="3"></el-option>
         <el-option label="全国会计从业资格考试" value="4"></el-option>
+        <el-option label="中小学教师资格考试" value="5"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="报名时间">

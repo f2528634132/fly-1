@@ -6,9 +6,9 @@
       <el-dropdown>
         <i class="el-icon-setting" style="margin-right: 15px"></i>
         <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>查看</el-dropdown-item>
-          <el-dropdown-item>新增</el-dropdown-item>
-          <el-dropdown-item>删除</el-dropdown-item>
+          <el-dropdown-item>个人信息</el-dropdown-item>
+          <el-dropdown-item>修改密码</el-dropdown-item>
+          <el-dropdown-item>退出登录</el-dropdown-item>
         </el-dropdown-menu>
       </el-dropdown>
       <span>傅荔怡</span>
@@ -29,7 +29,8 @@
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
               <el-menu-item index="1-1">我的报名</el-menu-item>
-              <el-menu-item index="1-2">备忘录</el-menu-item>
+              <el-menu-item index="1-2">成绩公布</el-menu-item>
+              <el-menu-item index="1-3">备忘录</el-menu-item>
             </el-menu-item-group>
             <!--          <el-menu-item-group title="分组2">-->
             <!--            <el-menu-item index="1-3">选项3</el-menu-item>-->
@@ -89,6 +90,9 @@
           <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
           </el-table-column>
           <el-table-column prop="examUrl" label="报名地址" width="350">
+            <template slot-scope="scope">
+              <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
+            </template>
           </el-table-column>
           <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">
 <!--            <template slot-scope="scope">-->
@@ -105,13 +109,12 @@
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <template slot-scope="scope">
               <el-row>
-                <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-                <el-button type="info" icon="el-icon-folder-add" circle
-                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
 <!--                <el-button type="info" icon="el-icon-folder-add" circle-->
-<!--                           @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"-->
+<!--                           @click.native="$router.push({path:'/MyExamDetails',query:{examId:scope.row.id,status:scope.row.status}})"></el-button>-->
 <!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
+                <el-button icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
+                <el-button type="info" icon="el-icon-folder-add" circle @click="collection"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>
@@ -218,7 +221,7 @@
         }
         // return statusW;
       },
-      open(){
+      collection(){
         this.$message({
           message:'收藏成功！',
           type: 'success'
