@@ -28,7 +28,7 @@
             <template slot="title"><i class="el-icon-user"></i>考试管理</template>
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
-              <el-menu-item index="1-1">我的报名</el-menu-item>
+              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
               <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
               <el-menu-item index="1-3">备忘录</el-menu-item>
             </el-menu-item-group>
@@ -37,8 +37,9 @@
             <!--          </el-menu-item-group>-->
             <el-submenu index="1-4">
               <template slot="title">我的收藏</template>
-              <el-menu-item index="1-4-1">论坛收藏</el-menu-item>
-              <el-menu-item index="1-4-2">广告收藏</el-menu-item>
+              <el-menu-item index="1-4-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
+              <el-menu-item index="1-4-2">论坛收藏</el-menu-item>
+              <el-menu-item index="1-4-3">广告收藏</el-menu-item>
             </el-submenu>
           </el-submenu>
 
@@ -113,8 +114,8 @@
 <!--                           @click.native="$router.push({path:'/MyExamDetails',query:{examId:scope.row.id,status:scope.row.status}})"></el-button>-->
 <!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
-                <el-button icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
-                <el-button type="info" icon="el-icon-folder-add" circle @click="collection"></el-button>
+                <el-button type="info" icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
+                <el-button type="primary" icon="el-icon-folder-add" circle @click="collection"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>
@@ -213,17 +214,17 @@
             return '已考试';
             break;
           case 4:
-            return '已过期';
+            return '报名已过期';
             break;
           case 5:
-            return '未考试';
+            return '考试已过期';
             break;
         }
         // return statusW;
       },
       collection(){
         this.$message({
-          message:'收藏成功！',
+          message:'添加备忘录成功！',
           type: 'success'
         });
       },

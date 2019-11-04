@@ -239,6 +239,24 @@
       <if test="null != personId">
         and a.person_id = #{personId,jdbcType=INTEGER}
       </if>
+        and a.status!=1
+    </where>
+    order by a.update_time desc
+  </select>
+  <select id="MyCollectExam" resultMap="MyExamResultMap" parameterType="java.util.Map" >
+    select a.id,exam_tips_title,signup_begintime,signup_endtime,exam_begintime,exam_endtime,exam_url,status
+    from my_exam a
+    left JOIN exam_tips b  on a.exam_id=b.id
+    <where>
+      <if test="null != deleted">
+        and a.deleted = #{deleted,jdbcType=INTEGER}
+      </if>
+      <if test="null != personId">
+        and a.person_id = #{personId,jdbcType=INTEGER}
+      </if>
+      <if test="null != status">
+        and a.status = #{status,jdbcType=INTEGER}
+      </if>
     </where>
     order by a.update_time desc
   </select>

@@ -35,7 +35,7 @@ public class MyExamServiceImpl implements MyExamService {
     @Autowired
     private ExamTipsMapper examTipsMapper;
     /**
-     * 1:未报名，2：已报名，3：已考试，4：已过期，5：未考试
+     * 1:未报名，2：已报名，3：已考试，4：报名已过期，5：考试已过期
      */
     private static final Integer MY_EXAM_STATUS_2 =2;
     private static final Integer MY_EXAM_STATUS_1 =1;
@@ -47,6 +47,16 @@ public class MyExamServiceImpl implements MyExamService {
     public PageBean<MyExamOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize,Integer userId) {
         Page page = PageHelper.startPage(pageNum, pageSize);
         List<MyExamOutVo> resultList =myExamMapper.queryPage(deleted,userId);
+        PageBean<MyExamOutVo> pageData = new PageBean<MyExamOutVo>(pageNum,
+                pageSize, (int)page.getTotal());
+        pageData.setItems(resultList);
+        return pageData;
+    }
+
+    @Override
+    public PageBean<MyExamOutVo> MyCollectExam(Integer deleted, Integer pageNum, Integer pageSize,Integer userId,Integer status) {
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        List<MyExamOutVo> resultList =myExamMapper.MyCollectExam(deleted,userId,status);
         PageBean<MyExamOutVo> pageData = new PageBean<MyExamOutVo>(pageNum,
                 pageSize, (int)page.getTotal());
         pageData.setItems(resultList);

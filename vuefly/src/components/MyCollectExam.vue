@@ -16,7 +16,7 @@
 
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <el-menu :default-openeds="['2']">
+        <el-menu :default-openeds="['2','2-4']">
           <el-submenu index="1">
             <template slot="title"><i class="el-icon-menu"></i>首页</template>
             <el-menu-item-group>
@@ -28,18 +28,18 @@
             <template slot="title"><i class="el-icon-user"></i>考试管理</template>
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
-              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
-              <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
-              <el-menu-item index="1-3">备忘录</el-menu-item>
+              <el-menu-item index="2-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
+              <el-menu-item index="2-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
+              <el-menu-item index="2-3">备忘录</el-menu-item>
             </el-menu-item-group>
             <!--          <el-menu-item-group title="分组2">-->
             <!--            <el-menu-item index="1-3">选项3</el-menu-item>-->
             <!--          </el-menu-item-group>-->
-            <el-submenu index="1-4">
+            <el-submenu index="2-4">
               <template slot="title">我的收藏</template>
-              <el-menu-item index="1-4-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
-              <el-menu-item index="1-4-2">论坛收藏</el-menu-item>
-              <el-menu-item index="1-4-3">广告收藏</el-menu-item>
+              <el-menu-item index="2-4-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
+              <el-menu-item index="2-4-2">论坛收藏</el-menu-item>
+              <el-menu-item index="2-4-3">广告收藏</el-menu-item>
             </el-submenu>
           </el-submenu>
 
@@ -80,16 +80,32 @@
         <!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
         <!--        </el-row>-->
         <el-table :data="tableData">
-          <el-table-column prop="examTipsTitle" label="考试名称" width="350">
+          <el-table-column prop="examTipsTitle" label="考试名称" width="200">
           </el-table-column>
-          <el-table-column prop="exam_scores_time" label="成绩公布时间" width="200">
+          <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
           </el-table-column>
-          <el-table-column prop="exam_scores_url" label="查询成绩地址" width="350">
+          <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
+          </el-table-column>
+          <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
+          </el-table-column>
+          <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
+          </el-table-column>
+          <el-table-column prop="examUrl" label="报名地址" width="350">
             <template slot-scope="scope">
-              <a :href="scope.row.exam_scores_url" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.exam_scores_url}}</a>
+              <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
             </template>
           </el-table-column>
           <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">
+            <!--            <template slot-scope="scope">-->
+            <!--              <router-link  to={`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`}>-->
+            <!--             <router-link  to="{path:'/MyExamDetails',query:{id:scope.row.id,status:scope.row.status}}">-->
+            <!--                <span v-if="scope.row.status===1">未报名</span>-->
+            <!--                <span v-if="scope.row.status===2">已报名</span>-->
+            <!--                <span v-if="scope.row.status===3">已考试</span>-->
+            <!--                <span v-if="scope.row.status===4">已过期</span>-->
+            <!--                <span v-if="scope.row.status===5">未考试</span>-->
+            <!--              </router-link>-->
+            <!--            </template>-->
           </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <template slot-scope="scope">
@@ -98,8 +114,7 @@
                 <!--                           @click.native="$router.push({path:'/MyExamDetails',query:{examId:scope.row.id,status:scope.row.status}})"></el-button>-->
                 <!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
-                <el-button icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
-                <el-button type="info" icon="el-icon-folder-add" circle @click="collection"></el-button>
+                <el-button type="info" icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>
@@ -154,7 +169,7 @@
       submitClick: function () {
         // console.log(this.filterForm);
         // let str='';
-        return this.getRequest(`/myExam/ExamScores?deleted=0&status=3&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
+        return this.getRequest(`/myExam/MyCollectExam?deleted=0&status=1&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);

@@ -39,8 +39,9 @@
             <!--          </el-menu-item-group>-->
             <el-submenu index="1-4">
               <template slot="title">我的收藏</template>
-              <el-menu-item index="1-4-1">论坛收藏</el-menu-item>
-              <el-menu-item index="1-4-2">广告收藏</el-menu-item>
+              <el-menu-item index="1-4-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
+              <el-menu-item index="1-4-2">论坛收藏</el-menu-item>
+              <el-menu-item index="1-4-3">广告收藏</el-menu-item>
             </el-submenu>
           </el-submenu>
 
@@ -91,9 +92,9 @@
             </el-table-column>
             <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
             </el-table-column>
-            <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
+            <el-table-column prop="examBegintime" label="考试开始时间" width="160">
             </el-table-column>
-            <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
+            <el-table-column prop="examEndtime" label="考试结束时间" width="160">
             </el-table-column>
             <el-table-column prop="examUrl" label="报名地址" width="350">
               <template slot-scope="scope">
@@ -107,12 +108,12 @@
             <el-table-column prop="operation" label="操作">
               <template slot-scope="scope">
                 <el-row>
-                <el-button icon="el-icon-search" circle></el-button>
-                <el-button icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-                <el-button id="examId" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>
+                <el-button type="info" icon="el-icon-search" circle></el-button>
+                <el-button  type="primary" icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+<!--                <el-button id="examId" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>-->
                 <!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
 <!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
-                <el-button type="warning" icon="el-icon-star-off" circle v-on:click="counter += 1"></el-button>
+                <el-button type="warning" icon="el-icon-star-off" circle v-on:click="joinMyExam(scope.row.id)"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle></el-button>
               </el-row>
               </template>

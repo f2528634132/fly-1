@@ -12,6 +12,7 @@ import MyExam from "../components/MyExam";
 import MyExamDetails from "../components/MyExamDetails";
 import AddExam from "../components/AddExam";
 import ExamScores from "../components/ExamScores";
+import MyCollectExam from "../components/MyCollectExam";
 Vue.use(Router)
 
 const router =  new Router({
@@ -84,6 +85,11 @@ const router =  new Router({
       path: '/MyExam',
       name: 'MyExam',
       component: MyExam
+    },
+    {
+      path: '/MyCollectExam',
+      name: 'MyCollectExam',
+      component: MyCollectExam
     },
     {
       path: '/MyExamDetails',

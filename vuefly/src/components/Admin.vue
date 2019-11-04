@@ -79,13 +79,12 @@
           <el-table-column prop="examTipsTitle" label="考试名称" width="250">
           </el-table-column>
           <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
-
           </el-table-column>
           <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="考试开始时间" width="160">
+          <el-table-column prop="examBegintime" label="考试开始时间" width="160">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="考试结束时间" width="160">
+          <el-table-column prop="examEndtime" label="考试结束时间" width="160">
           </el-table-column>
           <el-table-column prop="examUrl" label="报名地址" width="350">
             <template slot-scope="scope">

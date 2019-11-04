@@ -28,6 +28,8 @@ public interface MyExamMapper {
 
     List<MyExamOutVo> queryPage(@Param(value = "deleted") Integer deleted,@Param(value = "personId")Integer userId);
 
+    List<MyExamOutVo> MyCollectExam(@Param(value = "deleted") Integer deleted,@Param(value = "personId")Integer userId,Integer status);
+
     List<MyExamOutVo> ExamScores(@Param(value = "deleted") Integer deleted,@Param(value = "personId")Integer userId,Integer status);
 
     void updateBatchStatus(List<MyExam> list);
