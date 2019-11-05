@@ -40,7 +40,7 @@ public class MyExamStatusSchedule {
      *
      */
     @Async
-    @Scheduled(cron = "0 0 10 * * ? ")
+    @Scheduled(cron = "0 0 11 * * ? ")
     @Transactional(rollbackFor = Exception.class)
     public void myExamStatusSchedule() {
         //查询所有考试

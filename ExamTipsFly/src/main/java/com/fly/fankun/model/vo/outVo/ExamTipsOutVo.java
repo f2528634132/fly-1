@@ -16,6 +16,7 @@ public class ExamTipsOutVo implements Serializable {
     @ApiModelProperty("主键id,修改时传入")
     private Integer id;
 
+
     @ApiModelProperty("考试类型id")
     @NotNull(message = "考试类型不能为空")
     private Integer examTypeId;

@@ -9,10 +9,10 @@
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人信息</el-dropdown-item>
             <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
+            <el-dropdown-item @click.native="ClickOut">退出登录</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
-        <span aria-label="userId">傅荔怡</span>
+        <span>{{name}}</span>
       </el-header>
 
     <el-container>
@@ -199,7 +199,7 @@
         //   page: 1
         // },
         counter:0,
-        userId :this.$route.query.id,
+        name :this.$route.query.name,
       }
     },
     // computed: {
@@ -270,6 +270,14 @@
       // //      );
       //
       // },
+      ClickOut:function () {
+        return  this.getRequest(`/auth/logout`).then(
+          res=>(
+              this.$router.push({
+                path:`/Login`
+              })
+        ))
+      },
       submitClick: function () {
         // console.log(this.filterForm);
         //alert(currentPage1,pageSize);

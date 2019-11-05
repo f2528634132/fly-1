@@ -99,6 +99,49 @@
     },
 
     methods: {
+      initMyExamDetails:function(){
+        return this.getRequest(`/examTips/queryExam?examId=${this.examTipsInputVo.id}`)
+          .then(
+            res => {
+              console.log(res.data.data);
+              //重新定义的examTipsInputVo
+              // this.examTipsInputVo = res.data.data || [];
+              this.examTipsInputVo.examTipsTitle=res.data.data.examTipsTitle;
+              this.examTipsInputVo.examUrl=res.data.data.examUrl;
+              // this.examTipsInputVo.examTypeId=res.data.data.examTypeId;
+              this.examTipsInputVo.examComment=res.data.data.examComment;
+
+              this.examTipsInputVo.examTypeId=String(res.data.data.examTypeId);
+              // console.log(this.examTipsInputVo.examTypeId);
+
+               // this.examTipsInputVo.value1[0]=res.data.data.signupBegintime;
+               // this.examTipsInputVo.value1[1]=res.data.data.signupEndtime ;
+               // this.examTipsInputVo.value2[0]=res.data.data.examBegintime ;
+               // this.examTipsInputVo.value2[1]= res.data.data.examEndtime;
+
+
+              // console.log(this.examTipsInputVo.signupBegintime);
+
+              this.examTipsInputVo.value1 = [res.data.data.signupBegintime, res.data.data.signupEndtime]
+              let self = this;
+              this.$set(self.examTipsInputVo, "value2", [
+                new Date(res.data.data.examBegintime),
+                new Date(res.data.data.examEndtime)
+              ]);
+
+
+
+              console.log(this.examTipsInputVo.value1[0]);
+              console.log(this.examTipsInputVo.value2[1]);
+              console.log(this.examTipsInputVo.value1);
+              console.log(this.examTipsInputVo.value2);
+
+            },
+            err => {
+              // console.log(err);
+            }
+          );
+      },
       testClick(e){
         this.$nextTick(() => {
           this.$set(this.examTipsInputVo, "value1", [e[0], e[1]]);
@@ -106,45 +149,7 @@
         });
       },
 
-      initMyExamDetails:function(){
-       return this.getRequest(`/examTips/queryExam?examId=${this.examTipsInputVo.id}`)
-         .then(
-           res => {
-             console.log(res.data.data);
-             //重新定义的examTipsInputVo
-             // this.examTipsInputVo = res.data.data || [];
-             this.examTipsInputVo.examTipsTitle=res.data.data.examTipsTitle;
-             this.examTipsInputVo.examUrl=res.data.data.examUrl;
-             // this.examTipsInputVo.examTypeId=res.data.data.examTypeId;
-             this.examTipsInputVo.examComment=res.data.data.examComment;
 
-             this.examTipsInputVo.examTypeId=String(res.data.data.examTypeId);
-             // console.log(this.examTipsInputVo.examTypeId);
-
-             // this.examTipsInputVo.value1[0]=res.data.data.signupBegintime;
-             // this.examTipsInputVo.value1[1]=res.data.data.signupEndtime ;
-             // this.examTipsInputVo.value2[0]=res.data.data.examBegintime ;
-             // this.examTipsInputVo.value2[1]=res.data.data.examEndtime;
-
-
-             // console.log(this.examTipsInputVo.signupBegintime);
-
-             this.$set(self.examTipsInputVo, "value1", [
-               res.data.data.signupBegintime,
-               res.data.data.signupEndtime
-             ]);
-
-             // console.log(this.examTipsInputVo.value1[0]);
-             // console.log(this.examTipsInputVo.value2[1]);
-             // console.log(this.examTipsInputVo.value1);
-             // console.log(this.examTipsInputVo.value2);
-
-           },
-           err => {
-             // console.log(err);
-           }
-         );
-     },
 
 
       onSubmit: function () {

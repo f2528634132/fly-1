@@ -49,18 +49,18 @@
             let data = resp.data;
               _this.userToken = data.data.token;
               // 将用户token保存到vuex中
-
+                 console.log(data.data.name);
               // this.$store.commit('changeLogin', _this.userToken);
               _this.changeLogin({ Authorization: _this.userToken });
               if (0 === data.data.type){
                 this.$router.push({
                     path: '/Home',
-                    query: {'id':data.data.id}
+                    query: {'name':data.data.name}
                 })
             }else{
                 this.$router.push({
                     path: '/Admin',
-                    query: {'id': data.data.id}
+                    query: {'name':data.data.name}
 
                 })
             }
