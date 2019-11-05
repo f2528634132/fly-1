@@ -48,6 +48,9 @@
           if (resp && resp.status == 200) {
             let data = resp.data;
               _this.userToken = data.data.token;
+              this.GLOBAL.token = data.data.token;
+              this.GLOBAL.id = data.data.id;
+              this.GLOBAL.name = data.data.name;
               // 将用户token保存到vuex中
                  console.log(data.data.name);
               // this.$store.commit('changeLogin', _this.userToken);
@@ -55,7 +58,6 @@
               if (0 === data.data.type){
                 this.$router.push({
                     path: '/Home',
-                    query: {'name':data.data.name}
                 })
             }else{
                 this.$router.push({

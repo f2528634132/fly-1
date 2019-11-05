@@ -199,7 +199,7 @@
         //   page: 1
         // },
         counter:0,
-        name :this.$route.query.name,
+        name :this.GLOBAL.name,
       }
     },
     // computed: {

@@ -8,6 +8,8 @@ import axios from 'axios'
 import  VueResource  from 'vue-resource'
 import store  from "./store"
 
+import global_ from './components/Global'//引用文件
+
 import 'element-ui/lib/theme-chalk/index.css'
 import {getRequest} from './utils/api'
 import {postRequest} from './utils/api'
@@ -25,6 +27,7 @@ Vue.prototype.postRequest=postRequest;
 Vue.prototype.deleteRequest=deleteRequest;
 Vue.prototype.putRequest=putRequest;
 
+Vue.prototype.GLOBAL = global_ //挂载到Vue实例上面
 
 Vue.config.productionTip = false
 
