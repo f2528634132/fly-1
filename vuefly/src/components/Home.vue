@@ -3,7 +3,8 @@
   <el-container style="height: 945px; border: 0px solid #eee">
 
       <el-header style="text-align: right; font-size: 15px">
-
+<!--    <el-header>-->
+<!--        <span class="font-face" style="margin-left: 15px">ExamTips</span>-->
         <el-dropdown>
           <i class="el-icon-setting" style="margin-right: 15px"></i>
           <el-dropdown-menu slot="dropdown">
@@ -27,25 +28,26 @@
             </el-menu-item-group>
           </el-submenu>
           <el-submenu index="2">
+            <template slot="title"><i class="el-icon-collection"></i> 我的收藏</template>
+            <el-menu-item index="2-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
+            <el-menu-item index="2-2">论坛收藏</el-menu-item>
+            <el-menu-item index="2-3">广告收藏</el-menu-item>
+          </el-submenu>
+          <el-submenu index="3">
             <template slot="title"><i class="el-icon-user"></i>考试管理</template>
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
-              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
-              <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
-              <el-menu-item index="1-3">备忘录</el-menu-item>
+              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
+              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
+              <el-menu-item index="3-3">备忘录</el-menu-item>
             </el-menu-item-group>
             <!--          <el-menu-item-group title="分组2">-->
             <!--            <el-menu-item index="1-3">选项3</el-menu-item>-->
             <!--          </el-menu-item-group>-->
-            <el-submenu index="1-4">
-              <template slot="title">我的收藏</template>
-              <el-menu-item index="1-4-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
-              <el-menu-item index="1-4-2">论坛收藏</el-menu-item>
-              <el-menu-item index="1-4-3">广告收藏</el-menu-item>
-            </el-submenu>
+
           </el-submenu>
 
-          <el-submenu index="3">
+          <el-submenu index="4">
             <template slot="title"><i class="el-icon-setting"></i>信息设置</template>
             <el-menu-item-group>
               <el-menu-item index="2-1">基础信息</el-menu-item>
@@ -59,7 +61,7 @@
               <el-menu-item index="2-4-1">选项4-1</el-menu-item>
             </el-submenu>
           </el-submenu>
-          <el-submenu index="4">
+          <el-submenu index="5">
             <template slot="title"><i class="el-icon-message"></i>消息管理</template>
             <el-menu-item-group>
               <template slot="title">分组一</template>
@@ -79,9 +81,24 @@
 
         <el-main>
           <el-row>
-<!--            <el-button type="primary" round @click="submitClick()">主要按钮</el-button>-->
-            <el-button type="warning" round>热门考试</el-button>
-            <el-button type="danger" round>提示考试</el-button>
+            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
+              <el-menu-item index="1">最新考试</el-menu-item>
+              <el-submenu index="2">
+                <template slot="title">热门考试</template>
+                <el-menu-item index="2-1">选项1</el-menu-item>
+                <el-menu-item index="2-2">选项2</el-menu-item>
+                <el-menu-item index="2-3">选项3</el-menu-item>
+                <el-submenu index="2-4">
+                  <template slot="title">提示考试</template>
+                  <el-menu-item index="2-4-1">选项1</el-menu-item>
+                  <el-menu-item index="2-4-2">选项2</el-menu-item>
+                  <el-menu-item index="2-4-3">选项3</el-menu-item>
+                </el-submenu>
+              </el-submenu>
+              <el-menu-item index="3" >提示考试</el-menu-item>
+<!--              <el-menu-item index="3" disabled>提示考试</el-menu-item>-->
+<!--              <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">提示考试</a></el-menu-item>-->
+            </el-menu>
           </el-row>
           <el-table :data="tableData" ref="tableData">
             <el-table-column prop="id" label="考试编号" width="120">
@@ -147,6 +164,16 @@
   .el-aside {
     color: #333;
   }
+  /*.font-face {*/
+  /*  font-family: 'webfont';*/
+  /*  font-display: swap;*/
+  /*  src: url('//at.alicdn.com/t/webfont_xq8c7se00nh.eot'); !* IE9*!*/
+  /*  src: url('//at.alicdn.com/t/webfont_xq8c7se00nh.eot?#iefix') format('embedded-opentype'), !* IE6-IE8 *!*/
+  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.woff2') format('woff2'),*/
+  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.woff') format('woff'), !* chrome、firefox *!*/
+  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.ttf') format('truetype'), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
+  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.svg#AlibabaPuHuiTiH') format('svg'); !* iOS 4.1- *!*/
+  /*}*/
 
   .el-submenu [class^=el-icon-] {
     vertical-align: middle;
@@ -200,6 +227,7 @@
         // },
         counter:0,
         name :this.GLOBAL.name,
+        activeIndex: '1',
       }
     },
     // computed: {
@@ -227,6 +255,9 @@
                         // console.log(err);
                     }
                 );
+      },
+      handleSelect(key, keyPath) {
+        console.log(key, keyPath);
       },
       handleSizeChange(val) {
         console.log(`每页 ${val} 条`);

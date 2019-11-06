@@ -62,7 +62,7 @@
             }else{
                 this.$router.push({
                     path: '/Admin',
-                    query: {'name':data.data.name}
+                    // query: {'name':data.data.name}
 
                 })
             }

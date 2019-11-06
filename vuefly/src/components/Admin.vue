@@ -1,6 +1,20 @@
 <template>
+  <el-container>
+    <el-header style="text-align: right; font-size: 15px">
+      <el-dropdown>
+        <i class="el-icon-user-solid" style="margin-right: 15px"></i>
+        <el-dropdown-menu slot="dropdown">
+          <el-dropdown-item>个人信息</el-dropdown-item>
+          <el-dropdown-item>修改密码</el-dropdown-item>
+          <el-dropdown-item>退出登录</el-dropdown-item>
+        </el-dropdown-menu>
+      </el-dropdown>
+      <span>{{name}}</span>
+    </el-header>
+
+
   <el-container style="height: 900px; border: 0px solid #eee">
-    <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
+    <el-aside width="220px" style="background-color: rgb(238, 241, 246)">
       <el-menu :default-openeds="['1', '3']">
         <el-submenu index="1">
           <template slot="title"><i class="el-icon-menu"></i>考试信息管理</template>
@@ -9,72 +23,70 @@
               <el-menu-item index="1-1" >考试信息</el-menu-item>
             <el-menu-item index="1-2">成绩公布</el-menu-item>
           </el-menu-item-group>
-          <!--          <el-menu-item-group title="分组2">-->
-          <!--            <el-menu-item index="1-3">选项3</el-menu-item>-->
-          <!--          </el-menu-item-group>-->
-          <el-submenu index="1-4">
-            <template slot="title">我的收藏</template>
-            <el-menu-item index="1-4-1">论坛收藏</el-menu-item>
-            <el-menu-item index="1-4-2">广告收藏</el-menu-item>
-          </el-submenu>
         </el-submenu>
         <el-submenu index="2">
-          <template slot="title"><i class="el-icon-setting"></i>广告栏目管理</template>
-          <el-menu-item-group>
-            <template slot="title">账号管理</template>
-            <el-menu-item index="2-1">管理员</el-menu-item>
-            <el-menu-item index="2-2">个人用户</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="二级密码">
-            <el-menu-item index="2-3">修改二级密码</el-menu-item>
-          </el-menu-item-group>
-          <el-submenu index="2-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-          </el-submenu>
+          <template slot="title"><i class="el-icon-orange"></i>论坛话题管理</template>
+          <el-menu-item index="3-1">论坛分类</el-menu-item>
+          <el-menu-item index="3-2">话题管理</el-menu-item>
         </el-submenu>
+
         <el-submenu index="3">
-          <template slot="title"><i class="el-icon-message"></i>论坛管理</template>
-          <el-menu-item-group>
-            <template slot="title">分组一</template>
-            <el-menu-item index="3-1">选项1</el-menu-item>
-            <el-menu-item index="3-2">选项2</el-menu-item>
-          </el-menu-item-group>
-          <el-menu-item-group title="分组2">
-            <el-menu-item index="3-3">选项3</el-menu-item>
-          </el-menu-item-group>
+          <template slot="title"><i class="el-icon-aim"></i>广告栏目管理</template>
+            <el-menu-item index="2-1">机构栏目</el-menu-item>
+            <el-menu-item index="2-2">教材栏目</el-menu-item>
+        </el-submenu>
+
+        <el-submenu index="4">
+        <template slot="title"><i class="el-icon-user"></i> 账号管理</template>
+          <el-menu-item index="2-2">个人用户</el-menu-item>
+          <el-menu-item index="2-1">管理员</el-menu-item>
+        </el-submenu>
+        <el-submenu index="5">
+          <template slot="title"><i class="el-icon-data-line"></i>数据分析</template>
+            <el-menu-item index="3-1">报考情况</el-menu-item>
+            <el-menu-item index="3-2">考试类目</el-menu-item>
+            <el-menu-item index="3-3">考生分布</el-menu-item>
           <el-submenu index="3-4">
-            <template slot="title">选项4</template>
-            <el-menu-item index="3-4-1">选项4-1</el-menu-item>
+            <template slot="title">行为分析</template>
+            <el-menu-item index="3-4-1">报考关注度</el-menu-item>
+          </el-submenu>
+          <el-submenu index="3-4">
+            <template slot="title">相关性分析</template>
+            <el-menu-item index="3-4-1">报考与考生身份相关性</el-menu-item>
           </el-submenu>
         </el-submenu>
       </el-menu>
     </el-aside>
 
-    <el-container>
-      <el-header style="text-align: right; font-size: 15px">
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人信息</el-dropdown-item>
-            <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item>退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>傅荔怡</span>
-      </el-header>
+
 
       <el-main>
+<!--        <el-row>-->
+<!--          <el-button round @click.native="$router.push('/AddExam')">添加考试</el-button>-->
+<!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
+<!--          <el-button type="success" round>成功按钮</el-button>-->
+<!--          <el-button type="info" round>信息按钮</el-button>-->
+<!--          <el-button type="warning" round>警告按钮</el-button>-->
+<!--          <el-button type="danger" round>危险按钮</el-button>-->
+<!--        </el-row>-->
         <el-row>
-          <el-button round @click.native="$router.push('/AddExam')">添加考试</el-button>
-          <el-button type="primary" round @click="submitClick">主要按钮</el-button>
-          <el-button type="success" round>成功按钮</el-button>
-          <el-button type="info" round>信息按钮</el-button>
-          <el-button type="warning" round>警告按钮</el-button>
-          <el-button type="danger" round>危险按钮</el-button>
+          <div style="margin-top: 10px;">
+            <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
+              <el-select v-model="select" slot="prepend" placeholder="请选择">
+                <el-option label="ALL" value="1"></el-option>
+                <el-option label="计算机" value="2"></el-option>
+                <el-option label="外语" value="3"></el-option>
+                <el-option label="证券" value="4"></el-option>
+                <el-option label="会计" value="5"></el-option>
+                <el-option label="其他" value="6"></el-option>
+              </el-select>
+              <el-button slot="append" icon="el-icon-search"></el-button>
+            </el-input>
+            <el-button type="primary" style="margin-left: 500px" round @click.native="$router.push('/AddExam')">添加考试</el-button>
+          </div>
         </el-row>
         <el-table :data="tableData" ref="tableData">
-          <el-table-column prop="id" label="考试编号" width="120">
+          <el-table-column prop="id" label="考试编号" width="100">
           </el-table-column>
           <el-table-column prop="examTipsTitle" label="考试名称" width="250">
           </el-table-column>
@@ -148,6 +160,17 @@
     width: 24px;
     text-align: right;
     font-size: 20px;
+  }
+  .el-input-group {
+    width: 50%;
+    margin-left: 200px;
+    margin-bottom: 10px;
+  }
+  .el-select .el-input {
+    width: 130px;
+  }
+  .input-with-select .el-input-group__prepend {
+    background-color: #fff;
   }
 </style>
 
@@ -242,7 +265,10 @@
           pageSize: 5, // 每页回答数量
           deleted: 0, // 回答总数
           totalNum: 0,
-         tableData: [],
+          tableData: [],
+          input3:'',
+          select:'',
+          name :this.GLOBAL.name,
           // page: {
           //     currentPage: 1, //当前页
           //     pageSize: 5, //每页条数,  默认10条

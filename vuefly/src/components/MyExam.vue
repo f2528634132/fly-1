@@ -115,7 +115,7 @@
 <!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
                 <el-button type="info" icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
-                <el-button type="primary" icon="el-icon-folder-add" circle @click="collection"></el-button>
+                <el-button type="primary" icon="el-icon-collection-tag" circle @click="collection"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>

@@ -7,13 +7,13 @@
   </el-col>
   </el-row>
   <el-row>
-    <el-col :span="12">
-  <el-steps :active="active" finish-status="success">
-    <el-step title="未报名"></el-step>
-    <el-step title="已报名"></el-step>
-    <el-step title="已考试"></el-step>
+    <el-col :span="12" style="margin-top: 30px">
+  <el-steps :active="active" finish-status="success" align-center>
+    <el-step title="未报名" description="如已报名，请点击下一步"></el-step>
+    <el-step title="已报名" description="如已考试，请点击下一步"></el-step>
+    <el-step title="已考试" description="请到成绩公布查询成绩！"></el-step>
   </el-steps>
-  <el-button style="margin-top: 12px;" @click="next">下一步</el-button>
+  <el-button style="margin-top: 20px;" @click="next">下一步</el-button>
     </el-col>
   </el-row>
 </div>
