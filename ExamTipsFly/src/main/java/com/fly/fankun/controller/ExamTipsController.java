@@ -7,11 +7,13 @@ import com.fly.fankun.model.vo.inputVo.AdminInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
+import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
 import com.fly.fankun.service.AdminService;
 import com.fly.fankun.service.ExamTipsService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
+import java.util.List;
 import javax.validation.Valid;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -70,4 +72,11 @@ public class ExamTipsController extends BaseController{
         return BaseResult.success(resp);
     }
 
+    //查询所有考试目录
+    @GetMapping("/queryExamTypeList")
+    @ApiOperation(value = "查询考试类目",response = ExamTypeOutVo.class)
+    public BaseResult queryExamTypeList() {
+        List<ExamTypeOutVo> resp = examTipsService.queryExamTypeList();
+        return BaseResult.success(resp);
+    }
 }

@@ -8,11 +8,15 @@
     </el-form-item>
     <el-form-item label="考试类目">
       <el-select v-model="examTipsInputVo.examTypeId" placeholder="请选择考试类目">
-        <el-option label="全国计算机等级考试" value="1"></el-option>
-        <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
-        <el-option label="CET大学英语考试" value="3"></el-option>
-        <el-option label="全国会计从业资格考试" value="4"></el-option>
-        <el-option label="中小学教师资格考试" value="5"></el-option>
+<!--        <el-option label="全国计算机等级考试" value="1"></el-option>-->
+<!--        <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>-->
+<!--        <el-option label="CET大学英语考试" value="3"></el-option>-->
+<!--        <el-option label="全国会计从业资格考试" value="4"></el-option>-->
+<!--        <el-option label="中小学教师资格考试" value="5"></el-option>-->
+        <el-option
+          v-for="item in examTypeList"
+          :key="item.id"
+          :label="item.examName" :value="item.id"></el-option>
       </el-select>
     </el-form-item>
     <el-form-item label="报名时间">
@@ -91,11 +95,13 @@
           examEndtime: '',
           deleted: false,
           examComment: '',
-        }
+        },
+        examTypeList:[]
       }
     },
     mounted:function(){
       this.initMyExamDetails();
+      this.queryExamTypeList();
     },
 
     methods: {
@@ -148,8 +154,17 @@
           console.log(this.examTipsInputVo.value1)
         });
       },
-
-
+        queryExamTypeList: function () {
+            return  this.getRequest(`/examTips/queryExamTypeList`)
+                .then(
+                    res => {
+                        this.examTypeList = res.data.data || [];
+                    },
+                    err => {
+                        // console.log(err);
+                    }
+                );
+        },
 
 
       onSubmit: function () {

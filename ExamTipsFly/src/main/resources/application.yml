@@ -71,3 +71,7 @@ logging:
   level:
     com.fly.fankun: debug
     org: info
+sys:
+  auth:
+    aes-key: aA0fR0fA5rF3cH1h
+    sign-key: bFsd2ASFslk1hsB

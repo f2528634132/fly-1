@@ -103,4 +103,10 @@
       deleted = #{deleted,jdbcType=INTEGER}
     where id = #{id,jdbcType=INTEGER}
   </update>
+  <select id="queryAll" resultType="com.fly.fankun.model.vo.outVo.ExamTypeOutVo" >
+    select
+    id,
+    exam_name as examName
+    from exam_type where deleted = 0
+  </select>
 </mapper>

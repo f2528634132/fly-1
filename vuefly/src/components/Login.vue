@@ -43,7 +43,7 @@
         let _this = this;
         this.loading = true;
         // this.getRequest('/auth/login?userName='+this.loginForm.username+'&passWord='+this.loginForm.password+'&type='+this.radio).then(resp=> {
-          this.getRequest(`/auth/login?userName=${this.loginForm.username}&passWord=${this.loginForm.password}&type=${this.type}`).then(resp=> {
+          this.getRequest(`/auth/login?userName=${this.loginForm.username}&passWord=${encodeURIComponent(this.utils.encrypt(this.loginForm.password.replace(/(^\s*)|(\s*$)/g, ""),"aA0fR0fA5rF3cH1h"))}&type=${this.type}`).then(resp=> {
           _this.loading = false;
           if (resp && resp.status == 200) {
             let data = resp.data;

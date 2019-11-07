@@ -8,6 +8,7 @@ import com.fly.fankun.model.entity.ExamType;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
+import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
 import com.fly.fankun.service.ExamTipsService;
 import com.fly.fankun.util.BeanUtil;
 import com.github.pagehelper.Page;
@@ -86,5 +87,11 @@ public class ExamTipsServiceImpl implements ExamTipsService {
             pageSize, (int)page.getTotal());
         pageData.setItems(resultList);
         return pageData;
+    }
+
+    @Override
+    public List<ExamTypeOutVo> queryExamTypeList() {
+
+        return examTypeMapper.queryAll();
     }
 }
