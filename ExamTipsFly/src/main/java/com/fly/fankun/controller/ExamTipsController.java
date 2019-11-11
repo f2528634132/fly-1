@@ -41,7 +41,6 @@ public class ExamTipsController extends BaseController{
     private ExamTipsService examTipsService;
 
     @PostMapping(value = "/editExamTips",produces="application/json;charset=UTF-8")
-
     @ApiOperation(value = "编辑考试信息",response = ExamTipsOutVo.class)
     public BaseResult editExamTips(@Valid  @RequestBody ExamTipsInputVo examTipsInputVo) {
         ExamTipsOutVo resp=  examTipsService.editExamTips(examTipsInputVo);

@@ -53,6 +53,11 @@ public class ExamTipsOutVo implements Serializable {
     @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
     private Date examEndtime;
 
+    @ApiModelProperty("成绩公布时间")
+    @NotNull(message = "成绩公布时间不能为空")
+    @JsonFormat(shape = JsonFormat.Shape.STRING,pattern = "yyyy-MM-dd")
+    private Date examScorestime;
+
     private Integer clickNumber;
 
 }

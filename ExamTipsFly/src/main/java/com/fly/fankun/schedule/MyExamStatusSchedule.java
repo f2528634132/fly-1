@@ -18,8 +18,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 /**
  * @Title: 考试/报名状态定时任务修改
- * @author: fan.kun
- * @date: 2019/10/18
+ * @author: fly
+ * @date: 2019/11/06
  */
 @Component
 @Slf4j

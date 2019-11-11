@@ -70,7 +70,10 @@ public class MyExamController extends BaseController{
 
     @GetMapping("/queryPage")
     @ApiOperation(value = "分页查询我的报名",response = MyExamOutVo.class)
-    public BaseResult<PageBean<MyExamOutVo>> queryPage(@ApiParam(value = "当前页", required = true) @RequestParam Integer pageNum, @RequestParam @ApiParam(value = "分页大小", required = true) Integer pageSize, Integer deleted) {
+    public BaseResult<PageBean<MyExamOutVo>> queryPage(@ApiParam(value = "当前页", required = true)
+                                                       @RequestParam Integer pageNum,
+                                                       @RequestParam @ApiParam(value = "分页大小", required = true) Integer pageSize,
+                                                       Integer deleted) {
         PageBean<MyExamOutVo> resp = myExamService.queryPage(deleted,pageNum,pageSize,this.getUserId());
         return BaseResult.success(resp);
     }

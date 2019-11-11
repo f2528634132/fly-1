@@ -23,6 +23,8 @@ public class ExamTips {
 
     private Date examEndtime;
 
+    private Date examScorestime;
+
     private Integer clickNumber;
 
     private Date createTime;

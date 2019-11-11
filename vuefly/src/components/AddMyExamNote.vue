@@ -50,17 +50,6 @@
       </el-col>
     </el-form-item>
 
-    <el-form-item label="成绩公布">
-      <el-col :span="11">
-    <el-date-picker
-      v-model="examTipsInputVo.examScorestime"
-      type="date"
-      placeholder="选择日期">
-    </el-date-picker>
-      </el-col>
-    </el-form-item>
-
-
     <!--    <el-form-item label="活动性质">-->
     <!--      <el-checkbox-group v-model="form.type">-->
     <!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
@@ -104,7 +93,6 @@
           examEndtime: '',
           deleted: false,
           examComment: '',
-          examScorestime:''
         }
       }
     },

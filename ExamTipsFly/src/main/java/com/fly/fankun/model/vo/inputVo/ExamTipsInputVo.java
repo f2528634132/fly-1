@@ -38,4 +38,8 @@ public class ExamTipsInputVo implements Serializable {
     @NotNull(message = "考试结束时间不能为空")
     private Date examEndtime;
 
+    @ApiModelProperty("成绩公布时间")
+    @NotNull(message = "成绩公布时间不能为空")
+    private Date examScorestime;
+
 }
