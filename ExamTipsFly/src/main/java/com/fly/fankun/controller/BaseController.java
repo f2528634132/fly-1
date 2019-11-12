@@ -8,13 +8,19 @@
 package com.fly.fankun.controller;
 
 import com.alibaba.fastjson.JSONObject;
+import com.fly.fankun.dict.AccountAuthTypeEnum;
 import com.fly.fankun.exception.BizzException;
 import com.fly.fankun.globals.AuthConstant;
+import com.fly.fankun.mapper.AdminMapper;
+import com.fly.fankun.mapper.PersonMapper;
+import com.fly.fankun.model.entity.Admin;
+import com.fly.fankun.model.entity.Person;
 import com.fly.fankun.model.vo.TokenUserVo;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
 
@@ -26,6 +32,11 @@ import org.springframework.web.context.request.ServletRequestAttributes;
  */
 @Slf4j
 public class BaseController {
+
+	@Autowired
+	private PersonMapper personMapper;
+	@Autowired
+	private AdminMapper adminMapper;
 	/**
 	 * 获取本次请求
 	 * @return
@@ -56,15 +67,32 @@ public class BaseController {
 	}
 
 	protected Integer getUserId() {
+		return getUserInfo().getId();
+	}
+
+	protected TokenUserVo getUserInfo() {
 		TokenUserVo tokenUserVo = (TokenUserVo) getRequest().getAttribute(AuthConstant.HEADER_NAME_TOKEN_RESPONSE);
 		System.out.println(JSONObject.toJSONString(tokenUserVo));
 		if(null == tokenUserVo){
 			throw  new BizzException("暂未登录");
 		}
-		return tokenUserVo.getId();
+		Integer id = tokenUserVo.getId();
+		//个人用户
+		if(AccountAuthTypeEnum.CONSUMER.getCode().equals(tokenUserVo.getUserType())){
+			Person person = personMapper.selectByPrimaryKey(id);
+			if(null == person){
+				throw  new BizzException("用户不存在");
+			}
+		}else if(AccountAuthTypeEnum.SERVICE.getCode().equals(tokenUserVo.getUserType())){
+			Admin admin = adminMapper.selectByPrimaryKey(id);
+			if(null == admin){
+				throw  new BizzException("后端用户不存在");
+			}
+		}
+		return  tokenUserVo;
 	}
-//
-//	protected TokenUser getUserInfo() {
-//		return TokenUtils.getTokenUser(getRequest());
-//	}
+
+	protected Integer getUserType() {
+		return getUserInfo().getUserType();
+	}
 }

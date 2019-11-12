@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCF10;}
+</style>
+<rect x="256" y="192.03" class="st0" width="576" height="447.94"/>
+<g>
+	<circle cx="296" cy="512" r="40"/>
+	<circle cx="448" cy="512" r="40"/>
+	<circle cx="600" cy="512" r="40"/>
+	<path d="M832,128.03H320c-35.35,0-64,28.65-64,64V256h-64c-35.35,0-64,28.65-64,64v384c0,35.35,28.65,64,64,64h127.87L448,896
+		l128-128h128c35.35,0,64-28.65,64-64v-64h64c35.35,0,64-28.65,64-64V192.03C896,156.69,867.35,128.03,832,128.03z M704,704
+		C704,704,704,704,704,704l-128,0h-26.51l-18.74,18.75l-82.77,82.77l-82.88-82.79L346.36,704h-26.49H192c0,0,0,0,0,0V320
+		c0,0,0,0,0,0h512h0V704z M832,576C832,576,832,576,832,576l-64,0V320c0-35.35-28.65-64-64-64H320v-63.97c0,0,0,0,0,0h512V576z"/>
+</g>
+</svg>

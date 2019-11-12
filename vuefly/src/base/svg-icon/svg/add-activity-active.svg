@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCF10;}
+</style>
+<polygon class="st0" points="768,576 384,640 384,329.09 768,266.33 "/>
+<path d="M224,895.24L224,895.24c-17.67,0-32-14.33-32-32V160.5c0-17.67,14.33-32,32-32h0c17.67,0,32,14.33,32,32v702.74
+	C256,880.91,241.67,895.24,224,895.24z"/>
+<path d="M416,895.37L416,895.37c-17.67,0-32-14.33-32-32V565.85c0-17.67,14.33-32,32-32h0c17.67,0,32,14.33,32,32v297.52
+	C448,881.04,433.67,895.37,416,895.37z"/>
+<path d="M640,205v238.2l-384,71.41v-238.2L640,205 M704,128l-512,95.21v368.4l512-95.21V128L704,128z"/>
+<polygon points="704,276.66 704,341.49 768,331.16 768,570.76 448,627.63 448,544 384,555.9 384,704 832,624.4 832,256 "/>
+</svg>

@@ -1,5 +1,5 @@
 <template>
-  <el-container>
+<!--  <el-container>-->
 <!--    <el-header style="text-align: right; font-size: 15px">-->
 <!--      <el-dropdown>-->
 <!--        <i class="el-icon-user-solid" style="margin-right: 15px"></i>-->
@@ -11,50 +11,50 @@
 <!--      </el-dropdown>-->
 <!--      <span>{{name}}</span>-->
 <!--    </el-header>-->
-  <el-container style="height: 900px; border: 0px solid #eee">
-    <el-aside width="220px" style="background-color: rgb(238, 241, 246)">
-      <el-menu :default-openeds="['1', '3']">
-        <el-submenu index="1">
-          <template slot="title"><i class="el-icon-menu"></i>考试信息管理</template>
-          <el-menu-item-group>
-            <!--            <template slot="title">分组一</template>-->
-              <el-menu-item index="1-1" >考试信息</el-menu-item>
-            <el-menu-item index="1-2">成绩公布</el-menu-item>
-          </el-menu-item-group>
-        </el-submenu>
-        <el-submenu index="2">
-          <template slot="title"><i class="el-icon-orange"></i>论坛话题管理</template>
-          <el-menu-item index="3-1">论坛分类</el-menu-item>
-          <el-menu-item index="3-2">话题管理</el-menu-item>
-        </el-submenu>
+<!--  <el-container style="height: 900px; border: 0px solid #eee">-->
+<!--    <el-aside width="220px" style="background-color: rgb(238, 241, 246)">-->
+<!--      <el-menu :default-openeds="['1', '3']">-->
+<!--        <el-submenu index="1">-->
+<!--          <template slot="title"><i class="el-icon-menu"></i>考试信息管理</template>-->
+<!--          <el-menu-item-group>-->
+<!--            &lt;!&ndash;            <template slot="title">分组一</template>&ndash;&gt;-->
+<!--              <el-menu-item index="1-1" >考试信息</el-menu-item>-->
+<!--            <el-menu-item index="1-2">成绩公布</el-menu-item>-->
+<!--          </el-menu-item-group>-->
+<!--        </el-submenu>-->
+<!--        <el-submenu index="2">-->
+<!--          <template slot="title"><i class="el-icon-orange"></i>论坛话题管理</template>-->
+<!--          <el-menu-item index="3-1">论坛分类</el-menu-item>-->
+<!--          <el-menu-item index="3-2">话题管理</el-menu-item>-->
+<!--        </el-submenu>-->
 
-        <el-submenu index="3">
-          <template slot="title"><i class="el-icon-aim"></i>广告栏目管理</template>
-            <el-menu-item index="2-1">机构栏目</el-menu-item>
-            <el-menu-item index="2-2">教材栏目</el-menu-item>
-        </el-submenu>
+<!--        <el-submenu index="3">-->
+<!--          <template slot="title"><i class="el-icon-aim"></i>广告栏目管理</template>-->
+<!--            <el-menu-item index="2-1">机构栏目</el-menu-item>-->
+<!--            <el-menu-item index="2-2">教材栏目</el-menu-item>-->
+<!--        </el-submenu>-->
 
-        <el-submenu index="4">
-        <template slot="title"><i class="el-icon-user"></i> 账号管理</template>
-          <el-menu-item index="2-2">个人用户</el-menu-item>
-          <el-menu-item index="2-1">管理员</el-menu-item>
-        </el-submenu>
-        <el-submenu index="5">
-          <template slot="title"><i class="el-icon-data-line"></i>数据分析</template>
-            <el-menu-item index="3-1">报考情况</el-menu-item>
-            <el-menu-item index="3-2">考试类目</el-menu-item>
-            <el-menu-item index="3-3">考生分布</el-menu-item>
-          <el-submenu index="3-4">
-            <template slot="title">行为分析</template>
-            <el-menu-item index="3-4-1">报考关注度</el-menu-item>
-          </el-submenu>
-          <el-submenu index="3-4">
-            <template slot="title">相关性分析</template>
-            <el-menu-item index="3-4-1">报考与考生身份相关性</el-menu-item>
-          </el-submenu>
-        </el-submenu>
-      </el-menu>
-    </el-aside>
+<!--        <el-submenu index="4">-->
+<!--        <template slot="title"><i class="el-icon-user"></i> 账号管理</template>-->
+<!--          <el-menu-item index="2-2">个人用户</el-menu-item>-->
+<!--          <el-menu-item index="2-1">管理员</el-menu-item>-->
+<!--        </el-submenu>-->
+<!--        <el-submenu index="5">-->
+<!--          <template slot="title"><i class="el-icon-data-line"></i>数据分析</template>-->
+<!--            <el-menu-item index="3-1">报考情况</el-menu-item>-->
+<!--            <el-menu-item index="3-2">考试类目</el-menu-item>-->
+<!--            <el-menu-item index="3-3">考生分布</el-menu-item>-->
+<!--          <el-submenu index="3-4">-->
+<!--            <template slot="title">行为分析</template>-->
+<!--            <el-menu-item index="3-4-1">报考关注度</el-menu-item>-->
+<!--          </el-submenu>-->
+<!--          <el-submenu index="3-4">-->
+<!--            <template slot="title">相关性分析</template>-->
+<!--            <el-menu-item index="3-4-1">报考与考生身份相关性</el-menu-item>-->
+<!--          </el-submenu>-->
+<!--        </el-submenu>-->
+<!--      </el-menu>-->
+<!--    </el-aside>-->
 
 
 
@@ -139,8 +139,7 @@
           </div>
         </el-row>
       </el-main>
-    </el-container>
-  </el-container>
+<!--    </el-container>-->
 </template>
 <style>
   .el-header {
@@ -237,7 +236,6 @@
                 .then(
                     res => {
                         this.tableData = res.data.data.items || [];
-                        console.log(this.tableData);
                         this.totalNum = res.data.data.totalNum || 0;
                     },
                     err => {

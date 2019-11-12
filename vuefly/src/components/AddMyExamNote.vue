@@ -130,7 +130,6 @@
           //     "signupEndtime": "2019-10-29T09:54:10.912Z"
           //   })
         }).then((res) => {
-          console.log(res);
         });
       }
     }

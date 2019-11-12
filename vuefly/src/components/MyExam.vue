@@ -1,71 +1,71 @@
 <template>
   <el-container style="height: 100%; border: 0px solid #eee">
     <el-container>
-      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
-        <!--        <el-menu :default-openeds="['1', '3']">-->
-        <el-menu  :default-openeds="['2','3']">
-          <el-submenu index="1">
-            <template slot="title"><i class="el-icon-menu"></i>首页</template>
-            <el-menu-item-group>
-              <el-menu-item index="1-1" @click.native="$router.push('/Home')">ExamTips</el-menu-item>
-              <el-menu-item index="1-2">论坛话题</el-menu-item>
-            </el-menu-item-group>
-          </el-submenu>
-          <el-submenu index="2">
-            <template slot="title"><i class="el-icon-collection"></i> 我的收藏</template>
-            <el-menu-item index="2-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>
-            <el-menu-item index="2-2">论坛收藏</el-menu-item>
-            <el-menu-item index="2-3">广告收藏</el-menu-item>
-          </el-submenu>
-          <el-submenu index="3">
-            <template slot="title"><i class="el-icon-user"></i>考试管理</template>
-         <el-menu-item-group>-->
-              <!--            <template slot="title">分组一</template>-->
-<!--              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>-->
-              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
-              <el-menu-item index="3-3">备忘录</el-menu-item>
+<!--      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">-->
+<!--        &lt;!&ndash;        <el-menu :default-openeds="['1', '3']">&ndash;&gt;-->
+<!--        <el-menu  :default-openeds="['2','3']">-->
+<!--          <el-submenu index="1">-->
+<!--            <template slot="title"><i class="el-icon-menu"></i>首页</template>-->
+<!--            <el-menu-item-group>-->
+<!--              <el-menu-item index="1-1" @click.native="$router.push('/Home')">ExamTips</el-menu-item>-->
+<!--              <el-menu-item index="1-2">论坛话题</el-menu-item>-->
 <!--            </el-menu-item-group>-->
-<!--              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>-->
-<!--              <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>-->
-<!--              <el-menu-item index="1-3">备忘录</el-menu-item>-->
-            </el-menu-item-group>
-            <!--          <el-menu-item-group title="分组2">-->
-            <!--            <el-menu-item index="1-3">选项3</el-menu-item>-->
-            <!--          </el-menu-item-group>-->
+<!--          </el-submenu>-->
+<!--          <el-submenu index="2">-->
+<!--            <template slot="title"><i class="el-icon-collection"></i> 我的收藏</template>-->
+<!--            <el-menu-item index="2-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>-->
+<!--            <el-menu-item index="2-2">论坛收藏</el-menu-item>-->
+<!--            <el-menu-item index="2-3">广告收藏</el-menu-item>-->
+<!--          </el-submenu>-->
+<!--          <el-submenu index="3">-->
+<!--            <template slot="title"><i class="el-icon-user"></i>考试管理</template>-->
+<!--         <el-menu-item-group>&ndash;&gt;-->
+<!--              &lt;!&ndash;            <template slot="title">分组一</template>&ndash;&gt;-->
+<!--&lt;!&ndash;              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>&ndash;&gt;-->
+<!--              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>-->
+<!--              <el-menu-item index="3-3">备忘录</el-menu-item>-->
+<!--&lt;!&ndash;            </el-menu-item-group>&ndash;&gt;-->
+<!--&lt;!&ndash;              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;              <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>&ndash;&gt;-->
+<!--&lt;!&ndash;              <el-menu-item index="1-3">备忘录</el-menu-item>&ndash;&gt;-->
+<!--            </el-menu-item-group>-->
+<!--            &lt;!&ndash;          <el-menu-item-group title="分组2">&ndash;&gt;-->
+<!--            &lt;!&ndash;            <el-menu-item index="1-3">选项3</el-menu-item>&ndash;&gt;-->
+<!--            &lt;!&ndash;          </el-menu-item-group>&ndash;&gt;-->
 
-          </el-submenu>
+<!--          </el-submenu>-->
 
-          <el-submenu index="4">
-            <template slot="title"><i class="el-icon-setting"></i>信息设置</template>
-            <el-menu-item-group>
-              <el-menu-item index="2-1">基础信息</el-menu-item>
-              <el-menu-item index="2-2">修改密码</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group>
-              <el-menu-item index="2-3">修改二级密码</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="2-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="2-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-          <el-submenu index="5">
-            <template slot="title"><i class="el-icon-message"></i>消息管理</template>
-            <el-menu-item-group>
-              <template slot="title">分组一</template>
-              <el-menu-item index="3-1">选项1</el-menu-item>
-              <el-menu-item index="3-2">选项2</el-menu-item>
-            </el-menu-item-group>
-            <el-menu-item-group title="分组2">
-              <el-menu-item index="3-3">选项3</el-menu-item>
-            </el-menu-item-group>
-            <el-submenu index="3-4">
-              <template slot="title">选项4</template>
-              <el-menu-item index="3-4-1">选项4-1</el-menu-item>
-            </el-submenu>
-          </el-submenu>
-        </el-menu>
-      </el-aside>
+<!--          <el-submenu index="4">-->
+<!--            <template slot="title"><i class="el-icon-setting"></i>信息设置</template>-->
+<!--            <el-menu-item-group>-->
+<!--              <el-menu-item index="2-1">基础信息</el-menu-item>-->
+<!--              <el-menu-item index="2-2">修改密码</el-menu-item>-->
+<!--            </el-menu-item-group>-->
+<!--            <el-menu-item-group>-->
+<!--              <el-menu-item index="2-3">修改二级密码</el-menu-item>-->
+<!--            </el-menu-item-group>-->
+<!--            <el-submenu index="2-4">-->
+<!--              <template slot="title">选项4</template>-->
+<!--              <el-menu-item index="2-4-1">选项4-1</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--          </el-submenu>-->
+<!--          <el-submenu index="5">-->
+<!--            <template slot="title"><i class="el-icon-message"></i>消息管理</template>-->
+<!--            <el-menu-item-group>-->
+<!--              <template slot="title">分组一</template>-->
+<!--              <el-menu-item index="3-1">选项1</el-menu-item>-->
+<!--              <el-menu-item index="3-2">选项2</el-menu-item>-->
+<!--            </el-menu-item-group>-->
+<!--            <el-menu-item-group title="分组2">-->
+<!--              <el-menu-item index="3-3">选项3</el-menu-item>-->
+<!--            </el-menu-item-group>-->
+<!--            <el-submenu index="3-4">-->
+<!--              <template slot="title">选项4</template>-->
+<!--              <el-menu-item index="3-4-1">选项4-1</el-menu-item>-->
+<!--            </el-submenu>-->
+<!--          </el-submenu>-->
+<!--        </el-menu>-->
+<!--      </el-aside>-->
 
       <el-main>
 <!--        <el-row>-->

@@ -1,43 +1,73 @@
 <template>
-  <div>
-    <el-header style="text-align: right; font-size: 15px">
-      <!--    <el-header>-->
-      <!--        <span class="font-face" style="margin-left: 15px">ExamTips</span>-->
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>修改密码</el-dropdown-item>
-          <el-dropdown-item @click.native="ClickOut">退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>{{name}}</span>
-    </el-header>
-    <router-view/>
+  <div class="offer-home-wrapper">
+    <offer-header></offer-header>
+    <div class="offer-home-container">
+      <offer-nav-menu ></offer-nav-menu>
+      <div class="offer-home-content">
+        <keep-alive>
+          <router-view v-if="pageOk"></router-view>
+        </keep-alive>
+      </div>
+      <div>{{pageOk}}</div>
+    </div>
   </div>
 </template>
-
 <script>
-    export default {
-        data(){
-            return{
-                name :this.GLOBAL.name
-            }
-        },
-        methods: {
+    import OfferNavMenu from "../base/menu";
+    import OfferHeader from "../base/header";
+    import { mapState } from "vuex";
 
-            ClickOut:function () {
-                return  this.getRequest(`/auth/logout`).then(
-                    res=>(
-                        this.$router.push({
-                            path:`/Login`
-                        })
-                    ))
-            }
+    export default {
+        name: "offer-home",
+        data() {
+            return {
+                // 需要进行权限控制的页面
+                needControlLinks: [
+                    "/offer-manage",
+                    "/index",
+                    "/course-center",
+                    "/course-manage",
+                    "/report-analysis",
+                    "/communication",
+                    "/data-statistics",
+                    "/more-service",
+                    "/news-manage",
+                    "/topic-manage",
+                    "/qa-manage",
+                    "/activity-manage",
+                    "/message-manage",
+                    "/banner-manage",
+                    "/data-statistics",
+                    "/company-manage",
+                    "/asset-consumption"
+                ]
+            };
         },
+        components: {
+            OfferNavMenu,
+            OfferHeader
+        },
+        computed: {
+            ...mapState(["powerLinks"]),
+            pageOk() {
+                if (
+                    this.powerLinks.indexOf(this.$route.path) < 0
+                ) {
+                    return false;
+                } else {
+                    return true;
+                }
+            }
+        }
     };
 </script>
+<style lang="stylus">
+  .offer-home-container {
+    min-width: 1066px;
 
-<style scoped>
-
+    .offer-home-content {
+      overflow: hidden;
+      padding: 0 26px;
+    }
+  }
 </style>

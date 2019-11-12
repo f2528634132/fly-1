@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" id="图层_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCF10;}
+	.st1{fill-rule:evenodd;clip-rule:evenodd;}
+</style>
+<rect x="255.81" y="256" class="st0" width="512.19" height="448.19"/>
+<path d="M768.14,192v640h-512V192H768.14 M768.14,128h-512c-35.35,0-64,28.65-64,64v640c0,35.35,28.65,64,64,64h512
+	c35.35,0,64-28.65,64-64V192C832.14,156.65,803.49,128,768.14,128L768.14,128z"/>
+<g>
+	<rect x="320.33" y="704" class="st1" width="383.48" height="63.81"/>
+	<path d="M703.63,704.12v63.56H320.52v-63.56H703.63 M704,703.87H320.14v64.06H704V703.87L704,703.87z"/>
+</g>
+<g>
+	<rect x="320.33" y="576.06" class="st1" width="383.48" height="63.81"/>
+	<path d="M703.63,576.19v63.56H320.52v-63.56H703.63 M704,575.94H320.14V640H704V575.94L704,575.94z"/>
+</g>
+<g>
+	<polygon points="466.19,512.04 353.55,398.8 398.92,353.67 466.31,421.41 631.82,255.9 677.07,301.16 	"/>
+</g>
+</svg>

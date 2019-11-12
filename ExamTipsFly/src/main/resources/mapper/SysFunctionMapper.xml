@@ -1,0 +1,200 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fly.fankun.mapper.SysFunctionMapper" >
+  <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.SysFunction" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="func_code" property="funcCode" jdbcType="VARCHAR" />
+    <result column="func_name" property="funcName" jdbcType="VARCHAR" />
+    <result column="func_type" property="funcType" jdbcType="INTEGER" />
+    <result column="func_url" property="funcUrl" jdbcType="VARCHAR" />
+    <result column="parent_id" property="parentId" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="func_level" property="funcLevel" jdbcType="INTEGER" />
+    <result column="icon" property="icon" jdbcType="VARCHAR" />
+    <result column="order_no" property="orderNo" jdbcType="INTEGER" />
+    <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
+    <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, func_code, func_name, func_type, func_url, parent_id, status, func_level, icon, 
+    order_no, create_time, update_time, deleted
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from sys_function
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from sys_function
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fly.fankun.model.entity.SysFunction" >
+    insert into sys_function (id, func_code, func_name, 
+      func_type, func_url, parent_id, 
+      status, func_level, icon, 
+      order_no, create_time, update_time, 
+      deleted)
+    values (#{id,jdbcType=INTEGER}, #{funcCode,jdbcType=VARCHAR}, #{funcName,jdbcType=VARCHAR}, 
+      #{funcType,jdbcType=INTEGER}, #{funcUrl,jdbcType=VARCHAR}, #{parentId,jdbcType=VARCHAR}, 
+      #{status,jdbcType=INTEGER}, #{funcLevel,jdbcType=INTEGER}, #{icon,jdbcType=VARCHAR}, 
+      #{orderNo,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
+      #{deleted,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.SysFunction" >
+    insert into sys_function
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="funcCode != null" >
+        func_code,
+      </if>
+      <if test="funcName != null" >
+        func_name,
+      </if>
+      <if test="funcType != null" >
+        func_type,
+      </if>
+      <if test="funcUrl != null" >
+        func_url,
+      </if>
+      <if test="parentId != null" >
+        parent_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="funcLevel != null" >
+        func_level,
+      </if>
+      <if test="icon != null" >
+        icon,
+      </if>
+      <if test="orderNo != null" >
+        order_no,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="funcCode != null" >
+        #{funcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="funcName != null" >
+        #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="funcType != null" >
+        #{funcType,jdbcType=INTEGER},
+      </if>
+      <if test="funcUrl != null" >
+        #{funcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="funcLevel != null" >
+        #{funcLevel,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fly.fankun.model.entity.SysFunction" >
+    update sys_function
+    <set >
+      <if test="funcCode != null" >
+        func_code = #{funcCode,jdbcType=VARCHAR},
+      </if>
+      <if test="funcName != null" >
+        func_name = #{funcName,jdbcType=VARCHAR},
+      </if>
+      <if test="funcType != null" >
+        func_type = #{funcType,jdbcType=INTEGER},
+      </if>
+      <if test="funcUrl != null" >
+        func_url = #{funcUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="parentId != null" >
+        parent_id = #{parentId,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="funcLevel != null" >
+        func_level = #{funcLevel,jdbcType=INTEGER},
+      </if>
+      <if test="icon != null" >
+        icon = #{icon,jdbcType=VARCHAR},
+      </if>
+      <if test="orderNo != null" >
+        order_no = #{orderNo,jdbcType=INTEGER},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fly.fankun.model.entity.SysFunction" >
+    update sys_function
+    set func_code = #{funcCode,jdbcType=VARCHAR},
+      func_name = #{funcName,jdbcType=VARCHAR},
+      func_type = #{funcType,jdbcType=INTEGER},
+      func_url = #{funcUrl,jdbcType=VARCHAR},
+      parent_id = #{parentId,jdbcType=VARCHAR},
+      status = #{status,jdbcType=INTEGER},
+      func_level = #{funcLevel,jdbcType=INTEGER},
+      icon = #{icon,jdbcType=VARCHAR},
+      order_no = #{orderNo,jdbcType=INTEGER},
+      create_time = #{createTime,jdbcType=TIMESTAMP},
+      update_time = #{updateTime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+
+  <!--查询账号拥有的功能权限-->
+  <select id="queryUserFunction" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List"/>
+    from sys_function f
+    where f.id in(
+    select sys_function_id from role_sys_function af where af.role_type = #{userType}
+    )
+    and status = 1
+    order by order_no
+  </select>
+</mapper>

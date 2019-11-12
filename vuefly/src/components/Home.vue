@@ -246,9 +246,7 @@
             return  this.postRequest(`/myExam/joinMyExam?examId=${examId}`)
                 .then(
                     res => {
-                        console.log(res.data.data.items);
                         this.tableData = res.data.data.items || [];
-                        console.log(this.tableData);
                         this.totalNum= res.data.totalNum || 0;
                     },
                     err => {
@@ -257,15 +255,12 @@
                 );
       },
       handleSelect(key, keyPath) {
-        console.log(key, keyPath);
       },
       handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
         this.pageSize=val;
         this.submitClick();
       },
       handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
         this.currentPage=val;
         this.submitClick();
       },

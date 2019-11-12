@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 23.0.3, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 1024 1024" style="enable-background:new 0 0 1024 1024;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#FFCF10;}
+</style>
+<g id="图层_1">
+	<g>
+		<path class="st0" d="M832,896H192c-35.35,0-64-28.65-64-64V192c0-35.35,28.65-64,64-64h640c35.35,0,64,28.65,64,64v640
+			C896,867.34,867.35,896,832,896z"/>
+		<g>
+			<rect x="256" y="320" width="64" height="385"/>
+		</g>
+		<g>
+			<rect x="384" y="320" width="192" height="64"/>
+		</g>
+		<g>
+			<rect x="384" y="479.75" width="384" height="64"/>
+		</g>
+		<g>
+			<rect x="384" y="640" width="320" height="64"/>
+		</g>
+	</g>
+</g>
+<g id="图层_2">
+</g>
+</svg>
