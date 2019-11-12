@@ -2,19 +2,19 @@
 
   <el-container style="height: 945px; border: 0px solid #eee">
 
-      <el-header style="text-align: right; font-size: 15px">
-<!--    <el-header>-->
-<!--        <span class="font-face" style="margin-left: 15px">ExamTips</span>-->
-        <el-dropdown>
-          <i class="el-icon-setting" style="margin-right: 15px"></i>
-          <el-dropdown-menu slot="dropdown">
-            <el-dropdown-item>个人信息</el-dropdown-item>
-            <el-dropdown-item>修改密码</el-dropdown-item>
-            <el-dropdown-item @click.native="ClickOut">退出登录</el-dropdown-item>
-          </el-dropdown-menu>
-        </el-dropdown>
-        <span>{{name}}</span>
-      </el-header>
+<!--      <el-header style="text-align: right; font-size: 15px">-->
+<!--&lt;!&ndash;    <el-header>&ndash;&gt;-->
+<!--&lt;!&ndash;        <span class="font-face" style="margin-left: 15px">ExamTips</span>&ndash;&gt;-->
+<!--        <el-dropdown>-->
+<!--          <i class="el-icon-setting" style="margin-right: 15px"></i>-->
+<!--          <el-dropdown-menu slot="dropdown">-->
+<!--            <el-dropdown-item>个人信息</el-dropdown-item>-->
+<!--            <el-dropdown-item>修改密码</el-dropdown-item>-->
+<!--            <el-dropdown-item @click.native="ClickOut">退出登录</el-dropdown-item>-->
+<!--          </el-dropdown-menu>-->
+<!--        </el-dropdown>-->
+<!--        <span>{{name}}</span>-->
+<!--      </el-header>-->
 
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">

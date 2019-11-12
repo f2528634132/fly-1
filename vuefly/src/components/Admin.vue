@@ -1,18 +1,16 @@
 <template>
   <el-container>
-    <el-header style="text-align: right; font-size: 15px">
-      <el-dropdown>
-        <i class="el-icon-user-solid" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>修改密码</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>{{name}}</span>
-    </el-header>
-
-
+<!--    <el-header style="text-align: right; font-size: 15px">-->
+<!--      <el-dropdown>-->
+<!--        <i class="el-icon-user-solid" style="margin-right: 15px"></i>-->
+<!--        <el-dropdown-menu slot="dropdown">-->
+<!--          <el-dropdown-item>个人信息</el-dropdown-item>-->
+<!--          <el-dropdown-item>修改密码</el-dropdown-item>-->
+<!--          <el-dropdown-item>退出登录</el-dropdown-item>-->
+<!--        </el-dropdown-menu>-->
+<!--      </el-dropdown>-->
+<!--      <span>{{name}}</span>-->
+<!--    </el-header>-->
   <el-container style="height: 900px; border: 0px solid #eee">
     <el-aside width="220px" style="background-color: rgb(238, 241, 246)">
       <el-menu :default-openeds="['1', '3']">

@@ -1,19 +1,5 @@
 <template>
   <el-container style="height: 100%; border: 0px solid #eee">
-
-    <el-header style="text-align: right; font-size: 15px">
-
-      <el-dropdown>
-        <i class="el-icon-setting" style="margin-right: 15px"></i>
-        <el-dropdown-menu slot="dropdown">
-          <el-dropdown-item>个人信息</el-dropdown-item>
-          <el-dropdown-item>修改密码</el-dropdown-item>
-          <el-dropdown-item>退出登录</el-dropdown-item>
-        </el-dropdown-menu>
-      </el-dropdown>
-      <span>{{name}}</span>
-    </el-header>
-
     <el-container>
       <el-aside width="200px" style="background-color: rgb(238, 241, 246)">
         <!--        <el-menu :default-openeds="['1', '3']">-->
@@ -36,7 +22,7 @@
             <el-menu-item-group>
               <!--            <template slot="title">分组一</template>-->
               <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>
-              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>
+<!--              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>-->
               <el-menu-item index="3-3">备忘录</el-menu-item>
             </el-menu-item-group>
             <!--          <el-menu-item-group title="分组2">-->
