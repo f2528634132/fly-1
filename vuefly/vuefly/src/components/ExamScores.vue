@@ -1,13 +1,11 @@
 <template>
-  <el-container >
-    <el-container>
 <!--      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">-->
 <!--        &lt;!&ndash;        <el-menu :default-openeds="['1', '3']">&ndash;&gt;-->
 <!--        <el-menu  :default-openeds="['2','3']">-->
 <!--          <el-submenu index="1">-->
 <!--            <template slot="title"><i class="el-icon-menu"></i>首页</template>-->
 <!--            <el-menu-item-group>-->
-<!--              <el-menu-item index="1-1" @click.native="$router.push('/Home')">ExamTips</el-menu-item>-->
+<!--              <el-menu-item index="1-1">ExamTips</el-menu-item>-->
 <!--              <el-menu-item index="1-2">论坛话题</el-menu-item>-->
 <!--            </el-menu-item-group>-->
 <!--          </el-submenu>-->
@@ -19,15 +17,11 @@
 <!--          </el-submenu>-->
 <!--          <el-submenu index="3">-->
 <!--            <template slot="title"><i class="el-icon-user"></i>考试管理</template>-->
-<!--         <el-menu-item-group>&ndash;&gt;-->
+<!--            <el-menu-item-group>-->
 <!--              &lt;!&ndash;            <template slot="title">分组一</template>&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>&ndash;&gt;-->
-<!--              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>-->
+<!--              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>-->
+<!--&lt;!&ndash;              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>&ndash;&gt;-->
 <!--              <el-menu-item index="3-3">备忘录</el-menu-item>-->
-<!--&lt;!&ndash;            </el-menu-item-group>&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-menu-item index="1-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-menu-item index="1-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>&ndash;&gt;-->
-<!--&lt;!&ndash;              <el-menu-item index="1-3">备忘录</el-menu-item>&ndash;&gt;-->
 <!--            </el-menu-item-group>-->
 <!--            &lt;!&ndash;          <el-menu-item-group title="分组2">&ndash;&gt;-->
 <!--            &lt;!&ndash;            <el-menu-item index="1-3">选项3</el-menu-item>&ndash;&gt;-->
@@ -68,46 +62,30 @@
 <!--      </el-aside>-->
 
       <el-main>
-<!--        <el-row>-->
-<!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
-<!--        </el-row>-->
+        <!--        <el-row>-->
+        <!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
+        <!--        </el-row>-->
         <el-table :data="tableData">
-          <el-table-column prop="examTipsTitle" label="考试名称" width="200">
+          <el-table-column prop="examTipsTitle" label="考试名称" width="350">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
+          <el-table-column prop="exam_scores_time" label="成绩公布时间" width="200">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
-          </el-table-column>
-          <el-table-column prop="examBegintime" label="考试开始时间" width="160">
-          </el-table-column>
-          <el-table-column prop="examEndtime" label="考试结束时间" width="160">
-          </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址" width="350">
+          <el-table-column prop="exam_scores_url" label="查询成绩地址" width="350">
             <template slot-scope="scope">
-              <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
+              <a :href="scope.row.exam_scores_url" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.exam_scores_url}}</a>
             </template>
           </el-table-column>
           <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">
-<!--            <template slot-scope="scope">-->
-<!--              <router-link  to={`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`}>-->
-<!--             <router-link  to="{path:'/MyExamDetails',query:{id:scope.row.id,status:scope.row.status}}">-->
-<!--                <span v-if="scope.row.status===1">未报名</span>-->
-<!--                <span v-if="scope.row.status===2">已报名</span>-->
-<!--                <span v-if="scope.row.status===3">已考试</span>-->
-<!--                <span v-if="scope.row.status===4">已过期</span>-->
-<!--                <span v-if="scope.row.status===5">未考试</span>-->
-<!--              </router-link>-->
-<!--            </template>-->
           </el-table-column>
           <el-table-column prop="operation" label="操作" style="margin-left: 20px">
             <template slot-scope="scope">
               <el-row>
-<!--                <el-button type="info" icon="el-icon-folder-add" circle-->
-<!--                           @click.native="$router.push({path:'/MyExamDetails',query:{examId:scope.row.id,status:scope.row.status}})"></el-button>-->
-<!--                           v-if:="showStatus"></el-button>-->
+                <!--                <el-button type="info" icon="el-icon-folder-add" circle-->
+                <!--                           @click.native="$router.push({path:'/MyExamDetails',query:{examId:scope.row.id,status:scope.row.status}})"></el-button>-->
+                <!--                           v-if:="showStatus"></el-button>-->
                 <!--<el-button type="success" icon="el-icon-check" circle @click="submitClick"></el-button>-->
-                <el-button type="info" icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
-                <el-button type="primary" icon="el-icon-collection-tag" circle @click="collection"></el-button>
+                <el-button icon="el-icon-more" circle @click.native="$router.push(`/MyExamDetails?id=${scope.row.id}&status=${scope.row.status}`)"></el-button>
+                <el-button type="info" icon="el-icon-collection-tag"  circle @click="collection"></el-button>
                 <el-button type="danger" icon="el-icon-delete" circle v-on:click="delMyExam(scope.row.id)"></el-button>
               </el-row>
             </template>
@@ -127,9 +105,6 @@
           </div>
         </el-row>
       </el-main>
-
-    </el-container>
-  </el-container>
 </template>
 
 <script>
@@ -157,12 +132,12 @@
       delMyExam: function (Id) {
         alert(Id);
         return this.postRequest(`/myExam/delMyExam?id=${Id}`).then( res => {
-        this.submitClick()  })
+          this.submitClick()  })
       },
       submitClick: function () {
         // console.log(this.filterForm);
         // let str='';
-        return this.getRequest(`/myExam/queryPage?deleted=0&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
+        return this.getRequest(`/myExam/ExamScores?deleted=0&status=3&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);
@@ -170,7 +145,7 @@
               // console.log(isObject(this.tableData[0]));
               // return str;
               // console.log(str);
-                console.log(this.tableData);
+              console.log(this.tableData);
               this.totalNum = res.data.data.totalNum || 0;
             },
             err => {
@@ -206,17 +181,17 @@
             return '已考试';
             break;
           case 4:
-            return '报名已过期';
+            return '已过期';
             break;
           case 5:
-            return '考试已过期';
+            return '未考试';
             break;
         }
         // return statusW;
       },
       collection(){
         this.$message({
-          message:'添加备忘录成功！',
+          message:'收藏成功！',
           type: 'success'
         });
       },

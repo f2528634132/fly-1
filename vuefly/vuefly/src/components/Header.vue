@@ -9,7 +9,6 @@
 <!--          <router-view ></router-view>-->
         </keep-alive>
       </div>
-      <div>{{pageOk}}</div>
     </div>
   </div>
 </template>

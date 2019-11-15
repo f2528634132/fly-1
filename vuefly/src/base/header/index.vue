@@ -13,7 +13,6 @@
       </el-dropdown>
       <span>{{name}}</span>
     </el-header>
-    <router-view/>
   </div>
 </template>
 

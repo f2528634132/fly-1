@@ -16,23 +16,35 @@
             v-if="!menu.url"
             :class="{'is-active': menu.childNodes.map(l => {return l.url}).includes($route.path)}"
           >
-
             <template slot="title">
-              <i :class=menu.icon></i>
-                <div class="menu-text" :title="menu.name">{{menu.name}}</div>
-              <div v-if="isCollapse" class="float-right right-icon"></div>
-                  <!--                <svg-icon iconClass="arrow-right"></svg-icon>-->
+<!--              <svg-icon-->
+<!--                :iconClass="menu.childNodes.map(l => {return l.url}).includes($route.path) ? menu.icon + '-active' : menu.icon"-->
+<!--              ></svg-icon>-->
+              <div class="menu-text" :title="menu.name">{{menu.name}}</div>
+              <div v-if="isCollapse" class="float-right right-icon">
+<!--                <svg-icon iconClass="arrow-right"></svg-icon>-->
+              </div>
             </template>
+            <!-- <el-menu-item-group :key="index" v-for="(item,index) in menu.childNodes"> -->
+            <!-- <router-link :to="item.url" v-if="item.type != 2"> -->
             <el-menu-item :index="item.url" :key="index" v-for="(item,index) in menu.childNodes" v-if="item.type != 2">
               <div class="menu-text">{{item.name}}</div>
             </el-menu-item>
+            <!-- </router-link> -->
+            <!-- </el-menu-item-group> -->
           </el-submenu>
           <!-- 没有子菜单 -->
+          <!-- <router-link class="link" :key="index" :to="menu.url" v-else> -->
           <el-menu-item :index="menu.url" :key="index" class="hover-nav-bg" v-else>
+<!--            <svg-icon-->
+<!--              :iconClass="$route.path.includes(menu.url) ? menu.icon + '-active' : menu.icon"-->
+<!--            ></svg-icon>-->
             <div class="menu-text">{{menu.name}}</div>
             <div class="float-right right-icon">
+<!--              <svg-icon iconClass="arrow-right"></svg-icon>-->
             </div>
           </el-menu-item>
+          <!-- </router-link> -->
         </template>
       </el-menu>
       <i :class="isCollapse ? 'el-icon-s-unfold' : 'el-icon-s-fold'" @click="isCollapse = !isCollapse"></i>
@@ -49,7 +61,7 @@
                 menuAll: [
                     {
                         name: "首页",
-                        url: "/index",
+                        url: "/Home",
                         icon: "index",
                         childNodes: []
                     }
@@ -59,12 +71,8 @@
         computed: {
             ...mapState(["functionNodes"]),
             menuArr() {
-                this.menuAll = [{
-                    name: "首页",
-                    url: "/Home",
-                    icon: "index",
-                    childNodes: []
-                }]
+                this.menuAll = []
+                console.log(this.functionNodes[0])
                 let arr = this.functionNodes.filter(i => {
                     return i.type == 0
                 })
@@ -76,7 +84,7 @@
 </script>
 
 <style lang="stylus">
-  @import "~common/style/variable.styl";
+  /*@import '~common/style/variable.styl'*/
 
   .nav-menu-wrapper
     width: 226px;

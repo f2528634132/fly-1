@@ -16,12 +16,12 @@
             v-if="!menu.url"
             :class="{'is-active': menu.childNodes.map(l => {return l.url}).includes($route.path)}"
           >
-
             <template slot="title">
-              <i :class=menu.icon></i>
-                <div class="menu-text" :title="menu.name">{{menu.name}}</div>
-              <div v-if="isCollapse" class="float-right right-icon"></div>
-                  <!--                <svg-icon iconClass="arrow-right"></svg-icon>-->
+                 <i :class=menu.icon style="width: auto"></i>
+                 <div class="menu-text" :title="menu.name">{{menu.name}}</div>
+              <div v-if="isCollapse" class="float-right right-icon">
+<!--                     <svg-icon iconClass="arrow-right"></svg-icon>-->
+              </div>
             </template>
             <el-menu-item :index="item.url" :key="index" v-for="(item,index) in menu.childNodes" v-if="item.type != 2">
               <div class="menu-text">{{item.name}}</div>
@@ -46,25 +46,13 @@
         data() {
             return {
                 isCollapse: false,
-                menuAll: [
-                    {
-                        name: "首页",
-                        url: "/index",
-                        icon: "index",
-                        childNodes: []
-                    }
-                ]
+                menuAll: [ ]
             };
         },
         computed: {
             ...mapState(["functionNodes"]),
             menuArr() {
-                this.menuAll = [{
-                    name: "首页",
-                    url: "/Home",
-                    icon: "index",
-                    childNodes: []
-                }]
+                this.menuAll = [ ]
                 let arr = this.functionNodes.filter(i => {
                     return i.type == 0
                 })
@@ -101,7 +89,7 @@
         text-align center
         height 58px
         line-height 58px
-        border-top 1px solid $color-line-b
+        border-top 0px solid $color-line-b
         cursor pointer
         position absolute
         bottom 0
@@ -141,6 +129,7 @@
         .menu-text
           color $color-text
           font-size $font-size-medium
+          margin-left 38px
           display:inline-block;
         .el-menu-item
           position relative
@@ -165,7 +154,7 @@
               position absolute
               width 5px
               height 43px
-              background $color-theme
+              background #0abeff
               left 0
               top 50%
               transform translateY(-50%)
@@ -184,12 +173,11 @@
                 position absolute
                 width 5px
                 height 43px
-                background $color-theme
+                background #0abeff
                 left 0
                 top 50%
                 transform translateY(-50%)
           .el-menu-item
-            text-align center
             &.is-active
               background #ececec
               box-shadow none

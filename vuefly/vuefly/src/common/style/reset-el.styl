@@ -1,0 +1,412 @@
+@import "variable.styl"
+    
+// 全局重置el样式-----------------
+.el-notification__group
+  vertical-align: top;
+  display inline-block
+  .el-notification__content
+    margin: 0
+    line-height: 24px
+/*修改面包屑导航*/
+.el-breadcrumb
+  line-height 58px
+  .el-breadcrumb__inner a:hover, .el-breadcrumb__inner.is-link:hover
+    color $color-theme
+  .el-breadcrumb__inner, .el-breadcrumb__item:last-child .el-breadcrumb__inner
+    color #c3c3c3
+    font-weight: normal
+    font-size $font-size-medium-x
+/*修改tabs标签页样式*/
+.el-tabs__item
+  height 30px
+  line-height 20px
+  padding-bottom 10px
+  // font-weight bold
+  color #9B9B9B
+  font-size $font-size-medium-x
+  &.is-active, &:hover
+    color $color-text
+.el-tabs__nav-wrap::after
+  height 1px
+  background-color $color-line-b
+.el-tabs__active-bar
+  background-color $color-theme
+  height 3px
+  width 40px !important
+  left 15px
+/*修改checkbox选中状态*/
+.el-checkbox__input.is-checked, 
+.el-checkbox__input.is-indeterminate
+  .el-checkbox__inner
+    background $color-theme
+    border-color #aaa
+    &:after
+      border 1px solid #231815
+      border-left 0
+      border-top 0
+.el-checkbox__inner:hover, 
+.el-checkbox__input.is-focus .el-checkbox__inner, 
+.el-checkbox__inner
+    border-color #aaa
+.el-checkbox__input.is-checked+.el-checkbox__label
+  color  $color-text
+/*下拉菜单样式*/
+.el-dropdown-menu
+  width 117px
+  text-align center
+.el-dropdown-menu__item
+  padding 0
+  a
+    display block
+  &:focus, &:not(.is-disabled):hover
+    background-color #f8f8f8
+    color $color-text
+.el-table-filter__list-item:hover
+  background-color #f8f8f8
+  color $color-text
+/*修改标签样式*/
+.el-tag, .el-select .el-tag
+  height 26px
+  line-height 24px
+  border-radius 17px
+  margin-right 16px
+  padding 0 25px
+  border: 1px solid $color-theme
+  color $color-text
+  background $color-theme
+  position relative
+  .el-icon-close
+    color #fff
+    display none
+    top -8px
+    right 2px
+    position absolute
+    background #c3c3c3
+    &:hover
+      background #c3c3c3
+  &:hover .el-icon-close
+    display block
+  &.is-gray
+    color #aaa
+    border 1px solid $color-line-b
+    background #f8f8f8
+/* dialog弹窗样式修改 */
+.el-dialog
+    border-radius: 5px
+  .el-dialog__header
+    padding 0  23px
+    line-height 58px
+    height 58px
+    border-bottom 1px solid $color-background
+    .el-dialog__title
+      font-size $font-size-medium-x
+      font-weight bold
+      color $color-text
+    .el-dialog__headerbtn
+      line-height 58px
+      top 0
+  .el-dialog__footer
+    padding-bottom 30px
+  .el-dialog__body
+    padding-top 25px
+  .el-dialog__headerbtn
+    &:focus, &:hover
+      .el-dialog__close
+        color $color-theme
+  .el-dialog__body
+    padding 20px
+    max-height 70vh
+    overflow auto
+/*开关样式*/ 
+.el-switch
+  font-size 0
+/*弹窗遮罩*/
+.v-modal
+  background: #585858
+  opacity .3
+/* message消息提示样式修改 */
+.el-message--info 
+  .el-message__content
+    display inline-block
+/* message-box弹框样式修改 */
+.el-message-box__header
+  padding 0  23px
+  height 58px
+  border-bottom 1px solid $color-background
+  .el-message-box__title
+    line-height 58px
+    text-align left
+    display block
+    font-size $font-size-medium-x
+    font-weight bold
+    color $color-text
+  .el-message-box__headerbtn
+    line-height 58px
+    top 0
+.el-message-box--center
+  width 374px
+  .el-message-box__header
+    padding 0  23px
+  .el-message-box__content
+    padding 40px 67px
+    .el-message-box__message
+      color $color-text
+      font-size $font-size-medium
+      p
+        text-align left
+        line-height 20px
+.el-message-box__headerbtn:focus, 
+.el-message-box__headerbtn:hover 
+  .el-message-box__close
+    color $color-theme
+/*修改分页组件样式*/
+.el-pagination
+  padding-top 26px
+  padding-bottom 26px
+  font-weight normal
+  color $color-text
+  button:hover
+    color $color-theme
+  .el-pager
+    li
+      &.active, &:hover
+        color $color-theme
+        font-weight bold
+  .el-pagination__editor.el-input .el-input__inner,
+  .el-input__inner
+    border-radius 5px
+    height 21px
+    line-height 19px
+  .el-pagination__sizes
+    .el-input__inner:hover
+      border-color $color-theme
+/*拖拽上传*/ 
+.el-upload:focus
+  border-color $color-theme
+  color $color-theme
+  .el-upload-dragger
+    border-color $color-theme
+.el-upload-dragger
+  &:hover
+    border-color $color-theme
+  .el-upload__text em
+    color $color-theme
+/*修改日期选择样式*/
+.el-date-table
+  td.end-date, td.start-date, td.current:not(.disabled)
+    span
+      background-color $color-theme
+      color $color-text
+  td.today span, td.available:hover
+      color $color-theme
+  td.in-range
+    div
+      background-color #f7f5ed
+.el-date-editor
+  width 260px
+  height 34px
+  .el-range-separator
+    line-height 24px
+    width 10%
+    color $color-text
+    font-weight normal
+    font-size $font-size-small
+    vertical-align: top
+  .el-range-input
+    vertical-align: top
+    color #aaa
+    font-size $font-size-small
+    width 32%
+  .el-range__icon
+    border-right 1px solid $color-line-b
+    padding 0 14px 0 10px
+    width auto
+    font-size 18px
+  .el-range__icon, .el-range__close-icon
+    line-height 24px
+  .el-range__close-icon
+    width 18px
+.el-picker-panel__icon-btn:hover
+.el-date-picker__header-label.active, 
+.el-date-picker__header-label:hover,
+.el-year-table td.today .cell,
+.el-month-table td .cell:hover,
+.el-year-table td .cell:hover, 
+.el-year-table td.current:not(.disabled) .cell,
+.el-time-panel__btn.confirm,
+.el-time-panel__btn
+  color $color-theme
+.el-time-panel__btn.confirm
+  color: $color-text-a
+  border-radius: 3px
+  font-weight: normal
+  border 1px solid $color-line-b
+  line-height: 22px
+  &:hover
+    color: $color-theme
+    border-color: $color-theme
+/*默认按钮和主要按钮样式修改 主要按钮对应黄色 默认按钮对应灰色*/
+.el-button--primary, .el-button--default
+  height 30px
+  border: 1px solid $color-line-b
+  line-height 30px
+  font-size 13px
+  background #fff
+  color #aaa
+  padding 0 28px
+  &:hover, &:focus
+    background #ececec
+    border-color $color-line-b
+    color $color-text
+.el-button--primary
+  background $color-theme
+  border: 1px solid $color-theme
+  color #000
+  &:hover, &:focus
+    background: #ffe271
+    border-color #ffe271
+    color #000
+  &.is-disabled
+    background-color #F9F3E5
+    border-color #F9F3E5
+    color $color-text-a
+    &:active, &:hover, &:focus
+      background-color #F9F3E5
+      border-color #F9F3E5
+      color $color-text-a
+.el-button--text
+  color $color-theme
+.el-button.is-plain:focus, 
+.el-button.is-plain:hover
+  color $color-theme
+  border-color $color-theme
+/*radio单选样式修改*/
+.el-radio__input
+  .el-radio__inner
+    width 12px
+    height 12px
+  &.is-checked
+    &+.el-radio__label
+      color $color-text
+    .el-radio__inner
+      background-color #fff
+      border-color  $color-text
+  .el-radio__inner
+    &::after
+      background-color $color-background-b
+      width 7px
+      height 7px
+    &:hover
+      border-color: #585858
+/*loading状态svg颜色*/
+.el-loading-spinner 
+  .path
+    stroke: $color-theme;
+  .el-loading-text
+    color: $color-theme;
+/* 修改表单元素样式 表单输入框等样式*/
+// .el-form-item:not(.is-required) 
+//   .el-form-item__label
+//     padding-left: 10px;
+
+.el-form-item
+  .el-form-item__content
+    line-height 34px
+  .el-input
+    width 227px
+    .el-input__icon
+      line-height: 34px
+  .el-input__inner
+    height 34px
+    line-height: 32px
+    // line-height: 24px /* ie9 */
+  .el-form-item__label
+    line-height 34px
+    font-size $font-size-small
+    color: #585858
+    word-break: break-all
+    text-overflow ellipsis
+    overflow: hidden
+    white-space: nowrap
+.el-select .el-input.is-focus .el-input__inner,
+.el-select .el-input__inner:focus,
+.el-input.is-active .el-input__inner,
+.el-input__inner:focus
+.el-textarea__inner:focus
+.el-range-editor.is-active,
+.el-range-editor.is-active:hover
+  border-color $color-theme
+  color $color-text-a
+.el-input__inner,
+.el-textarea__inner
+  color $color-text-a
+  font-size $font-size-small
+  border-color $color-line-b
+  font-family 'Microsoft YaHei', 'PingFang SC', 'STHeitiSC-Light', 'Helvetica-Light', arial, sans-serif, 'Droid Sans Fallback'
+.el-select-dropdown__item.selected
+.el-table-filter__list-item.is-active
+  color $color-text
+  background: $color-theme
+.el-select-dropdown.is-multiple .el-select-dropdown__item.selected
+  color $color-theme
+.el-form-item.is-error
+  .el-input__inner,
+  .el-input__inner:focus,
+  .el-textarea__inner,
+  .el-textarea__inner:focus,
+  .el-message-box__input input.invalid,
+  .el-message-box__input input.invalid:focus
+  .upload-image__inner
+    border-color $color-background-r
+  .el-form-item__error
+    color $color-text-r
+.el-form-item.is-success
+  .el-input__inner,
+  .el-input__inner:focus,
+  .el-textarea__inner,
+  .el-textarea__inner:focus,
+  .el-message-box__input input.invalid,
+  .el-message-box__input input.invalid:focus
+  .upload-image__inner
+    border-color $color-theme
+/*修改表格组件样式*/ 
+.el-table--enable-row-hover .el-table__body tr:hover>td
+.el-table--striped .el-table__body tr.el-table__row--striped.current-row td, 
+.el-table__body tr.current-row>td, 
+.el-table__body tr.hover-row.current-row>td, 
+.el-table__body tr.hover-row.el-table__row--striped.current-row>td, 
+.el-table__body tr.hover-row.el-table__row--striped>td, 
+.el-table__body tr.hover-row>td
+  background-color $color-background-g
+.el-table
+  color $color-text
+  font-size $font-size-medium
+  thead
+    color $color-text
+    font-weight normal
+    font-size $font-size-medium
+  td 
+    padding 16px 0
+  th
+    height 50px
+    font-weight normal
+    background #f1f1f1
+    &.is-leaf
+      border-bottom: 1px solid $color-line-b
+    &>.cell.highlight
+      color $color-theme
+      font-weight bold
+/*修改排序图标行内块属性*/
+.el-table
+  .caret-wrapper
+    display: flex;
+    position: absolute;
+    right: 5px;
+    top: 50%;
+    transform: translateY(-50%);
+  th>.sort-cell, .sort-cell .cell
+      padding-right: 24px;
+/*级联选择器*/ 
+.el-cascader-menu__item
+  &.is-active
+    color $color-theme

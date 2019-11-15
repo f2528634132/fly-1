@@ -1,0 +1,111 @@
+@import './variable.styl'
+@import './mixin.styl'
+  .manage-wrapper
+    .offer-b-card
+      margin-bottom: 25px
+      padding-top 10px
+      .offer-b-title
+        line-height 58px
+      .el-form-item
+        margin-right 42px
+      .el-button--primary
+        .svg-icon
+          font-size $font-size-large
+          vertical-align text-bottom
+    .topic-manage-card
+      margin-bottom 25px
+      padding-top 24px
+      .el-tabs__item
+        height 30px
+        line-height 20px
+        padding-bottom 10px
+        font-weight bold
+        color #9B9B9B
+        font-size $font-size-medium-x
+        &.is-active
+          color $color-text
+      .el-tabs__nav-wrap::after
+        height 1px
+        background-color $color-line-b
+      .el-tabs__active-bar
+        background-color $color-theme
+        height 3px
+        width 40px !important
+        left 15px
+    .inputs-wrapper, .operates-wrapper
+      .el-date-editor--daterange
+        width 260px
+      .el-tag
+        height 24px
+        line-height 22px
+        border-radius 17px
+        vertical-align middle
+        border: 1px solid $color-line-b
+        color #aaa
+        background #f8f8f8
+        .el-icon-close
+          color #aaa
+          &:hover
+            background #fff
+      .el-input
+        width 152px
+        vertical-align middle
+      .el-button--primary
+        .svg-icon
+          font-size $font-size-large
+          vertical-align text-bottom
+    .operates-wrapper
+      padding 0 0 15px 0
+    .cell
+      line-height 1.4
+      .pic-wrapper
+        height 45px
+        width 60px
+        overflow hidden
+        margin: 0 auto;
+      .svg-icon
+        font-size $font-size-large-x
+      .el-dropdown-selfdefine
+        width 105px
+        display inline-block
+    .title
+      .cell
+        .is-top, .is-banner
+          color: #FF5700
+          display: inline-block
+          height 18px
+          width 18px
+          border-radius: 3px
+          border 1px solid #FF5700
+          line-height: 16px
+          font-size: $font-size-small
+          margin-left 5px
+        .is-banner
+          color: #008EE1
+          border 1px solid #008EE1
+    td.numbers
+      .cell
+        font-size 0
+        span 
+          font-size $font-size-medium
+  .el-popover.manage-table-popover
+    width 414px
+  .el-popover.content-popper
+    width 414px
+    max-height: 600px
+    overflow auto
+    text-align: left
+    .el-popover__title
+      font-weight: 400;
+      font-size: 22px;
+    img 
+      max-width: 100%
+    table
+      border-top: 1px solid #ccc;
+      border-left: 1px solid #ccc;
+      width 100%
+      border-spacing: 0;
+      td, th
+        border-bottom: 1px solid #ccc
+        border-right: 1px solid #ccc
+        padding: 3px 5px
