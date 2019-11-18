@@ -57,16 +57,15 @@
 <!--    </el-aside>-->
 
 
+  <div class="offer-manage-wrapper">
+    <div style="width: 100%;height: 26px;"></div>
+    <!-- <el-breadcrumb separator="/">
+      <el-breadcrumb-item center :to="{ path: '/index' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item center :to="{ path: '/offer-manage' }">Offer管理</el-breadcrumb-item>
+    </el-breadcrumb> -->
+    <div class="offer-manage-card offer-b-card">
 
       <el-main>
-<!--        <el-row>-->
-<!--          <el-button round @click.native="$router.push('/AddExam')">添加考试</el-button>-->
-<!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
-<!--          <el-button type="success" round>成功按钮</el-button>-->
-<!--          <el-button type="info" round>信息按钮</el-button>-->
-<!--          <el-button type="warning" round>警告按钮</el-button>-->
-<!--          <el-button type="danger" round>危险按钮</el-button>-->
-<!--        </el-row>-->
         <el-row>
           <div style="margin-top: 10px;">
             <el-input placeholder="请输入内容" v-model="input3" class="input-with-select">
@@ -83,25 +82,25 @@
             <el-button type="primary" style="margin-left: 500px" round @click.native="$router.push('/AddExam')">添加考试</el-button>
           </div>
         </el-row>
-        <el-table :data="tableData" ref="tableData">
-          <el-table-column prop="id" label="考试编号" width="100">
+        <el-table :data="tableData" ref="tableData" header-row-class-name="center">
+          <el-table-column prop="id" label="编号" width="60" >
           </el-table-column>
           <el-table-column prop="examTipsTitle" label="考试名称" width="250">
           </el-table-column>
-          <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
+          <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
           </el-table-column>
-          <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
+          <el-table-column prop="signupEndtime" label="报名结束时间" width="150">
           </el-table-column>
-          <el-table-column prop="examBegintime" label="考试开始时间" width="160">
+          <el-table-column prop="examBegintime" label="考试开始时间" width="150">
           </el-table-column>
-          <el-table-column prop="examEndtime" label="考试结束时间" width="160">
+          <el-table-column prop="examEndtime" label="考试结束时间" width="150">
           </el-table-column>
-          <el-table-column prop="examUrl" label="报名地址" width="350">
+          <el-table-column prop="examUrl" label="报名地址" width="320">
             <template slot-scope="scope">
               <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
             </template>
           </el-table-column>
-          <el-table-column prop="operation" label="操作">
+          <el-table-column prop="operation" label="操作" >
             <template slot-scope="scope">
             <el-row>
               <el-button icon="el-icon-search" circle></el-button>
@@ -111,12 +110,13 @@
               <el-button type="info" icon="el-icon-message" circle></el-button>
 <!--              <el-button type="danger"  icon="el-icon-delete" circle></el-button>-->
               <el-button type="danger" icon="el-icon-delete" circle v-on:click="deleteExam(scope.row.id)"></el-button>
-
             </el-row>
             </template>
           </el-table-column>
         </el-table>
+
         <el-row>
+
 <!--          <div class="block">
             <el-pagination
               @size-change="handleSizeChange"
@@ -140,8 +140,32 @@
         </el-row>
       </el-main>
 <!--    </el-container>-->
+      </div>
+    </div>
 </template>
-<style>
+<style lang="stylus">
+  @import '~common/style/variable.styl'
+
+  .offer-manage-wrapper
+    .upgrade-notice-wrapper .text-box
+      margin: 62px auto;
+    .set-icon
+      color: #C0C4CC;
+      margin-left 5px;
+      cursor pointer;
+    .offer-manage-card
+      margin-bottom 25px
+      .offer-manage-tab
+        .el-tabs__item
+          padding 0 20px
+
+  .offer-b-card {
+            background: #fff;
+            border-radius: 5px;
+            -webkit-box-shadow: 4px 4px 10px 0 rgba(0,0,0,0.12);
+            box-shadow: 4px 4px 10px 0 rgba(0,0,0,0.12);
+            padding: 0 28px 0 28px;
+    }
   .el-header {
     background-color: #B3C0D1;
     color: #333;
@@ -160,7 +184,7 @@
   }
   .el-input-group {
     width: 50%;
-    margin-left: 200px;
+    margin-left: 120px;
     margin-bottom: 10px;
   }
   .el-select .el-input {
@@ -169,6 +193,9 @@
   .input-with-select .el-input-group__prepend {
     background-color: #fff;
   }
+  /*.el-table td, .el-table th {*/
+  /*  text-align: center;*/
+  /*}*/
 </style>
 
 <script>
