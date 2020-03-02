@@ -1,6 +1,17 @@
 <template>
-  <el-container>
-    <el-form ref="form" class="forum" :model="examTipsInputVo" label-width="80px">
+  <div class="offer-manage-wrapper">
+
+    <div style="width: 100%;height: 26px;"></div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>考试信息管理</el-breadcrumb-item>
+      <el-breadcrumb-item>考试信息</el-breadcrumb-item>
+      <el-breadcrumb-item>添加考试</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!--    <div class="offer-manage-card offer-b-card">-->
+    <el-card class="box-card" >
+<!--    <el-form ref="form" class="forum" :model="examTipsInputVo" label-width="80px">-->
+      <el-form :model="examTipsInputVo">
       <el-form-item label="考试标题">
         <el-input v-model="examTipsInputVo.examTipsTitle"></el-input>
       </el-form-item>
@@ -17,7 +28,6 @@
           <el-option label="全国英语等级考试(PETS)" value="6"></el-option>
           <el-option label="研究生考试" value="7"></el-option>
           <el-option label="剑桥商务英语证书考试 (BEC)" value="8"></el-option>
-
         </el-select>
       </el-form-item>
       <el-form-item label="报名时间">
@@ -29,9 +39,9 @@
             unlink-panels
             range-separator="至"
             start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            @input="testClickSignup"
-          >
+            end-placeholder="结束日期">
+<!--            @input="testClickSignup"-->
+
           </el-date-picker>
         </el-col>
       </el-form-item>
@@ -44,9 +54,9 @@
             unlink-panels
             range-separator="至"
             start-placeholder="开始日期"
-            end-placeholder="结束日期"
-            @input="testClickExam"
-          >
+            end-placeholder="结束日期"   >
+<!--            @input="testClickExam"-->
+
           </el-date-picker>
         </el-col>
       </el-form-item>
@@ -61,21 +71,6 @@
         </el-col>
       </el-form-item>
 
-
-      <!--    <el-form-item label="活动性质">-->
-      <!--      <el-checkbox-group v-model="form.type">-->
-      <!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
-      <!--        <el-checkbox label="地推活动" name="type"></el-checkbox>-->
-      <!--        <el-checkbox label="线下主题活动" name="type"></el-checkbox>-->
-      <!--        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>-->
-      <!--      </el-checkbox-group>-->
-      <!--    </el-form-item>-->
-      <!--    <el-form-item label="特殊资源">-->
-      <!--      <el-radio-group v-model="form.resource">-->
-      <!--        <el-radio label="线上品牌商赞助"></el-radio>-->
-      <!--        <el-radio label="线下场地免费"></el-radio>-->
-      <!--      </el-radio-group>-->
-      <!--    </el-form-item>-->
       <el-form-item label="考试详情">
         <el-input type="textarea" v-model="examTipsInputVo.examComment"></el-input>
       </el-form-item>
@@ -86,9 +81,9 @@
         <el-button type="primary" @click="onSubmit">立即创建</el-button>
         <el-button>取消</el-button>
       </el-form-item>
-    </el-form>
-  </el-container>
-
+      </el-form>
+    </el-card>
+  </div>
 </template>
 
 <script>
@@ -160,6 +155,9 @@
     border: 1px solid #eaeaea;
     -webkit-box-shadow: 0 0 25px #cac6c6;
     box-shadow: 0 0 25px #cac6c6;
+  }
+  .el-form{
+    padding: 35px 35px 15px 35px;
   }
   .el-input {
     position: relative;

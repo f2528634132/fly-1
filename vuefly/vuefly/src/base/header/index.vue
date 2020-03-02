@@ -121,7 +121,7 @@
           margin-top: 17px;
           margin-right: 19px;
           line-height: 50px;
-          height: 32px;
+          height: 40px;
           vertical-align: top;
           font-size: 136px;
         }
