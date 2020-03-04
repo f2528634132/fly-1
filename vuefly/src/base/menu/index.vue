@@ -6,8 +6,7 @@
         :collapse-transition="false"
         class="el-menu-vertical-demo"
         :default-active="$route.path"
-        :router="true"
-      >
+        :router="true":unique-opened="true" >
         <template v-for="(menu, index) in menuArr">
           <!-- 有子菜单 -->
           <el-submenu
@@ -23,7 +22,7 @@
 <!--                     <svg-icon iconClass="arrow-right"></svg-icon>-->
               </div>
             </template>
-            <el-menu-item :index="item.url" :key="index" v-for="(item,index) in menu.childNodes" v-if="item.type != 2">
+            <el-menu-item :index="item.url" :key="index" v-for="(item,index) in menu.childNodes" v-if="item.type!= 2">
               <div class="menu-text">{{item.name}}</div>
             </el-menu-item>
           </el-submenu>

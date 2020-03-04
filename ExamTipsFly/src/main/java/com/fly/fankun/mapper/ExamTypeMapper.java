@@ -20,6 +20,5 @@ public interface ExamTypeMapper {
 
     List<ExamTypeOutVo> queryAll();
 
-
     List<ExamStatisticsOutVo> getExamStatistics();
 }

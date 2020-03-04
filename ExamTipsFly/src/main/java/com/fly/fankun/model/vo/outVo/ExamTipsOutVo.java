@@ -59,5 +59,6 @@ public class ExamTipsOutVo implements Serializable {
     private Date examScorestime;
 
     private Integer clickNumber;
+    private Integer status;
 
 }

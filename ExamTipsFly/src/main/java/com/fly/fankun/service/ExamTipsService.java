@@ -1,6 +1,7 @@
 package com.fly.fankun.service;
 
 import com.fly.fankun.model.result.PageBean;
+import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
@@ -15,6 +16,8 @@ import java.util.List;
 public interface ExamTipsService {
     ExamTipsOutVo editExamTips(ExamTipsInputVo examTipsInputVo);
 
+    void editStatus(Integer id, Integer status);
+
     void editDeleted(Integer id, Integer deleted);
 
     ExamTipsOutVo queryExam(Integer id);
@@ -25,4 +28,5 @@ public interface ExamTipsService {
 
     List<ExamStatisticsOutVo> examStatistics();
 
+    void addExamScores(ExamScoresOpenInputVo examScoresOpenInputVo);
 }

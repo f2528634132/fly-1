@@ -1,71 +1,18 @@
 <template>
-<!--      <el-aside width="200px" style="background-color: rgb(238, 241, 246)">-->
-<!--        &lt;!&ndash;        <el-menu :default-openeds="['1', '3']">&ndash;&gt;-->
-<!--        <el-menu  :default-openeds="['2','3']">-->
-<!--          <el-submenu index="1">-->
-<!--            <template slot="title"><i class="el-icon-menu"></i>首页</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <el-menu-item index="1-1">ExamTips</el-menu-item>-->
-<!--              <el-menu-item index="1-2">论坛话题</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="2">-->
-<!--            <template slot="title"><i class="el-icon-collection"></i> 我的收藏</template>-->
-<!--            <el-menu-item index="2-1"  @click.native="$router.push('/MyCollectExam')">考试收藏</el-menu-item>-->
-<!--            <el-menu-item index="2-2">论坛收藏</el-menu-item>-->
-<!--            <el-menu-item index="2-3">广告收藏</el-menu-item>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="3">-->
-<!--            <template slot="title"><i class="el-icon-user"></i>考试管理</template>-->
-<!--            <el-menu-item-group>-->
-<!--              &lt;!&ndash;            <template slot="title">分组一</template>&ndash;&gt;-->
-<!--              <el-menu-item index="3-1" @click.native="$router.push('/MyExam')">我的报名</el-menu-item>-->
-<!--&lt;!&ndash;              <el-menu-item index="3-2"  @click.native="$router.push('/ExamScores')">成绩公布</el-menu-item>&ndash;&gt;-->
-<!--              <el-menu-item index="3-3">备忘录</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            &lt;!&ndash;          <el-menu-item-group title="分组2">&ndash;&gt;-->
-<!--            &lt;!&ndash;            <el-menu-item index="1-3">选项3</el-menu-item>&ndash;&gt;-->
-<!--            &lt;!&ndash;          </el-menu-item-group>&ndash;&gt;-->
-
-<!--          </el-submenu>-->
-
-<!--          <el-submenu index="4">-->
-<!--            <template slot="title"><i class="el-icon-setting"></i>信息设置</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <el-menu-item index="2-1">基础信息</el-menu-item>-->
-<!--              <el-menu-item index="2-2">修改密码</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-menu-item-group>-->
-<!--              <el-menu-item index="2-3">修改二级密码</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-submenu index="2-4">-->
-<!--              <template slot="title">选项4</template>-->
-<!--              <el-menu-item index="2-4-1">选项4-1</el-menu-item>-->
-<!--            </el-submenu>-->
-<!--          </el-submenu>-->
-<!--          <el-submenu index="5">-->
-<!--            <template slot="title"><i class="el-icon-message"></i>消息管理</template>-->
-<!--            <el-menu-item-group>-->
-<!--              <template slot="title">分组一</template>-->
-<!--              <el-menu-item index="3-1">选项1</el-menu-item>-->
-<!--              <el-menu-item index="3-2">选项2</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-menu-item-group title="分组2">-->
-<!--              <el-menu-item index="3-3">选项3</el-menu-item>-->
-<!--            </el-menu-item-group>-->
-<!--            <el-submenu index="3-4">-->
-<!--              <template slot="title">选项4</template>-->
-<!--              <el-menu-item index="3-4-1">选项4-1</el-menu-item>-->
-<!--            </el-submenu>-->
-<!--          </el-submenu>-->
-<!--        </el-menu>-->
-<!--      </el-aside>-->
-
+  <div class="offer-manage-wrapper">
+    <div style="width: 100%;height: 26px;"></div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>考试信息管理</el-breadcrumb-item>
+      <el-breadcrumb-item>成绩公布</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!--    <div class="offer-manage-card offer-b-card">-->
+    <el-card class="box-card">
       <el-main>
         <!--        <el-row>-->
         <!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
         <!--        </el-row>-->
-        <el-table :data="tableData">
+        <el-table :data="tableData"  border stripe>
           <el-table-column prop="examTipsTitle" label="考试名称" width="350">
           </el-table-column>
           <el-table-column prop="exam_scores_time" label="成绩公布时间" width="200">
@@ -105,6 +52,8 @@
           </div>
         </el-row>
       </el-main>
+    </el-card>
+  </div>
 </template>
 
 <script>

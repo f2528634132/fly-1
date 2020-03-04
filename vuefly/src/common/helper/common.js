@@ -268,7 +268,7 @@ export default {
         if (opt.quality && opt.quality >= 1 && opt.quality < 0) {
           quality = opt.quality
         }
-        let base64 = canvas.toDataURL('image/jpeg')
+        let base64 = canvas.toDataURL('images/jpeg')
         resolve(convertBase64UrlToBlob(base64), quality)
       }
     })
@@ -291,7 +291,7 @@ export default {
 //         link.download = `${name}.${MIME}`
 //         link.click()
 //         resolve(true)
-//       }, 'image/' + MIME)
+//       }, 'images/' + MIME)
 //     })
 //     img.addEventListener('error', () => {
 //       resolve(false)

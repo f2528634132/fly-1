@@ -48,6 +48,7 @@
                 this.getRequest(`/role/queryUserFunction`)
                     .then(res => {
                         let functionNodes = res.data.data || [];
+                        console.log(res.data)
                         this.$store.commit("setFunctionNodes", functionNodes);
                         // 页面功能权限
                         let powerLinks = [];
@@ -71,6 +72,9 @@
                                 }
                             });
                         });
+                        powerLinks.push("/AddExam");
+                        powerLinks.push("/ExamEdit");
+                        powerLinks.push("/AddExamScoreOpen");
                         powerLinks.splice(1, 0, ...this.powerLinks);
                         this.$store.commit("setNodeTypeTwo", nodeTypeTwo);
                         console.log("aaaaa"+powerLinks)
@@ -121,7 +125,7 @@
           margin-top: 17px;
           margin-right: 19px;
           line-height: 50px;
-          height: 32px;
+          height: 40px;
           vertical-align: top;
           font-size: 136px;
         }

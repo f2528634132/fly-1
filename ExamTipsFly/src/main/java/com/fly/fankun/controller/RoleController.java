@@ -40,6 +40,7 @@ public class RoleController extends BaseController{
     @ApiOperation(value = "查询用户角色权限")
     public BaseResult queryUserFunction() {
      List<UserFunctionNodeOutVo> resp =  sysFunctionService.queryUserFunction(this.getUserInfo());
+        System.out.println(resp);
         return BaseResult.success(resp);
     }
 }

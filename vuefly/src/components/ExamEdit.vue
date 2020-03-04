@@ -1,5 +1,17 @@
 <template>
-  <el-form ref="form" class="forum" :model="examTipsInputVo" label-width="80px">
+  <div class="offer-manage-wrapper">
+
+    <div style="width: 100%;height: 26px;"></div>
+    <el-breadcrumb separator-class="el-icon-arrow-right">
+      <el-breadcrumb-item :to="{ path: '/' }">首页</el-breadcrumb-item>
+      <el-breadcrumb-item>考试信息管理</el-breadcrumb-item>
+      <el-breadcrumb-item>考试信息</el-breadcrumb-item>
+      <el-breadcrumb-item>编辑考试</el-breadcrumb-item>
+    </el-breadcrumb>
+    <!--    <div class="offer-manage-card offer-b-card">-->
+    <el-card class="box-card" >
+<!--  <el-form ref="form" class="forum" :model="examTipsInputVo" label-width="80px">-->
+      <el-form :model="examTipsInputVo">
     <el-form-item label="考试标题">
       <el-input v-model="examTipsInputVo.examTipsTitle"></el-input>
     </el-form-item>
@@ -8,11 +20,11 @@
     </el-form-item>
     <el-form-item label="考试类目">
       <el-select v-model="examTipsInputVo.examTypeId" placeholder="请选择考试类目">
-<!--        <el-option label="全国计算机等级考试" value="1"></el-option>-->
-<!--        <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>-->
-<!--        <el-option label="CET大学英语考试" value="3"></el-option>-->
-<!--        <el-option label="全国会计从业资格考试" value="4"></el-option>-->
-<!--        <el-option label="中小学教师资格考试" value="5"></el-option>-->
+        <el-option label="全国计算机等级考试" value="1"></el-option>
+        <el-option label="计算机技术与软件专业技术资格（水平）考试" value="2"></el-option>
+        <el-option label="CET大学英语考试" value="3"></el-option>
+        <el-option label="全国会计从业资格考试" value="4"></el-option>
+        <el-option label="中小学教师资格考试" value="5"></el-option>
         <el-option
           v-for="item in examTypeList"
           :key="item.id"
@@ -44,26 +56,10 @@
           range-separator="至"
           start-placeholder="开始日期"
           end-placeholder="结束日期"
-
           >
         </el-date-picker>
       </el-col>
     </el-form-item>
-
-<!--    <el-form-item label="活动性质">-->
-<!--      <el-checkbox-group v-model="form.type">-->
-<!--        <el-checkbox label="美食/餐厅线上活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="地推活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="线下主题活动" name="type"></el-checkbox>-->
-<!--        <el-checkbox label="单纯品牌曝光" name="type"></el-checkbox>-->
-<!--      </el-checkbox-group>-->
-<!--    </el-form-item>-->
-<!--    <el-form-item label="特殊资源">-->
-<!--      <el-radio-group v-model="form.resource">-->
-<!--        <el-radio label="线上品牌商赞助"></el-radio>-->
-<!--        <el-radio label="线下场地免费"></el-radio>-->
-<!--      </el-radio-group>-->
-<!--    </el-form-item>-->
     <el-form-item label="考试详情">
       <el-input type="textarea" v-model="examTipsInputVo.examComment"></el-input>
     </el-form-item>
@@ -75,6 +71,8 @@
       <el-button>取消</el-button>
     </el-form-item>
   </el-form>
+    </el-card>
+  </div>
 </template>
 
 
@@ -199,13 +197,14 @@
         //   })
          }).then((res) => {
           console.log(res);
+          return this.$router.push('/Admin')
         });
       }
     }
   }
 </script>
 
-<style>
+<style scoped>
   .forum {
     margin: 80px;
     width: 800px;
@@ -215,11 +214,14 @@
     -webkit-box-shadow: 0 0 25px #cac6c6;
     box-shadow: 0 0 25px #cac6c6;
   }
+  .el-form{
+    padding: 35px 35px 15px 35px;
+  }
   .el-input {
     position: relative;
     font-size: 14px;
     /* display: inline-block; */
-    width: 80%;
+    width: 350px;
   }
   .el-select {
     /* display: inline-block; */

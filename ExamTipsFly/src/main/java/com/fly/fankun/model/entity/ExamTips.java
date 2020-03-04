@@ -1,6 +1,8 @@
 package com.fly.fankun.model.entity;
 
 import java.util.Date;
+
+import com.fasterxml.jackson.annotation.JsonFormat;
 import lombok.Data;
 
 @Data
@@ -27,12 +29,18 @@ public class ExamTips {
 
     private Integer clickNumber;
 
-    private Integer collectNum;
-
     private Date createTime;
 
     private Date updateTime;
 
     private Integer deleted;
+
+    private Integer status;
+
+    private Date examScoresTime;
+
+    private String examScoresComment;
+
+    private String examScoresUrl;
 
 }

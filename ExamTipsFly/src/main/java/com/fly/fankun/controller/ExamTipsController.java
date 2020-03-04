@@ -4,6 +4,7 @@ import com.fly.fankun.globals.GlobalConstans;
 import com.fly.fankun.model.result.BaseResult;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
+import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
@@ -44,18 +45,38 @@ public class ExamTipsController extends BaseController{
     @PostMapping(value = "/editExamTips",produces="application/json;charset=UTF-8")
     @ApiOperation(value = "编辑考试信息",response = ExamTipsOutVo.class)
     public BaseResult editExamTips(@Valid  @RequestBody ExamTipsInputVo examTipsInputVo) {
+        System.out.println(examTipsInputVo);
         ExamTipsOutVo resp=  examTipsService.editExamTips(examTipsInputVo);
         return BaseResult.success(resp);
     }
 
-    @GetMapping("/editDeleted")
+    //添加考试成绩公布信息
+    @PostMapping(value = "/addExamScores",produces="application/json;charset=UTF-8")
+    @ApiOperation(value = "添加考试成绩公布信息")
+    public BaseResult addExamScores(@Valid  @RequestBody ExamScoresOpenInputVo examScoresOpenInputVo){
+        System.out.println(examScoresOpenInputVo);
+        examTipsService.addExamScores(examScoresOpenInputVo);
+        return BaseResult.success("添加成功");
+    }
+
+    @GetMapping("/editStatus")
     @ApiOperation(value = "禁用/启用考试信息")
+    public BaseResult editStatus(@RequestParam Integer id,@RequestParam Integer status) {
+        if(null == status || (!GlobalConstans.ZERO .equals(status) && !GlobalConstans.ONE .equals(status))){
+            return BaseResult.fail();
+        }
+       examTipsService.editStatus(id,status);
+        return BaseResult.success("操作成功");
+    }
+
+    @GetMapping("/editDeleted")
+    @ApiOperation(value = "删除考试信息")
     public BaseResult editDeleted(@RequestParam Integer id,@RequestParam Integer deleted) {
         if(null == deleted || (!GlobalConstans.ZERO .equals(deleted) && !GlobalConstans.ONE .equals(deleted))){
             return BaseResult.fail();
         }
-       examTipsService.editDeleted(id,deleted);
-        return BaseResult.success("操作成功");
+        examTipsService.editDeleted(id,deleted);
+        return BaseResult.success("删除成功");
     }
 
     @GetMapping("/queryPage")
@@ -87,5 +108,7 @@ public class ExamTipsController extends BaseController{
         List<ExamStatisticsOutVo> resp = examTipsService.examStatistics();
         return BaseResult.success(resp);
     }
+
+
 
 }

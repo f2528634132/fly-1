@@ -11,16 +11,19 @@
     <result column="signup_endtime" property="signupEndtime" jdbcType="TIMESTAMP" />
     <result column="exam_begintime" property="examBegintime" jdbcType="TIMESTAMP" />
     <result column="exam_endtime" property="examEndtime" jdbcType="TIMESTAMP" />
-    <result column="exam_scores_time" property="examScorestime" jdbcType="TIMESTAMP" />
+    <result column="exam_scores_time" property="examScoresTime" jdbcType="TIMESTAMP" />
     <result column="click_number" property="clickNumber" jdbcType="INTEGER" />
-    <result column="collect_num" property="collectNum" jdbcType="INTEGER" />
     <result column="create_time" property="createTime" jdbcType="TIMESTAMP" />
     <result column="update_time" property="updateTime" jdbcType="TIMESTAMP" />
     <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="exam_scores_time" property="examScoresTime" jdbcType="TIMESTAMP" />
+    <result column="exam_scores_comment" property="examScoresComment" jdbcType="INTEGER" />
+    <result column="exam_scores_url" property="examScoresUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, exam_type_id, exam_url, exam_tips_title, exam_comment, signup_begintime, signup_endtime, 
-    exam_begintime, exam_endtime,exam_scores_time, click_number,click_number, create_time, update_time, deleted
+    exam_begintime, exam_endtime,exam_scores_time, click_number, create_time, update_time, deleted,status
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
     select
@@ -38,12 +41,12 @@
     insert into exam_tips (id, exam_type_id, exam_url, 
       exam_tips_title, exam_comment, signup_begintime, 
       signup_endtime, exam_begintime, exam_endtime, exam_scores_time,
-      click_number,click_number, create_time, update_time,
+      click_number, create_time, update_time, 
       deleted)
     values (#{id,jdbcType=INTEGER}, #{examTypeId,jdbcType=INTEGER}, #{examUrl,jdbcType=VARCHAR}, 
       #{examTipsTitle,jdbcType=VARCHAR}, #{examComment,jdbcType=VARCHAR}, #{signupBegintime,jdbcType=TIMESTAMP}, 
       #{signupEndtime,jdbcType=TIMESTAMP}, #{examBegintime,jdbcType=TIMESTAMP}, #{examEndtime,jdbcType=TIMESTAMP}, #{examScorestime,jdbcType=TIMESTAMP},
-      #{clickNumber,jdbcType=INTEGER},#{collectNum,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
+      #{clickNumber,jdbcType=INTEGER}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP}, 
       #{deleted,jdbcType=INTEGER})
   </insert>
   <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.ExamTips" useGeneratedKeys="true" keyProperty="id">
@@ -81,9 +84,6 @@
       </if>
       <if test="clickNumber != null" >
         click_number,
-      </if>
-      <if test="collectNum != null" >
-        collect_num,
       </if>
       <if test="createTime != null" >
         create_time,
@@ -130,9 +130,6 @@
       <if test="clickNumber != null" >
         #{clickNumber,jdbcType=INTEGER},
       </if>
-      <if test="collectNum != null" >
-        #{collectNum,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -146,7 +143,7 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fly.fankun.model.entity.ExamTips" >
     update exam_tips
-    <set >
+    <set>
       <if test="examTypeId != null" >
         exam_type_id = #{examTypeId,jdbcType=INTEGER},
       </if>
@@ -174,9 +171,6 @@
       <if test="clickNumber != null" >
         click_number = #{clickNumber,jdbcType=INTEGER},
       </if>
-      <if test="collectNum != null" >
-        collect_num = #{collectNum,jdbcType=INTEGER},
-      </if>
       <if test="createTime != null" >
         create_time = #{createTime,jdbcType=TIMESTAMP},
       </if>
@@ -185,6 +179,18 @@
       </if>
       <if test="deleted != null" >
         deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="examScoresTime != null" >
+        exam_scores_time = #{examScoresTime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="examScoresComment != null" >
+        exam_scores_comment = #{examScoresComment,jdbcType=VARCHAR},
+      </if>
+      <if test="examScoresUrl != null" >
+        exam_scores_url = #{examScoresUrl,jdbcType=VARCHAR},
       </if>
     </set>
     where id = #{id,jdbcType=INTEGER}
@@ -200,7 +206,6 @@
       exam_begintime = #{examBegintime,jdbcType=TIMESTAMP},
       exam_endtime = #{examEndtime,jdbcType=TIMESTAMP},
       click_number = #{clickNumber,jdbcType=INTEGER},
-      collect_num = #{collectNum,jdbcType=INTEGER},
       create_time = #{createTime,jdbcType=TIMESTAMP},
       update_time = #{updateTime,jdbcType=TIMESTAMP},
       deleted = #{deleted,jdbcType=INTEGER}
@@ -220,6 +225,7 @@
     <result column="exam_begintime" property="examBegintime" jdbcType="TIMESTAMP" />
     <result column="exam_endtime" property="examEndtime" jdbcType="TIMESTAMP" />
     <result column="click_number" property="clickNumber" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
   </resultMap>
 
   <select id="selectByExamId" resultMap="ExamBaseResultMap" parameterType="java.lang.Integer" >

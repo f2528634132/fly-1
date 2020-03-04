@@ -23,23 +23,23 @@
             return {
                 // 需要进行权限控制的页面
                 needControlLinks: [
-                    "/offer-manage",
-                    "/index",
-                    "/course-center",
-                    "/course-manage",
-                    "/report-analysis",
-                    "/communication",
-                    "/data-statistics",
-                    "/more-service",
-                    "/news-manage",
-                    "/topic-manage",
-                    "/qa-manage",
-                    "/activity-manage",
-                    "/message-manage",
-                    "/banner-manage",
-                    "/data-statistics",
-                    "/company-manage",
-                    "/asset-consumption"
+                    // "/offer-manage",
+                    // "/index",
+                    // "/course-center",
+                    // "/course-manage",
+                    // "/report-analysis",
+                    // "/communication",
+                    // "/data-statistics",
+                    // "/more-service",
+                    // "/news-manage",
+                    // "/topic-manage",
+                    // "/qa-manage",
+                    // "/activity-manage",
+                    // "/message-manage",
+                    // "/banner-manage",
+                    // "/data-statistics",
+                    // "/company-manage",
+                    // "/asset-consumption"
                 ]
             };
         },

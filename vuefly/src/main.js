@@ -9,12 +9,12 @@ import  VueResource  from 'vue-resource'
 import store  from "./store"
 import utils from "./utils/utils"
 import global_ from './components/Global'//引用文件
-
 import 'element-ui/lib/theme-chalk/index.css'
 import {getRequest} from './utils/api'
 import {postRequest} from './utils/api'
 import {deleteRequest} from './utils/api'
 import {putRequest} from './utils/api'
+import './assets/css/global.css'
 Vue.use(ElementUI)
 Vue.use(VueResource)
 //Vue.use({axios,VueAxios})

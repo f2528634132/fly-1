@@ -7,6 +7,7 @@ import com.fly.fankun.mapper.MyExamMapper;
 import com.fly.fankun.model.entity.ExamTips;
 import com.fly.fankun.model.entity.ExamType;
 import com.fly.fankun.model.result.PageBean;
+import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
@@ -59,6 +60,29 @@ public class ExamTipsServiceImpl implements ExamTipsService {
         }
         return BeanUtil.copy(examTips, ExamTipsOutVo.class);
     }
+    @Override
+    public void addExamScores(ExamScoresOpenInputVo examScoresOpenInputVo) {
+        System.out.println(examScoresOpenInputVo.getId());
+        if(null  == examScoresOpenInputVo.getId()){
+            throw  new BizzException("需添加的考试项id丢失");
+        }
+        ExamTips examTips = BeanUtil.copy(examScoresOpenInputVo, ExamTips.class);
+        System.out.println(examTips);
+        examTipsMapper.updateByPrimaryKeySelective(examTips);
+    }
+
+    @Override
+    @Transactional(rollbackFor = Exception.class)
+    public void editStatus(Integer id, Integer status) {
+        ExamTips examTips = examTipsMapper.selectByPrimaryKey(id);
+        if(null  == examTips){
+            throw  new BizzException("考试不存在");
+        }
+        //修改状态'
+        examTips.setStatus(status);
+        examTips.setUpdateTime(new Date());
+        examTipsMapper.updateByPrimaryKeySelective(examTips);
+    }
 
     @Override
     @Transactional(rollbackFor = Exception.class)
@@ -67,7 +91,7 @@ public class ExamTipsServiceImpl implements ExamTipsService {
         if(null  == examTips){
             throw  new BizzException("考试不存在");
         }
-        //修改状态'
+        //删除
         examTips.setDeleted(deleted);
         examTips.setUpdateTime(new Date());
         examTipsMapper.updateByPrimaryKeySelective(examTips);
@@ -96,7 +120,6 @@ public class ExamTipsServiceImpl implements ExamTipsService {
 
     @Override
     public List<ExamTypeOutVo> queryExamTypeList() {
-
         return examTypeMapper.queryAll();
     }
 
@@ -107,15 +130,16 @@ public class ExamTipsServiceImpl implements ExamTipsService {
             return list;
         }
         for (ExamStatisticsOutVo vo:list) {
-           ExamStatisticsOutVo result = myExamMapper.getExamStatistics(vo.getId());
-           if(null != result){
-               vo.setHasExamNum(result.getHasExamNum());
-               vo.setNoExamNum(result.getNoExamNum());
-               vo.setPersonNum(result.getPersonNum());
-           }
+            ExamStatisticsOutVo result = myExamMapper.getExamStatistics(vo.getId());
+            if(null != result){
+                vo.setHasExamNum(result.getHasExamNum());
+                vo.setNoExamNum(result.getNoExamNum());
+                vo.setPersonNum(result.getPersonNum());
+            }
 
         }
         return list;
-
     }
+
+
 }

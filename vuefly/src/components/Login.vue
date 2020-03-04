@@ -1,13 +1,14 @@
 <template>
+  <div class="login_div">
   <el-form :rules="rules" class="login-container" label-position="left" :model="loginForm"
            label-width="0px" v-loading="loading">
     <h3 class="login_title">ExamTips系统登录</h3>
     <el-form-item prop="username">
-      <el-input type="text" v-model="loginForm.username"
+      <el-input type="text" v-model="loginForm.username" prefix-icon="el-icon-user"
                 auto-complete="off" placeholder="账号"></el-input>
     </el-form-item>
     <el-form-item prop="password">
-      <el-input type="password" v-model="loginForm.password"
+      <el-input type="password" v-model="loginForm.password" prefix-icon="el-icon-lock"
                 auto-complete="off" placeholder="密码"></el-input>
     </el-form-item>
     <el-radio v-model="type" label="0" >个人</el-radio>
@@ -16,14 +17,16 @@
       <el-button type="primary" style="width: 100%" @click="submitClick">登录</el-button>
     </el-form-item>
   </el-form>
+  </div>
 </template>
+
 <script>
 
     import { mapMutations } from 'vuex';
   export default{
     data(){
       return {
-          type: '0',
+          type: '1',
         rules: {
           username: [{required: true, message: '请输入用户名', trigger: 'blur'}],
           password: [{required: true, message: '请输入密码', trigger: 'blur'}]
@@ -76,10 +79,17 @@
   }
 </script>
 <style>
+  .login_div{
+    background-color: azure;
+    height: 100%;
+  }
   .login-container {
     border-radius: 15px;
     background-clip: padding-box;
-    margin: 180px auto;
+    position: absolute;
+    left: 50%;
+    top: 40%;
+    transform: translate(-50%,-50%);
     width: 350px;
     padding: 35px 35px 15px 35px;
     background: #fff;
@@ -102,4 +112,8 @@
     margin-bottom: 20px;
     margin-left: 60px;
   }
+  .el-input--prefix .el-input__inner {
+    padding-left: 40px;
+  }
+
 </style>
