@@ -2,6 +2,7 @@ package com.fly.fankun.service;
 
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
+import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
 import java.util.List;
@@ -21,5 +22,7 @@ public interface ExamTipsService {
     PageBean<ExamTipsOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize);
 
     List<ExamTypeOutVo> queryExamTypeList();
+
+    List<ExamStatisticsOutVo> examStatistics();
 
 }

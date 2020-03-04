@@ -1,6 +1,7 @@
 package com.fly.fankun.mapper;
 
 import com.fly.fankun.model.entity.MyExam;
+import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.MyExamOutVo;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
@@ -33,4 +34,6 @@ public interface MyExamMapper {
     List<MyExamOutVo> ExamScores(@Param(value = "deleted") Integer deleted,@Param(value = "personId")Integer userId,@Param(value = "status")Integer status);
 
     void updateBatchStatus(List<MyExam> list);
+
+    ExamStatisticsOutVo getExamStatistics(Integer typeId);
 }

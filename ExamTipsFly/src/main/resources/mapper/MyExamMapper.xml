@@ -277,4 +277,14 @@
     </where>
     order by a.update_time desc
   </select>
+  <select id="getExamStatistics" resultType="com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo">
+    SELECT
+      count(DISTINCT person_id) personNum,
+      sum ( case when status in (3) then 1 else 0 end ) hasExamNum,
+      sum (case when status in (1,2,5) then 1 else 0 end) noExamNum
+    FROM
+      my_exam
+    WHERE
+      exam_id IN ( SELECT id FROM exam_tips WHERE exam_type_id = #{typeId} );
+  </select>
 </mapper>

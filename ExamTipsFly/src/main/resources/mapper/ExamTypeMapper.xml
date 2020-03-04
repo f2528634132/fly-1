@@ -109,4 +109,16 @@
     exam_name as examName
     from exam_type where deleted = 0
   </select>
+  <select id="getExamStatistics" resultType="com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo">
+    SELECT
+      t.id,
+      t.exam_name examTypeName,
+      sum( CASE WHEN ti.click_number IS NULL THEN 0 ELSE ti.click_number END ) clickNum ,
+      sum( CASE WHEN ti.collect_num IS NULL THEN 0 ELSE ti.collect_num END ) collectNum
+    FROM
+      exam_type t
+      LEFT JOIN exam_tips ti ON t.id = ti.exam_type_id
+    GROUP BY
+      t.id
+  </select>
 </mapper>

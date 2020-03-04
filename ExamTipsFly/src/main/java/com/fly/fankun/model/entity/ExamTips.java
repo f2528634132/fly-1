@@ -27,6 +27,8 @@ public class ExamTips {
 
     private Integer clickNumber;
 
+    private Integer collectNum;
+
     private Date createTime;
 
     private Date updateTime;

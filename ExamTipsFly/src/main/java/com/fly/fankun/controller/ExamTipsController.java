@@ -6,6 +6,7 @@ import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
+import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
 import com.fly.fankun.service.AdminService;
@@ -78,4 +79,13 @@ public class ExamTipsController extends BaseController{
         List<ExamTypeOutVo> resp = examTipsService.queryExamTypeList();
         return BaseResult.success(resp);
     }
+
+    //查询所有考试目录
+    @GetMapping("/queryExamType/statistics")
+    @ApiOperation(value = "考试类目统计",response = ExamStatisticsOutVo.class)
+    public BaseResult examStatistics() {
+        List<ExamStatisticsOutVo> resp = examTipsService.examStatistics();
+        return BaseResult.success(resp);
+    }
+
 }

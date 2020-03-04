@@ -3,10 +3,12 @@ package com.fly.fankun.service.impl;
 import com.fly.fankun.exception.BizzException;
 import com.fly.fankun.mapper.ExamTipsMapper;
 import com.fly.fankun.mapper.ExamTypeMapper;
+import com.fly.fankun.mapper.MyExamMapper;
 import com.fly.fankun.model.entity.ExamTips;
 import com.fly.fankun.model.entity.ExamType;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
+import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
 import com.fly.fankun.service.ExamTipsService;
@@ -16,6 +18,7 @@ import com.github.pagehelper.PageHelper;
 import java.util.Date;
 import java.util.List;
 import lombok.extern.slf4j.Slf4j;
+import org.apache.commons.collections4.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -33,6 +36,8 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     private ExamTipsMapper examTipsMapper;
     @Autowired
     private ExamTypeMapper examTypeMapper;
+    @Autowired
+    private MyExamMapper myExamMapper;
 
 
 
@@ -93,5 +98,24 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     public List<ExamTypeOutVo> queryExamTypeList() {
 
         return examTypeMapper.queryAll();
+    }
+
+    @Override
+    public List<ExamStatisticsOutVo> examStatistics() {
+        List<ExamStatisticsOutVo> list = examTypeMapper.getExamStatistics();
+        if(CollectionUtils.isEmpty(list)){
+            return list;
+        }
+        for (ExamStatisticsOutVo vo:list) {
+           ExamStatisticsOutVo result = myExamMapper.getExamStatistics(vo.getId());
+           if(null != result){
+               vo.setHasExamNum(result.getHasExamNum());
+               vo.setNoExamNum(result.getNoExamNum());
+               vo.setPersonNum(result.getPersonNum());
+           }
+
+        }
+        return list;
+
     }
 }
