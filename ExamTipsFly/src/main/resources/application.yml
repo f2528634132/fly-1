@@ -55,6 +55,8 @@ spring:
      port: 6379
      database: 0
      timeout: 10000
+  resources:
+    static-locations: /META-INF/resources/,classpath:/static,classpath:/resources/,file:${upload.filePath},file:static/
 swagger:
   enabled: true
   request:
@@ -75,3 +77,9 @@ sys:
   auth:
     aes-key: aA0fR0fA5rF3cH1h
     sign-key: bFsd2ASFslk1hsB
+upload:
+  filePath: D:\image\
+
+springboot:
+  mvc:
+    static-path-pattern: /**
