@@ -10,7 +10,7 @@
     <el-card class="box-card">
       <el-main>
         <el-row>
-            <el-input placeholder="请输入内容">
+            <el-input placeholder="请输入内容" v-model="query">
               <el-select v-model="select" slot="prepend" placeholder="请选择">
                 <el-option label="ALL" value="1"></el-option>
                 <el-option label="计算机" value="2"></el-option>
@@ -19,22 +19,34 @@
                 <el-option label="会计" value="5"></el-option>
                 <el-option label="其他" value="6"></el-option>
               </el-select>
-              <el-button slot="append" icon="el-icon-search"></el-button>
+              <el-button slot="append" icon="el-icon-search" @click="queryPageByName"></el-button>
             </el-input>
             <el-button type="primary" style="margin-left: 500px" round @click.native="$router.push('/AddExam')">添加考试</el-button>
         </el-row>
-        <el-table :data="tableData" ref="tableData" header-row-class-name="center" border stripe>
+        <el-table :data="tableData" ref="tableData" header-row-class-name="center" border stripe :header-cell-style="{background:'#eef1f6',color:'#606266'}">
           <el-table-column prop="id" label="编号" width="60" >
           </el-table-column>
           <el-table-column prop="examTipsTitle" label="考试名称" width="250">
           </el-table-column>
           <el-table-column prop="signupBegintime" label="报名开始时间" width="150">
+            <template slot-scope="scope">
+            <i class="el-icon-time"></i>
+              <span style="margin-left: 10px">{{ scope.row.signupBegintime }}</span></template>
           </el-table-column>
           <el-table-column prop="signupEndtime" label="报名结束时间" width="150">
+            <template slot-scope="scope">
+              <i class="el-icon-time"></i>
+              <span style="margin-left: 10px">{{ scope.row.signupEndtime }}</span></template>
           </el-table-column>
           <el-table-column prop="examBegintime" label="考试开始时间" width="150">
+            <template slot-scope="scope">
+              <i class="el-icon-time"></i>
+              <span style="margin-left: 10px">{{ scope.row.examBegintime }}</span></template>
           </el-table-column>
           <el-table-column prop="examEndtime" label="考试结束时间" width="150">
+            <template slot-scope="scope">
+              <i class="el-icon-time"></i>
+              <span style="margin-left: 10px">{{ scope.row.examEndtime }}</span></template>
           </el-table-column>
           <el-table-column prop="examUrl" label="报名地址" width="320">
             <template slot-scope="scope">
@@ -99,31 +111,7 @@
         alert("修改"+id+"的状态为"+status);
         this.getRequest(`/examTips/editStatus?status=${status}&id=${id}`)
       },
-      // queryPage() {
-      //     this._后台方法名(自己命名).(this.params).then(result => {
-      //         // 一般后天用字符串，前段用json所以这里涉及到字符串的转换
-      //         //这个语法就将后台传来的字符串转换成前段可以截取的json
-      //         let data = JSON.parse(result);
-      //         // 看后台的返回值，一般出现0就是成功，出现500就是失败了
-      //         if (data.status == 0) {//上面自己定义的一个数组将这个数组接收我们后台传入的数据
-      //             this.tableData = data.result.list;//这个地方不一定有list,要看数据反馈的是否有层级
-      //             this.tableData.forEach(item => {
-      //                 item.RQ = item.RQ.substr(0, 10)
-      //             })
-      //             this.page.totalRecords = data.result.totalRecords;//分页
-      //
-      //         }
-      //
-      //     })
-      // },
-      // editMyExam:function(examId){
-      //   alert(examId);
-      //   this.$router.push({
-      //     path: '/ExamEdit',
-      //     query: {'id':examId}
-      //   })
-      //
-      // },
+
       deleteExam: function (Id) {
         alert(Id);
         return this.getRequest(`/examTips/editDeleted?deleted=1&id=${Id}`).then( res => {
@@ -132,7 +120,19 @@
 
       submitClick: function () {
         // console.log(this.filterForm);
-        return  this.getRequest(`/examTips/queryPage?pageNum=${this.currentPage}&pageSize=${this.pageSize}&deleted=${this.deleted}`)
+        return  this.getRequest(`/examTips/queryPageByName?pageNum=${this.currentPage}&pageSize=${this.pageSize}&str=${this.query}&deleted=${this.deleted}`)
+          .then(
+            res => {
+              this.tableData = res.data.data.items || [];
+              this.totalNum = res.data.data.totalNum || 0;
+            },
+            err => {
+              // console.log(err);
+            }
+          );
+      },
+      queryPageByName:function () {
+        return  this.getRequest(`/examTips/queryPageByName?pageNum=${this.currentPage}&pageSize=${this.pageSize}&str=${this.query}&deleted=${this.deleted}`)
           .then(
             res => {
               this.tableData = res.data.data.items || [];
@@ -147,9 +147,10 @@
     data() {
       return {
         // tableData: Array(6).fill(item),
+        query:'',
         currentPage: 1, // 当前页
         pageSize: 5, // 每页回答数量
-        deleted: 0, // 回答总数
+        deleted: 0,
         totalNum: 0,
         tableData: [],
         input3:'',

@@ -24,6 +24,12 @@ import MyExamNote from "../components/MyExamNote";
 import PersonBasic from "../components/PersonBasic";
 import JoinRate from "../components/JoinRate";
 import AddExamScoreOpen from "../components/AddExamScoreOpen";
+import Institution from "../components/Institution";
+import Tutorial from "../components/Tutorial";
+import MyCollectForum from "../components/MyCollectForum";
+import MyCollectAd from "../components/MyCollectAd";
+import Message from "element-ui/packages/message/src/main";
+import MessageDetails from "../components/MessageDetails";
 Vue.use(Router)
 
 const router =  new Router({
@@ -65,6 +71,11 @@ const router =  new Router({
         {path: '/PersonBasic',  component: PersonBasic},
         {path: '/JoinRate',  component: JoinRate},
         {path: '/AddExamScoreOpen',  component: AddExamScoreOpen},
+        {path: '/Institution',  component: Institution},
+        {path: '/Tutorial',  component: Tutorial},
+        {path: '/MyCollectForum',  component: MyCollectForum},
+        {path: '/MyCollectAd',  component: MyCollectAd},
+        {path: '/MessageDetails',  component: MessageDetails},
       ]
     }
   ]

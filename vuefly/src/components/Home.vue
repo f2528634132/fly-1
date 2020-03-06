@@ -1,63 +1,84 @@
 <template>
-  <el-container style="height: 945px; border: 0px solid #eee">
+<!--  <el-container style="height: 945px; border: 0px solid #eee">-->
+  <div>
+  <div style="width: 100%;height: 26px;"></div>
+    <el-card class="box-card">
     <el-container>
         <el-main>
-          <el-row>
-            <el-menu :default-active="activeIndex" class="el-menu-demo" mode="horizontal" @select="handleSelect">
-              <el-menu-item index="1">最新考试</el-menu-item>
-              <el-submenu index="2">
-                <template slot="title">热门考试</template>
-                <el-menu-item index="2-1">选项1</el-menu-item>
-                <el-menu-item index="2-2">选项2</el-menu-item>
-                <el-menu-item index="2-3">选项3</el-menu-item>
-                <el-submenu index="2-4">
-                  <template slot="title">提示考试</template>
-                  <el-menu-item index="2-4-1">选项1</el-menu-item>
-                  <el-menu-item index="2-4-2">选项2</el-menu-item>
-                  <el-menu-item index="2-4-3">选项3</el-menu-item>
-                </el-submenu>
-              </el-submenu>
-              <el-menu-item index="3" >提示考试</el-menu-item>
-<!--              <el-menu-item index="3" disabled>提示考试</el-menu-item>-->
-<!--              <el-menu-item index="4"><a href="https://www.ele.me" target="_blank">提示考试</a></el-menu-item>-->
-            </el-menu>
-          </el-row>
-          <el-table :data="tableData" ref="tableData" border  stripe>
-            <el-table-column prop="id" label="考试编号" width="120">
-            </el-table-column>
-            <el-table-column prop="examTipsTitle" label="考试名称" width="250">
-            </el-table-column>
-            <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
-            </el-table-column>
-            <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
-            </el-table-column>
-            <el-table-column prop="examBegintime" label="考试开始时间" width="160">
-            </el-table-column>
-            <el-table-column prop="examEndtime" label="考试结束时间" width="160">
-            </el-table-column>
-            <el-table-column prop="examUrl" label="报名地址" width="350">
-              <template slot-scope="scope">
-                <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
-              </template>
-            </el-table-column>
-<!--            <el-table-column prop="clickNumber" label="热度" width="160">-->
-<!--            </el-table-column>-->
-<!--            <el-table-column prop="id" label="考试Id" width="160">-->
-<!--            </el-table-column>-->
-            <el-table-column prop="operation" label="操作">
-              <template slot-scope="scope">
-                <el-row>
-                <el-button type="info" icon="el-icon-search" circle></el-button>
-                <el-button  type="primary" icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
-<!--                <el-button id="examId" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>-->
-                <!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
-<!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
-                <el-button type="warning" icon="el-icon-star-off" circle v-on:click="joinMyExam(scope.row.id)"></el-button>
-                <el-button type="danger" icon="el-icon-delete" circle></el-button>
-              </el-row>
-              </template>
-            </el-table-column>
-          </el-table>
+          <el-tabs :tab-position="top">
+            <el-tab-pane label="最新考试">
+              <el-table :data="tableData" ref="tableData" border  stripe :header-cell-style="{background:'#eef1f6',color:'#606266'}">
+                <el-table-column prop="id" label="考试编号" width="120">
+                </el-table-column>
+                <el-table-column prop="examTipsTitle" label="考试名称" width="250">
+                </el-table-column>
+                <el-table-column prop="signupBegintime" label="报名开始时间" width="160">
+                  <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.signupBegintime }}</span></template>
+                </el-table-column>
+                <el-table-column prop="signupEndtime" label="报名结束时间" width="160">
+                  <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.signupEndtime }}</span></template>
+                </el-table-column>
+                <el-table-column prop="examBegintime" label="考试开始时间" width="160">
+                  <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.examBegintime }}</span></template>
+                </el-table-column>
+                <el-table-column prop="examEndtime" label="考试结束时间" width="160">
+                  <template slot-scope="scope">
+                    <i class="el-icon-time"></i>
+                    <span style="margin-left: 10px">{{ scope.row.examEndtime }}</span></template>
+                </el-table-column>
+                <el-table-column prop="examUrl" label="报名地址" width="350">
+                  <template slot-scope="scope">
+                    <a :href="scope.row.examUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examUrl}}</a>
+                  </template>
+                </el-table-column>
+                <!--            <el-table-column prop="clickNumber" label="热度" width="160">-->
+                <!--            </el-table-column>-->
+                <!--            <el-table-column prop="id" label="考试Id" width="160">-->
+                <!--            </el-table-column>-->
+                <el-table-column prop="operation" label="操作">
+                  <template slot-scope="scope">
+                    <el-row>
+                      <!--                <el-button type="info" icon="el-icon-search" circle></el-button>-->
+                      <el-button  type="primary" icon="el-icon-more" circle @click.native="$router.push('/MyExamDetails')"></el-button>
+                      <!--                <el-button id="examId" type="primary" icon="el-icon-plus" circle v-on:click="joinMyExam(scope.row.id)" ></el-button>-->
+                      <!--                <el-button type="success" icon="el-icon-check" circle></el-button>-->
+                      <!--                <el-button type="info" icon="el-icon-message" circle></el-button>-->
+                      <el-tooltip class="item" effect="dark" content="加入我的收藏" placement="top" :enterable="false">
+                        <el-button type="warning" icon="el-icon-star-off" circle v-on:click="joinMyExam(scope.row.id)"></el-button></el-tooltip>
+                      <el-button type="danger" icon="el-icon-delete" circle></el-button>
+                    </el-row>
+                  </template>
+                </el-table-column>
+              </el-table>
+            </el-tab-pane>
+            <el-tab-pane label="热门考试">好热好热</el-tab-pane>
+            <el-tab-pane label="推荐考试"><i class="el-icon-info"></i>
+              <el-button type="text">建议完善个人信息，系统将会为你推荐考试</el-button>
+
+              <el-row :gutter="100">
+                <el-col :span="8"  v-for="c in 5">
+              <el-card class="box-card" shadow="hover" style="margin-top: 20px" id="c">
+                <div slot="header" class="clearfix">
+                  <span>同专业都在考的证</span>
+                  <el-button style="float: right; padding: 3px 0" type="text">赶紧报名</el-button>
+                </div>
+                <div v-for="o in 4" :key="o">
+                  <el-button type="text"><span style="font-size: 14px">{{'计算机等级考试 ' + o +'级'}}</span></el-button>
+                </div>
+              </el-card>
+             </el-col>
+            </el-row>
+
+
+            </el-tab-pane>
+          </el-tabs>
+
           <el-row>
             <div class="block">
               <el-pagination
@@ -74,44 +95,9 @@
         </el-main>
 
     </el-container>
-  </el-container>
+  </el-card>
+  </div>
 </template>
-<style>
-  .el-header {
-    background-color: #B3C0D1;
-    color: #333;
-    line-height: 60px;
-  }
-
-  .el-aside {
-    color: #333;
-  }
-  /*.font-face {*/
-  /*  font-family: 'webfont';*/
-  /*  font-display: swap;*/
-  /*  src: url('//at.alicdn.com/t/webfont_xq8c7se00nh.eot'); !* IE9*!*/
-  /*  src: url('//at.alicdn.com/t/webfont_xq8c7se00nh.eot?#iefix') format('embedded-opentype'), !* IE6-IE8 *!*/
-  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.woff2') format('woff2'),*/
-  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.woff') format('woff'), !* chrome、firefox *!*/
-  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.ttf') format('truetype'), !* chrome、firefox、opera、Safari, Android, iOS 4.2+*!*/
-  /*  url('//at.alicdn.com/t/webfont_xq8c7se00nh.svg#AlibabaPuHuiTiH') format('svg'); !* iOS 4.1- *!*/
-  /*}*/
-
-  .el-submenu [class^=el-icon-] {
-    vertical-align: middle;
-    margin-right: 5px;
-    width: 24px;
-    text-align: right;
-    font-size: 20px;
-  }
-
-  .el-pagination {
-    white-space: nowrap;
-    padding: 30px 300px;
-    color: #303133;
-    font-weight: 700;
-  }
-</style>
 
 <script>
 
@@ -121,13 +107,6 @@
   export default {
 
     data() {
-      // const item = {
-      //   examTipsTitle: '全国计算机等级考试',
-      //   signupBegintime: '2019-11-2',
-      //   signupEndtime: '2019-11-12',
-      //   examUrl: 'www.baidu.com',
-      //   counter:0
-      // };
       return {
         //tableData: Array(20).fill(item),
         currentPage: 1,
@@ -159,22 +138,22 @@
     // activated() {
     //   this.initDatas();
     // },
-      mounted:function(){
-          this.submitClick();
-      },
+    mounted:function(){
+      this.submitClick();
+    },
     methods: {
-        joinMyExam: function (examId) {
+      joinMyExam: function (examId) {
         alert(examId);
-            return  this.postRequest(`/myExam/joinMyExam?examId=${examId}`)
-                .then(
-                    res => {
-                        this.tableData = res.data.data.items || [];
-                        this.totalNum= res.data.totalNum || 0;
-                    },
-                    err => {
-                        // console.log(err);
-                    }
-                );
+        return  this.postRequest(`/myExam/joinMyExam?examId=${examId}`)
+          .then(
+            res => {
+              this.tableData = res.data.data.items || [];
+              this.totalNum= res.data.totalNum || 0;
+            },
+            err => {
+              // console.log(err);
+            }
+          );
       },
       handleSelect(key, keyPath) {
       },
@@ -186,50 +165,18 @@
         this.currentPage=val;
         this.submitClick();
       },
-      //  initDatas(){
-      //   this.$http
-      //     .get(`${this.domain}examTips/queryPage`,this.projectForm)
-      //     .then(
-      //       res=>{
-      //         console.log(res.data.data.items);
-      //         this.tableData = res.data.data.items || [];
-      //         console.log(this.tableData);
-      //         this.totalMessage = res.data.totalNum || 0;
-      //       })
-      // //   $axios.get(
-      // //     `/examTips/queryPage?deleted=0&pageNum=1&pageSize=10` ).then(
-      // //            res=>{
-      // //              console.log(res.data.data.items);
-      // //              this.tableData = res.data.data.items || [];
-      // //              console.log(this.tableData);
-      // //              this.totalMessage = res.data.totalNum || 0;
-      // //            })
-      // //    return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=1&pageSize=10`)
-      // //      .then(
-      // //        res => {
-      // //          console.log(res.data.data.items);
-      // //          this.tableData = res.data.data.items || [];
-      // //          console.log(this.tableData);
-      // //          this.totalMessage = res.data.totalNum || 0;
-      // //        },
-      // //        err => {
-      // //          // console.log(err);
-      // //        }
-      // //      );
-      //
-      // },
       ClickOut:function () {
         return  this.getRequest(`/auth/logout`).then(
           res=>(
-              this.$router.push({
-                path:`/Login`
-              })
-        ))
+            this.$router.push({
+              path:`/Login`
+            })
+          ))
       },
       submitClick: function () {
         // console.log(this.filterForm);
         //alert(currentPage1,pageSize);
-        return  this.getRequest(`/examTips/queryPage?deleted=0&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
+        return  this.getRequest(`/examTips/queryPageByName?deleted=0&pageNum=${this.currentPage}&pageSize=${this.pageSize}`)
           .then(
             res => {
               console.log(res.data.data.items);
@@ -246,3 +193,32 @@
     },
   };
 </script>
+
+
+<style>
+  .el-header {
+    background-color: #B3C0D1;
+    color: #333;
+    line-height: 60px;
+  }
+
+  .el-aside {
+    color: #333;
+  }
+
+  .el-submenu [class^=el-icon-] {
+    vertical-align: middle;
+    margin-right: 5px;
+    width: 24px;
+    text-align: right;
+    font-size: 20px;
+  }
+
+  .el-pagination {
+    white-space: nowrap;
+    padding: 30px 300px;
+    color: #303133;
+    font-weight: 700;
+  }
+</style>
+

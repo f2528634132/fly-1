@@ -56,10 +56,6 @@
     methods:{
       onSubmit: function () {
         let inputVo = this.examTipsInputVo;
-        console.log(inputVo.id)
-        console.log(inputVo.examScoresTime)
-        console.log(inputVo.examScoresComment)
-        console.log(inputVo.examScoresUrl)
         this.$axios({
           method: "post",
           url: "/examTips/addExamScores",

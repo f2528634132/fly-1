@@ -3,6 +3,7 @@ package com.fly.fankun.service;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
+import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
@@ -24,9 +25,12 @@ public interface ExamTipsService {
 
     PageBean<ExamTipsOutVo> queryPage(Integer deleted, Integer pageNum, Integer pageSize);
 
+    PageBean<ExamTipsOutVo> queryPageByInfo(QueryInfoInputVo queryInfoInputVo);
+
     List<ExamTypeOutVo> queryExamTypeList();
 
     List<ExamStatisticsOutVo> examStatistics();
 
     void addExamScores(ExamScoresOpenInputVo examScoresOpenInputVo);
+
 }

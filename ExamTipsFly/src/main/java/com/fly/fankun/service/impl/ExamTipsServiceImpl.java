@@ -9,6 +9,7 @@ import com.fly.fankun.model.entity.ExamType;
 import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
+import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
@@ -62,7 +63,6 @@ public class ExamTipsServiceImpl implements ExamTipsService {
     }
     @Override
     public void addExamScores(ExamScoresOpenInputVo examScoresOpenInputVo) {
-        System.out.println(examScoresOpenInputVo.getId());
         if(null  == examScoresOpenInputVo.getId()){
             throw  new BizzException("需添加的考试项id丢失");
         }
@@ -114,6 +114,16 @@ public class ExamTipsServiceImpl implements ExamTipsService {
         List<ExamTipsOutVo> resultList = examTipsMapper.list(deleted);
         PageBean<ExamTipsOutVo> pageData = new PageBean<ExamTipsOutVo>(pageNum,
             pageSize, (int)page.getTotal());
+        pageData.setItems(resultList);
+        return pageData;
+    }
+
+    @Override
+    public PageBean<ExamTipsOutVo> queryPageByInfo(QueryInfoInputVo queryInfoInputVo) {
+        Page page = PageHelper.startPage(queryInfoInputVo.getPageNum(), queryInfoInputVo.getPageSize());
+        List<ExamTipsOutVo> resultList = examTipsMapper.list(queryInfoInputVo);
+        PageBean<ExamTipsOutVo> pageData = new PageBean<ExamTipsOutVo>(queryInfoInputVo.getPageNum(),
+                queryInfoInputVo.getPageSize(), (int)page.getTotal());
         pageData.setItems(resultList);
         return pageData;
     }

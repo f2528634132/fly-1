@@ -12,14 +12,17 @@
         <!--        <el-row>-->
         <!--          <el-button type="primary" round @click="submitClick">主要按钮</el-button>-->
         <!--        </el-row>-->
-        <el-table :data="tableData"  border stripe>
+        <el-table :data="tableData"  border stripe :header-cell-style="{background:'#eef1f6',color:'#606266'}">
           <el-table-column prop="examTipsTitle" label="考试名称" width="350">
           </el-table-column>
-          <el-table-column prop="exam_scores_time" label="成绩公布时间" width="200">
-          </el-table-column>
-          <el-table-column prop="exam_scores_url" label="查询成绩地址" width="350">
+          <el-table-column prop="examScoresTime" label="成绩公布时间" width="200">
             <template slot-scope="scope">
-              <a :href="scope.row.exam_scores_url" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.exam_scores_url}}</a>
+              <i class="el-icon-time"></i>
+              <span style="margin-left: 10px">{{ scope.row.examScoresTime }}</span></template>
+          </el-table-column>
+          <el-table-column prop="examScoresUrl" label="查询成绩地址" width="350">
+            <template slot-scope="scope">
+              <a :href="scope.row.examScoresUrl" target="_blank" class="buttonText" style="text-decoration:none;" >{{scope.row.examScoresUrl}}</a>
             </template>
           </el-table-column>
           <el-table-column prop="status" :formatter="statusFormat" label="考试状态" width="150">

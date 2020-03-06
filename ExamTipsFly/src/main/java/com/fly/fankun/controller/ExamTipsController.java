@@ -6,6 +6,7 @@ import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.AdminInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
+import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
 import com.fly.fankun.model.vo.outVo.AdminOutVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
@@ -45,7 +46,6 @@ public class ExamTipsController extends BaseController{
     @PostMapping(value = "/editExamTips",produces="application/json;charset=UTF-8")
     @ApiOperation(value = "编辑考试信息",response = ExamTipsOutVo.class)
     public BaseResult editExamTips(@Valid  @RequestBody ExamTipsInputVo examTipsInputVo) {
-        System.out.println(examTipsInputVo);
         ExamTipsOutVo resp=  examTipsService.editExamTips(examTipsInputVo);
         return BaseResult.success(resp);
     }
@@ -54,7 +54,6 @@ public class ExamTipsController extends BaseController{
     @PostMapping(value = "/addExamScores",produces="application/json;charset=UTF-8")
     @ApiOperation(value = "添加考试成绩公布信息")
     public BaseResult addExamScores(@Valid  @RequestBody ExamScoresOpenInputVo examScoresOpenInputVo){
-        System.out.println(examScoresOpenInputVo);
         examTipsService.addExamScores(examScoresOpenInputVo);
         return BaseResult.success("添加成功");
     }
@@ -83,6 +82,13 @@ public class ExamTipsController extends BaseController{
     @ApiOperation(value = "分页查询考试信息",response = ExamTipsOutVo.class)
     public BaseResult<PageBean<ExamTipsOutVo>> queryPage(@RequestParam(required = false) Integer deleted,@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
         PageBean<ExamTipsOutVo> resp = examTipsService.queryPage(deleted,pageNum,pageSize);
+        return BaseResult.success(resp);
+    }
+
+    @GetMapping("/queryPageByName")
+    @ApiOperation(value = "模糊分页查询考试信息",response = ExamTipsOutVo.class)
+    public BaseResult<PageBean<ExamTipsOutVo>> queryPageByName(QueryInfoInputVo queryInfoInputVo) {
+        PageBean<ExamTipsOutVo> resp = examTipsService.queryPageByInfo(queryInfoInputVo);
         return BaseResult.success(resp);
     }
 

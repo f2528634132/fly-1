@@ -235,7 +235,7 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
-  <select id="list" resultMap="ExamBaseResultMap" parameterType="java.lang.Integer" >
+  <select id="list" resultMap="ExamBaseResultMap" parameterType="com.fly.fankun.model.vo.inputVo.QueryInfoInputVo" >
     select
     <include refid="Base_Column_List" />
     from exam_tips
@@ -243,7 +243,11 @@
       <if test="null != deleted">
        and deleted = #{deleted,jdbcType=INTEGER}
       </if>
+      <if test="null != str">
+        and exam_tips_title LIKE '%${str}%'
+      </if>
     </where>
     order by update_time desc
   </select>
+
 </mapper>
