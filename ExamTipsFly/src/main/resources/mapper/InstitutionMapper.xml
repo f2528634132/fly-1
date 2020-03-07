@@ -1,0 +1,230 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fly.fankun.mapper.InstitutionMapper" >
+  <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.Institution" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_type_id" property="examTypeId" jdbcType="INTEGER" />
+    <result column="course_type" property="courseType" jdbcType="INTEGER" />
+    <result column="course_title" property="courseTitle" jdbcType="VARCHAR" />
+    <result column="course_picture" property="coursePicture" jdbcType="VARCHAR" />
+    <result column="course_comment" property="courseComment" jdbcType="VARCHAR" />
+    <result column="creater_admin_id" property="createrAdminId" jdbcType="INTEGER" />
+    <result column="status" property="status" jdbcType="INTEGER" />
+    <result column="createtime" property="createtime" jdbcType="TIMESTAMP" />
+    <result column="updatetime" property="updatetime" jdbcType="TIMESTAMP" />
+    <result column="deleted" property="deleted" jdbcType="INTEGER" />
+    <result column="institution" property="institution" jdbcType="VARCHAR" />
+    <result column="course_price" property="coursePrice" jdbcType="NUMERIC" />
+    <result column="courser_time" property="courserTime" jdbcType="DATE" />
+    <result column="institution_type" property="institutionType" jdbcType="INTEGER" />
+    <result column="course_url" property="courseUrl" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, exam_type_id, course_type, course_title, course_picture, course_comment, creater_admin_id, 
+    status, createtime, updatetime, deleted, institution, course_price, courser_time, 
+    institution_type, course_url
+  </sql>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from institution
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="list" resultMap="BaseResultMap">
+    select
+    <include refid="Base_Column_List" />
+    from institution
+    order by createtime desc
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from institution
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <insert id="insert" parameterType="com.fly.fankun.model.entity.Institution" >
+    insert into institution (id, exam_type_id, course_type, 
+      course_title, course_picture, course_comment, 
+      creater_admin_id, status, createtime, 
+      updatetime, deleted, institution, 
+      course_price, courser_time, institution_type, 
+      course_url)
+    values (#{id,jdbcType=INTEGER}, #{examTypeId,jdbcType=INTEGER}, #{courseType,jdbcType=INTEGER}, 
+      #{courseTitle,jdbcType=VARCHAR}, #{coursePicture,jdbcType=VARCHAR}, #{courseComment,jdbcType=VARCHAR}, 
+      #{createrAdminId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
+      #{updatetime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER}, #{institution,jdbcType=VARCHAR}, 
+      #{coursePrice,jdbcType=NUMERIC}, #{courserTime,jdbcType=DATE}, #{institutionType,jdbcType=INTEGER}, 
+      #{courseUrl,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.Institution" >
+    insert into institution
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="examTypeId != null" >
+        exam_type_id,
+      </if>
+      <if test="courseType != null" >
+        course_type,
+      </if>
+      <if test="courseTitle != null" >
+        course_title,
+      </if>
+      <if test="coursePicture != null" >
+        course_picture,
+      </if>
+      <if test="courseComment != null" >
+        course_comment,
+      </if>
+      <if test="createrAdminId != null" >
+        creater_admin_id,
+      </if>
+      <if test="status != null" >
+        status,
+      </if>
+      <if test="createtime != null" >
+        createtime,
+      </if>
+      <if test="updatetime != null" >
+        updatetime,
+      </if>
+      <if test="deleted != null" >
+        deleted,
+      </if>
+      <if test="institution != null" >
+        institution,
+      </if>
+      <if test="coursePrice != null" >
+        course_price,
+      </if>
+      <if test="courserTime != null" >
+        courser_time,
+      </if>
+      <if test="institutionType != null" >
+        institution_type,
+      </if>
+      <if test="courseUrl != null" >
+        course_url,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="examTypeId != null" >
+        #{examTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseType != null" >
+        #{courseType,jdbcType=INTEGER},
+      </if>
+      <if test="courseTitle != null" >
+        #{courseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePicture != null" >
+        #{coursePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="courseComment != null" >
+        #{courseComment,jdbcType=VARCHAR},
+      </if>
+      <if test="createrAdminId != null" >
+        #{createrAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="institution != null" >
+        #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        #{coursePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="courserTime != null" >
+        #{courserTime,jdbcType=DATE},
+      </if>
+      <if test="institutionType != null" >
+        #{institutionType,jdbcType=INTEGER},
+      </if>
+      <if test="courseUrl != null" >
+        #{courseUrl,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <update id="updateByPrimaryKeySelective" parameterType="com.fly.fankun.model.entity.Institution" >
+    update institution
+    <set >
+      <if test="examTypeId != null" >
+        exam_type_id = #{examTypeId,jdbcType=INTEGER},
+      </if>
+      <if test="courseType != null" >
+        course_type = #{courseType,jdbcType=INTEGER},
+      </if>
+      <if test="courseTitle != null" >
+        course_title = #{courseTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePicture != null" >
+        course_picture = #{coursePicture,jdbcType=VARCHAR},
+      </if>
+      <if test="courseComment != null" >
+        course_comment = #{courseComment,jdbcType=VARCHAR},
+      </if>
+      <if test="createrAdminId != null" >
+        creater_admin_id = #{createrAdminId,jdbcType=INTEGER},
+      </if>
+      <if test="status != null" >
+        status = #{status,jdbcType=INTEGER},
+      </if>
+      <if test="createtime != null" >
+        createtime = #{createtime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="updatetime != null" >
+        updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      </if>
+      <if test="deleted != null" >
+        deleted = #{deleted,jdbcType=INTEGER},
+      </if>
+      <if test="institution != null" >
+        institution = #{institution,jdbcType=VARCHAR},
+      </if>
+      <if test="coursePrice != null" >
+        course_price = #{coursePrice,jdbcType=NUMERIC},
+      </if>
+      <if test="courserTime != null" >
+        courser_time = #{courserTime,jdbcType=DATE},
+      </if>
+      <if test="institutionType != null" >
+        institution_type = #{institutionType,jdbcType=INTEGER},
+      </if>
+      <if test="courseUrl != null" >
+        course_url = #{courseUrl,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.fly.fankun.model.entity.Institution" >
+    update institution
+    set exam_type_id = #{examTypeId,jdbcType=INTEGER},
+      course_type = #{courseType,jdbcType=INTEGER},
+      course_title = #{courseTitle,jdbcType=VARCHAR},
+      course_picture = #{coursePicture,jdbcType=VARCHAR},
+      course_comment = #{courseComment,jdbcType=VARCHAR},
+      creater_admin_id = #{createrAdminId,jdbcType=INTEGER},
+      status = #{status,jdbcType=INTEGER},
+      createtime = #{createtime,jdbcType=TIMESTAMP},
+      updatetime = #{updatetime,jdbcType=TIMESTAMP},
+      deleted = #{deleted,jdbcType=INTEGER},
+      institution = #{institution,jdbcType=VARCHAR},
+      course_price = #{coursePrice,jdbcType=NUMERIC},
+      courser_time = #{courserTime,jdbcType=DATE},
+      institution_type = #{institutionType,jdbcType=INTEGER},
+      course_url = #{courseUrl,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
