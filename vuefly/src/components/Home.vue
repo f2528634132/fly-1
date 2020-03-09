@@ -62,8 +62,8 @@
               <el-button type="text">建议完善个人信息，系统将会为你推荐考试</el-button>
 
               <el-row :gutter="100">
-                <el-col :span="8"  v-for="c in 5">
-              <el-card class="box-card" shadow="hover" style="margin-top: 20px" id="c">
+                <el-col :span="8"  v-for="c in 5" :key="c">
+              <el-card class="box-card" shadow="hover" style="margin-top: 20px" :id="c">
                 <div slot="header" class="clearfix">
                   <span>同专业都在考的证</span>
                   <el-button style="float: right; padding: 3px 0" type="text">赶紧报名</el-button>

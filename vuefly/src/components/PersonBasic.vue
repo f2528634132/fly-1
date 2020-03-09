@@ -44,7 +44,7 @@
             </el-form-item>
             <el-form-item>
               <el-button type="primary" @click="onSubmit">保存修改</el-button>
-              <el-button>取消</el-button>
+              <el-button type="info">取消</el-button>
             </el-form-item>
           </div>
           </el-form>

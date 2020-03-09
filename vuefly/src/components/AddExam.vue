@@ -119,16 +119,6 @@
           },
           withCredentials: true,
           data: JSON.stringify(inputVo)
-          //   data: JSON.stringify({
-          //     "examBegintime": "2019-10-29T09:54:10.912Z",
-          //     "examComment": "test",
-          //     "examEndtime": "2019-10-29T09:54:10.912Z",
-          //     "examTipsTitle": "test",
-          //     "examTypeId": 0,
-          //     "examUrl": "test",
-          //     "signupBegintime": "2019-10-29T09:54:10.912Z",
-          //     "signupEndtime": "2019-10-29T09:54:10.912Z"
-          //   })
         }).then((res) => {
           console.log(res);
         });

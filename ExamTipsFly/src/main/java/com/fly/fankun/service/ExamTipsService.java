@@ -4,6 +4,7 @@ import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
+import com.fly.fankun.model.vo.outVo.ExamScoresOutVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
@@ -33,4 +34,5 @@ public interface ExamTipsService {
 
     void addExamScores(ExamScoresOpenInputVo examScoresOpenInputVo);
 
+    PageBean<ExamScoresOutVo> examScoresByAdmin(Integer deleted, Integer pageNum, Integer pageSize);
 }

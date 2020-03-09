@@ -30,6 +30,7 @@ import MyCollectForum from "../components/MyCollectForum";
 import MyCollectAd from "../components/MyCollectAd";
 import Message from "element-ui/packages/message/src/main";
 import MessageDetails from "../components/MessageDetails";
+import ExamScoresByAdmin from "../components/ExamScoresByAdmin";
 Vue.use(Router)
 
 const router =  new Router({
@@ -58,6 +59,7 @@ const router =  new Router({
         { path: '/Content', component: Content},
         { path: '/ExamEdit',  component: ExamEdit},
         {path: '/ExamScores',  component: ExamScores},
+        {path: '/ExamScoresByAdmin',  component: ExamScoresByAdmin},
         {path: '/TopicEdit', component: TopicEdit},
         {path: '/MyExam', component: MyExam},
         {path: '/MyCollectExam', component: MyCollectExam},

@@ -7,10 +7,7 @@ import com.fly.fankun.model.vo.inputVo.AdminInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
-import com.fly.fankun.model.vo.outVo.AdminOutVo;
-import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
-import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
-import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
+import com.fly.fankun.model.vo.outVo.*;
 import com.fly.fankun.service.AdminService;
 import com.fly.fankun.service.ExamTipsService;
 import io.swagger.annotations.Api;
@@ -56,6 +53,14 @@ public class ExamTipsController extends BaseController{
     public BaseResult addExamScores(@Valid  @RequestBody ExamScoresOpenInputVo examScoresOpenInputVo){
         examTipsService.addExamScores(examScoresOpenInputVo);
         return BaseResult.success("添加成功");
+    }
+
+
+    @GetMapping("/examScores")
+    @ApiOperation(value = "管理员分页查询考试公布",response = ExamScoresOutVo.class)
+    public BaseResult<PageBean<ExamScoresOutVo>> ExamScoresByAdmin(@ApiParam(value = "当前页", required = true) @RequestParam Integer pageNum, @RequestParam @ApiParam(value = "分页大小", required = true) Integer pageSize, Integer deleted) {
+        PageBean<ExamScoresOutVo> resp = examTipsService.examScoresByAdmin(deleted,pageNum,pageSize);
+        return BaseResult.success(resp);
     }
 
     @GetMapping("/editStatus")

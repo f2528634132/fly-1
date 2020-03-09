@@ -41,7 +41,7 @@ Vue.prototype.utils=utils;
 new Vue({
   el: '#app',
   router,
- store:store,
+  store:store,
   components: { App },
   template: '<App/>'
 })

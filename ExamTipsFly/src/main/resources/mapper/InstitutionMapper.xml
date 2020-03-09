@@ -4,7 +4,7 @@
   <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.Institution" >
     <id column="id" property="id" jdbcType="INTEGER" />
     <result column="exam_type_id" property="examTypeId" jdbcType="INTEGER" />
-    <result column="course_type" property="courseType" jdbcType="INTEGER" />
+    <result column="course_type" property="courseType" jdbcType="VARCHAR" />
     <result column="course_title" property="courseTitle" jdbcType="VARCHAR" />
     <result column="course_picture" property="coursePicture" jdbcType="VARCHAR" />
     <result column="course_comment" property="courseComment" jdbcType="VARCHAR" />
@@ -15,13 +15,13 @@
     <result column="deleted" property="deleted" jdbcType="INTEGER" />
     <result column="institution" property="institution" jdbcType="VARCHAR" />
     <result column="course_price" property="coursePrice" jdbcType="NUMERIC" />
-    <result column="courser_time" property="courserTime" jdbcType="DATE" />
+    <result column="course_time" property="courseTime" jdbcType="DATE" />
     <result column="institution_type" property="institutionType" jdbcType="INTEGER" />
     <result column="course_url" property="courseUrl" jdbcType="VARCHAR" />
   </resultMap>
   <sql id="Base_Column_List" >
     id, exam_type_id, course_type, course_title, course_picture, course_comment, creater_admin_id, 
-    status, createtime, updatetime, deleted, institution, course_price, courser_time, 
+    status, createtime, updatetime, deleted, institution, course_price, course_time,
     institution_type, course_url
   </sql>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
@@ -30,10 +30,15 @@
     from institution
     where id = #{id,jdbcType=INTEGER}
   </select>
-  <select id="list" resultMap="BaseResultMap">
+  <select id="list" resultMap="BaseResultMap" parameterType="java.lang.Integer">
     select
     <include refid="Base_Column_List" />
     from institution
+    <where>
+      <if test="institutionType!=null">
+        institution_type=#{institutionType}
+      </if>
+    </where>
     order by createtime desc
   </select>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
@@ -45,13 +50,13 @@
       course_title, course_picture, course_comment, 
       creater_admin_id, status, createtime, 
       updatetime, deleted, institution, 
-      course_price, courser_time, institution_type, 
+      course_price, course_time, institution_type,
       course_url)
-    values (#{id,jdbcType=INTEGER}, #{examTypeId,jdbcType=INTEGER}, #{courseType,jdbcType=INTEGER}, 
+    values (#{id,jdbcType=INTEGER}, #{examTypeId,jdbcType=INTEGER}, #{courseType,jdbcType=VARCHAR},
       #{courseTitle,jdbcType=VARCHAR}, #{coursePicture,jdbcType=VARCHAR}, #{courseComment,jdbcType=VARCHAR}, 
       #{createrAdminId,jdbcType=INTEGER}, #{status,jdbcType=INTEGER}, #{createtime,jdbcType=TIMESTAMP}, 
       #{updatetime,jdbcType=TIMESTAMP}, #{deleted,jdbcType=INTEGER}, #{institution,jdbcType=VARCHAR}, 
-      #{coursePrice,jdbcType=NUMERIC}, #{courserTime,jdbcType=DATE}, #{institutionType,jdbcType=INTEGER}, 
+      #{coursePrice,jdbcType=NUMERIC}, #{courseTime,jdbcType=DATE}, #{institutionType,jdbcType=INTEGER},
       #{courseUrl,jdbcType=VARCHAR})
   </insert>
   <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.Institution" >
@@ -96,8 +101,8 @@
       <if test="coursePrice != null" >
         course_price,
       </if>
-      <if test="courserTime != null" >
-        courser_time,
+      <if test="courseTime != null" >
+        course_time,
       </if>
       <if test="institutionType != null" >
         institution_type,
@@ -114,7 +119,7 @@
         #{examTypeId,jdbcType=INTEGER},
       </if>
       <if test="courseType != null" >
-        #{courseType,jdbcType=INTEGER},
+        #{courseType,jdbcType=VARCHAR},
       </if>
       <if test="courseTitle != null" >
         #{courseTitle,jdbcType=VARCHAR},
@@ -146,8 +151,8 @@
       <if test="coursePrice != null" >
         #{coursePrice,jdbcType=NUMERIC},
       </if>
-      <if test="courserTime != null" >
-        #{courserTime,jdbcType=DATE},
+      <if test="courseTime != null" >
+        #{courseTime,jdbcType=DATE},
       </if>
       <if test="institutionType != null" >
         #{institutionType,jdbcType=INTEGER},
@@ -159,12 +164,12 @@
   </insert>
   <update id="updateByPrimaryKeySelective" parameterType="com.fly.fankun.model.entity.Institution" >
     update institution
-    <set >
+    <set>
       <if test="examTypeId != null" >
         exam_type_id = #{examTypeId,jdbcType=INTEGER},
       </if>
       <if test="courseType != null" >
-        course_type = #{courseType,jdbcType=INTEGER},
+        course_type = #{courseType,jdbcType=VARCHAR},
       </if>
       <if test="courseTitle != null" >
         course_title = #{courseTitle,jdbcType=VARCHAR},
@@ -196,8 +201,8 @@
       <if test="coursePrice != null" >
         course_price = #{coursePrice,jdbcType=NUMERIC},
       </if>
-      <if test="courserTime != null" >
-        courser_time = #{courserTime,jdbcType=DATE},
+      <if test="courseTime != null" >
+        course_time = #{courseTime,jdbcType=DATE},
       </if>
       <if test="institutionType != null" >
         institution_type = #{institutionType,jdbcType=INTEGER},
@@ -211,7 +216,7 @@
   <update id="updateByPrimaryKey" parameterType="com.fly.fankun.model.entity.Institution" >
     update institution
     set exam_type_id = #{examTypeId,jdbcType=INTEGER},
-      course_type = #{courseType,jdbcType=INTEGER},
+      course_type = #{courseType,jdbcType=VARCHAR},
       course_title = #{courseTitle,jdbcType=VARCHAR},
       course_picture = #{coursePicture,jdbcType=VARCHAR},
       course_comment = #{courseComment,jdbcType=VARCHAR},
@@ -222,7 +227,7 @@
       deleted = #{deleted,jdbcType=INTEGER},
       institution = #{institution,jdbcType=VARCHAR},
       course_price = #{coursePrice,jdbcType=NUMERIC},
-      courser_time = #{courserTime,jdbcType=DATE},
+      course_time = #{courseTime,jdbcType=DATE},
       institution_type = #{institutionType,jdbcType=INTEGER},
       course_url = #{courseUrl,jdbcType=VARCHAR}
     where id = #{id,jdbcType=INTEGER}

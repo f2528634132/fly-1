@@ -1,0 +1,181 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.fly.fankun.mapper.TutorialMapper">
+    <resultMap id="BaseResultMap" type="com.fly.fankun.model.entity.Tutorial">
+        <id property="id" column="id"></id>
+        <result property="tutorialName" column="tutorial_name"></result>
+        <result property="tutorialPress" column="tutorial_press"></result>
+        <result property="tutorialSynopsis" column="tutorial_synopsis"></result>
+        <result property="tutorialPrice" column="tutorial_price"></result>
+        <result property="tutorialSellNumber" column="tutorial_sell_number"></result>
+        <result property="tutorialComment" column="tutorial_comment"></result>
+        <result property="status" column="status"></result>
+        <result property="createrAdminId" column="creater_admin_id"></result>
+        <result property="createtime" column="createtime"></result>
+        <result property="updatetime" column="updatetime"></result>
+        <result property="tutorialPicture" column="tutorial_picture"></result>
+        <result property="deleted" column="deleted"></result>
+        <result property="tutorialType" column="tutorial_type"></result>
+    </resultMap>
+    <insert id="insertSelective" parameterType="com.fly.fankun.model.entity.Tutorial">
+        insert into tutorial
+        <trim prefix="(" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                id,
+            </if>
+            <if test="tutorialName !=null">
+                tutorial_name,
+            </if>
+            <if test="tutorialPress !=null">
+                tutorial_press,
+            </if>
+            <if test="tutorialSynopsis !=null">
+                tutorial_synopsis,
+            </if>
+            <if test="tutorialPrice !=null">
+                tutorial_price,
+            </if>
+            <if test="tutorialSellNumber !=null">
+                tutorial_sell_number,
+            </if>
+            <if test="tutorialComment !=null">
+                tutorial_comment,
+            </if>
+            <if test="status !=null">
+                status,
+            </if>
+            <if test="createrAdminId !=null">
+                creater_admin_id,
+            </if>
+            <if test="createtime !=null">
+                createtime,
+            </if>
+            <if test="updatetime !=null">
+                updatetime,
+            </if>
+            <if test="tutorialPicture !=null">
+                tutorial_picture,
+            </if>
+            <if test="deleted !=null">
+                deleted,
+            </if>
+            <if test="tutorialType !=null">
+                tutorial_type
+            </if>
+        </trim>
+        <trim prefix="values (" suffix=")" suffixOverrides=",">
+            <if test="id !=null">
+                #{id,jdbcType=INTEGER},
+            </if>
+            <if test="tutorialName !=null">
+                #{tutorialName,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialPress !=null">
+                #{tutorialPress,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialSynopsis !=null">
+                #{tutorialSynopsis,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialPrice !=null">
+                #{tutorialPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="tutorialSellNumber !=null">
+                #{tutorialSellNumber,jdbcType=INTEGER},
+            </if>
+            <if test="tutorialComment !=null">
+                #{tutorialComment,jdbcType=VARCHAR},
+            </if>
+            <if test="status !=null">
+                #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createrAdminId !=null">
+                #{createrAdminId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime !=null">
+                #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime !=null">
+                #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tutorialPicture !=null">
+                #{tutorialPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted !=null">
+                #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="tutorialType !=null">
+                #{tutorialType,jdbcTypa=INTEGER}
+            </if>
+        </trim>
+    </insert>
+    <update id="updateByPrimaryKey" parameterType="com.fly.fankun.model.entity.Tutorial">
+        update tutorial
+        <set>
+            <if test="tutorialName !=null">
+                tutorial_name = #{tutorialName,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialPress !=null">
+                tutorial_press=#{tutorialPress,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialSynopsis !=null">
+                tutorial_synopsis = #{tutorialSynopsis,jdbcType=VARCHAR},
+            </if>
+            <if test="tutorialPrice !=null">
+                tutorial_price = #{tutorialPrice,jdbcType=NUMERIC},
+            </if>
+            <if test="tutorialSellNumber !=null">
+                tutorial_sell_number  = #{tutorialSellNumber,jdbcType=INTEGER},
+            </if>
+            <if test="tutorialComment !=null">
+                tutorial_comment  = #{tutorialComment,jdbcType=VARCHAR},
+            </if>
+            <if test="status !=null">
+                status= #{status,jdbcType=INTEGER},
+            </if>
+            <if test="createrAdminId !=null">
+                creater_admin_id  = #{createrAdminId,jdbcType=INTEGER},
+            </if>
+            <if test="createtime !=null">
+                createtime =  #{createtime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="updatetime !=null">
+                updatetime = #{updatetime,jdbcType=TIMESTAMP},
+            </if>
+            <if test="tutorialPicture !=null">
+                tutorial_picture = #{tutorialPicture,jdbcType=VARCHAR},
+            </if>
+            <if test="deleted !=null">
+                deleted= #{deleted,jdbcType=INTEGER},
+            </if>
+            <if test="tutorialType !=null">
+                 tutorial_type= #{tutorialType,jdbcTypa=INTEGER}
+            </if>
+        </set>
+        where id =  #{id,jdbcType=INTEGER}
+    </update>
+
+    <resultMap id="TutorialOutputVoMap" type="com.fly.fankun.model.vo.outVo.TutorialOutputVo">
+        <id property="id" column="id"></id>
+        <result property="tutorialName" column="tutorial_name"></result>
+        <result property="tutorialPress" column="tutorial_press"></result>
+        <result property="tutorialSynopsis" column="tutorial_synopsis"></result>
+        <result property="tutorialPrice" column="tutorial_price"></result>
+        <result property="tutorialComment" column="tutorial_comment"></result>
+        <result property="status" column="status"></result>
+        <result property="tutorialPicture" column="tutorial_picture"></result>
+        <result property="tutorialType" column="tutorial_type"></result>
+        <result property="tutorialSellNumber" column="tutorial_sell_number"></result>
+    </resultMap>
+    <select id="tutorialList" parameterType="java.lang.Integer" resultMap="TutorialOutputVoMap">
+        select id,tutorial_name,tutorial_press,tutorial_synopsis,tutorial_price,tutorial_comment,status,tutorial_picture,tutorial_type,tutorial_sell_number
+        from tutorial
+        <where>
+            <if test="deleted != null">
+                and deleted = #{deleted}
+            </if>
+            <if test="tutorialType !=null">
+                and tutorial_type= #{tutorialType}
+            </if>
+        </where>
+    </select>
+</mapper>

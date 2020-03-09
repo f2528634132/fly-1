@@ -91,4 +91,5 @@ public class MyExamController extends BaseController{
         PageBean<MyExamOutVo> resp = myExamService.ExamScores(deleted,pageNum,pageSize,this.getUserId(),status);
         return BaseResult.success(resp);
     }
+
 }

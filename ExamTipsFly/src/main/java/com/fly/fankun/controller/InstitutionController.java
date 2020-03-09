@@ -63,10 +63,17 @@ public class InstitutionController extends BaseController{
     }
 
 
-    @GetMapping("/queryPage")
+    @GetMapping("/queryPageBySelf")
     @ApiOperation(value = "分页查询考试信息",response = InstitutionFormOutVo.class)
-    public BaseResult<PageBean<InstitutionFormOutVo>> queryPage(@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
-        PageBean<InstitutionFormOutVo> resp = institutionService.queryPage(pageNum,pageSize);
+    public BaseResult<PageBean<InstitutionFormOutVo>> queryPageBySelf(@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
+        PageBean<InstitutionFormOutVo> resp = institutionService.queryPageBySelf(pageNum,pageSize);
+        return BaseResult.success(resp);
+    }
+
+    @GetMapping("/queryPageByThird")
+    @ApiOperation(value = "分页查询考试信息",response = InstitutionFormOutVo.class)
+    public BaseResult<PageBean<InstitutionFormOutVo>> queryPageByThird(@ApiParam(value = "当前页",required = true) @RequestParam Integer pageNum,@RequestParam@ApiParam(value = "分页大小",required = true) Integer pageSize) {
+        PageBean<InstitutionFormOutVo> resp = institutionService.queryPageByThird(pageNum,pageSize);
         return BaseResult.success(resp);
     }
 

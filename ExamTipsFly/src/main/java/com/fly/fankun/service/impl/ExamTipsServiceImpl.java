@@ -10,6 +10,7 @@ import com.fly.fankun.model.result.PageBean;
 import com.fly.fankun.model.vo.inputVo.ExamScoresOpenInputVo;
 import com.fly.fankun.model.vo.inputVo.ExamTipsInputVo;
 import com.fly.fankun.model.vo.inputVo.QueryInfoInputVo;
+import com.fly.fankun.model.vo.outVo.ExamScoresOutVo;
 import com.fly.fankun.model.vo.outVo.ExamStatisticsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTipsOutVo;
 import com.fly.fankun.model.vo.outVo.ExamTypeOutVo;
@@ -124,6 +125,15 @@ public class ExamTipsServiceImpl implements ExamTipsService {
         List<ExamTipsOutVo> resultList = examTipsMapper.list(queryInfoInputVo);
         PageBean<ExamTipsOutVo> pageData = new PageBean<ExamTipsOutVo>(queryInfoInputVo.getPageNum(),
                 queryInfoInputVo.getPageSize(), (int)page.getTotal());
+        pageData.setItems(resultList);
+        return pageData;
+    }
+
+    @Override
+    public PageBean<ExamScoresOutVo> examScoresByAdmin(Integer deleted, Integer pageNum, Integer pageSize) {
+        Page page=PageHelper.startPage(pageNum,pageSize);
+        List<ExamScoresOutVo> resultList=examTipsMapper.examScoresList(deleted);
+        PageBean<ExamScoresOutVo> pageData=new PageBean<>(pageNum,pageSize,(int)page.getTotal());
         pageData.setItems(resultList);
         return pageData;
     }

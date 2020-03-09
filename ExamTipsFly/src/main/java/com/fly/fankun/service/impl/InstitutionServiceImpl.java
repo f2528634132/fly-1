@@ -51,14 +51,28 @@ public class InstitutionServiceImpl implements InstitutionService {
     }
 
     @Override
-    public PageBean<InstitutionFormOutVo> queryPage(Integer pageNum, Integer pageSize) {
+    public PageBean<InstitutionFormOutVo> queryPageBySelf(Integer pageNum, Integer pageSize) {
+        Page page = PageHelper.startPage(pageNum, pageSize);
+        //("机构类型institutionType：0：自有课程；1：第三方合作")
+        List<Institution> resultList = institutionMapper.list(0);
+
+        PageBean<InstitutionFormOutVo> pageData = new PageBean<>(pageNum,
+                pageSize, (int)page.getTotal());
+        pageData.setItems(BeanUtil.copy(resultList, InstitutionFormOutVo.class));
+        return pageData;
+    }
+
+    @Override
+    public PageBean<InstitutionFormOutVo> queryPageByThird(Integer pageNum, Integer pageSize) {
 
         Page page = PageHelper.startPage(pageNum, pageSize);
-        List<Institution> resultList = institutionMapper.list();
+        //("机构类型institutionType：0：自有课程；1：第三方合作")
+        List<Institution> resultList = institutionMapper.list(1);
 
         PageBean<InstitutionFormOutVo> pageData = new PageBean<>(pageNum,
             pageSize, (int)page.getTotal());
         pageData.setItems(BeanUtil.copy(resultList, InstitutionFormOutVo.class));
         return pageData;
     }
+
 }

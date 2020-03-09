@@ -1,6 +1,8 @@
 package com.fly.fankun.mapper;
 
 import com.fly.fankun.model.entity.Institution;
+import org.apache.ibatis.annotations.Param;
+
 import java.util.List;
 
 public interface InstitutionMapper {
@@ -16,5 +18,5 @@ public interface InstitutionMapper {
 
     int updateByPrimaryKey(Institution record);
 
-    List<Institution> list();
+    List<Institution> list(@Param(value = "institutionType")Integer institutionType);
 }

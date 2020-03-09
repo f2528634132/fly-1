@@ -13,7 +13,7 @@ module.exports = {
     proxyTable: {
          '/': {
         target: 'http://localhost:8088',
-        changeOrigin: true,
+        changeOrigin: true,//是否跨域
         pathRewrite: {
           '^/': ''
         }
@@ -32,7 +32,7 @@ module.exports = {
     notifyOnErrors: true,
     poll: false, // https://webpack.js.org/configuration/dev-server/#devserver-watchoptions-
 
-    
+
     /**
      * Source Maps
      */

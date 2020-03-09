@@ -72,6 +72,7 @@ public class MyExamServiceImpl implements MyExamService {
         return pageData;
     }
 
+
     @Override
     @Transactional(rollbackFor = Exception.class)
     public void joinMyExam(Integer examId, Integer userId) {

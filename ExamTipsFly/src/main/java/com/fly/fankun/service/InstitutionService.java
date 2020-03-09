@@ -14,5 +14,7 @@ public interface InstitutionService {
 
     void editStatus(Integer id, Integer status);
 
-    PageBean<InstitutionFormOutVo> queryPage(Integer pageNum, Integer pageSize);
+    PageBean<InstitutionFormOutVo> queryPageBySelf(Integer pageNum, Integer pageSize);
+
+    PageBean<InstitutionFormOutVo> queryPageByThird(Integer pageNum, Integer pageSize);
 }

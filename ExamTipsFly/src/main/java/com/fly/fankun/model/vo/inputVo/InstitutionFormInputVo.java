@@ -18,9 +18,9 @@ public class InstitutionFormInputVo {
     private Integer id;
 
     @ApiModelProperty("上课形式：0：线上；1：线下；2：线上+线下")
-    @Range(min = 0,max = 2,message = "上课形式：0：线上；1：线下；2：线上+线下")
+//    @Range(min = 0,max = 2,message = "上课形式：0：线上；1：线下；2：线上+线下")
     @NotNull
-    private Integer courseType;
+    private String courseType;
     @ApiModelProperty("课程名称")
     private String courseTitle;
     @ApiModelProperty("封面")
@@ -34,7 +34,7 @@ public class InstitutionFormInputVo {
     @ApiModelProperty("课程价格")
     private BigDecimal coursePrice;
     @ApiModelProperty("开课时间")
-    private Date courserTime;
+    private Date courseTime;
     @ApiModelProperty("机构类型：0：自有课程；1：第三方合作")
     @Range(min = 0,max = 1,message = "机构类型：0：自有课程；1：第三方合作")
     @NotNull

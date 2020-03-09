@@ -235,6 +235,24 @@
     where id = #{id,jdbcType=INTEGER}
   </select>
 
+  <resultMap id="ExamScoresResultMap" type="com.fly.fankun.model.vo.outVo.ExamScoresOutVo" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="exam_tips_title" property="examTipsTitle" jdbcType="VARCHAR" />
+    <result column="exam_scores_time" property="examScoresTime" jdbcType="TIMESTAMP" />
+    <result column="exam_scores_url" property="examScoresUrl" jdbcType="VARCHAR" />
+    <result column="exam_scores_comment" property="examScoresComment" jdbcType="VARCHAR" />
+
+  </resultMap>
+  <select id="examScoresList" resultMap="ExamScoresResultMap" parameterType="java.lang.Integer">
+    select exam_tips_title,exam_scores_time,exam_scores_url,exam_scores_comment from exam_tips
+    <where>
+      <if test="deleted != null">
+        and deleted = #{deleted}
+      </if>
+    </where>
+    and exam_scores_time is not NULL
+  </select>
+
   <select id="list" resultMap="ExamBaseResultMap" parameterType="com.fly.fankun.model.vo.inputVo.QueryInfoInputVo" >
     select
     <include refid="Base_Column_List" />
