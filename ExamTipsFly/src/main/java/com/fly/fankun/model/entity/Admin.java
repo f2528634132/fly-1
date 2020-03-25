@@ -1,7 +1,9 @@
 package com.fly.fankun.model.entity;
 
 import java.util.Date;
+import lombok.Data;
 
+@Data
 public class Admin {
     private Integer id;
 
