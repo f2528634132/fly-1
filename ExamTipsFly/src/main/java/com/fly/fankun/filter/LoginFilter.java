@@ -36,8 +36,8 @@ public class LoginFilter implements Filter {
     @Autowired
     JwtHelper jwtHelper;
     //免登录就可访问的路径(比如:注册,登录,注册页面上的一些获取数据等)
-    String[] includeUrls = new String[]{"/swagger-ui.html","/webjars/.*","/swagger-resources/.*","/swagger-resources","/v2/api-docs/.*","/v2/api-docs","/reports/groupByExam",
-            "/examTips/.*", "/auth/.*","/file/.*","/static/.*","/institution/.*","/tutorial/.*"
+    String[] includeUrls = new String[]{"/api/swagger-ui.html","/api/webjars/.*","/api/swagger-resources/.*","/api/swagger-resources","/api/v2/api-docs/.*","/api/v2/api-docs","/api/reports/groupByExam",
+            "/api/examTips/.*", "/api/auth/.*","/api/file/.*","/api/static/.*","/api/institution/.*","/api/tutorial/.*"
     };
 
     @Override

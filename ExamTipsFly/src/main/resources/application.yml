@@ -13,8 +13,9 @@
 #spring.http.encoding.charset=UTF-8
 #spring.http.encoding.enabled=true
 server:
-  port: 8087
-
+  port: 8086
+  servlet:
+    context-path: /api
 
 spring:
   datasource:
@@ -55,6 +56,7 @@ spring:
      port: 6379
      database: 0
      timeout: 10000
+     password: fly316416
   resources:
     static-locations: /META-INF/resources/,classpath:/static,classpath:/resources/,file:${upload.filePath},file:static/
 swagger:
