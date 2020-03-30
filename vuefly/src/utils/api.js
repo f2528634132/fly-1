@@ -44,7 +44,7 @@ axios.interceptors.response.use(data => {
   }
   // return Promise.resolve(err);
 })
-let base = '';
+let base = '/api';
 export const postRequest = (url, params) => {
   return axios({
     method: 'post',

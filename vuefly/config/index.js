@@ -9,35 +9,35 @@ module.exports = {
 
     // Paths
     assetsSubDirectory: 'static',
-    // assetsPublicPath: './',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
+    // assetsPublicPath: '/',
     proxyTable: {
-         '/': {
-        // target: 'http://106.15.249.213:8086',
-        target: 'http://192.168.43.84:8086',
-        changeOrigin: true,//是否跨域
-        pathRewrite: {
-          '^/': ''
-        }
-      },
-      '/ws/*': {
-        // target: 'ws://106.15.249.213:8082',
-        target: 'ws://127.0.0.1:8082',
-        ws: true
-      },
+      //    '/': {
+      //   target: 'http://106.15.249.213:8086/',
+      //   // target: 'http://192.168.43.84:8086/api/',
+      //   changeOrigin: true,//是否跨域
+      //   pathRewrite: {
+      //     '^/': ''
+      //   }
+      // },
+      // '/ws/*': {
+      //   target: 'ws://106.15.249.213:8082',
+      //   // target: 'ws://127.0.0.1:8082',
+      //   ws: true
+      // },
       '/api': {
-        // target:'http://106.15.249.213:8086/',
-        target:'http://192.168.43.84:8086/',
+        target:'http://106.15.249.213:8086',
+        // target:'http://192.168.43.84:8086',
         changeOrigin: true,
         pathRewrite: {
-          '^/api': ''
+          '^/api': '/api'
         }
       }
     },
 
     // Various Dev Server settings
-    host: 'localhost', // can be overwritten by process.env.HOST
-    // host: '106.15.249.213', // can be overwritten by process.env.HOST
+    // host: 'localhost', // can be overwritten by process.env.HOST
+    host: '106.15.249.213', // can be overwritten by process.env.HOST
     port: 8082, // can be overwritten by process.env.PORT, if port is in use, a free one will be determined
     autoOpenBrowser: false,
     errorOverlay: true,
@@ -67,8 +67,8 @@ module.exports = {
     // Paths
     assetsRoot: path.resolve(__dirname, '../dist'),
     assetsSubDirectory: 'static',
-    // assetsPublicPath: './',
-    assetsPublicPath: '/',
+    assetsPublicPath: './',
+    // assetsPublicPath: '/',
 
     /**
      * Source Maps
