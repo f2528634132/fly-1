@@ -22,7 +22,7 @@ spring:
     driver-class-name: org.postgresql.Driver
     url: jdbc:postgresql://106.15.249.213:5432/exam_tips?allowMultiQueries=true
     username: postgres
-    password: 88888888
+    password: postgres
     # 以下为数据库连接池配置，比直接使用数据库的要好 https://blog.csdn.net/justlpf/article/details/80728529
 #    type: com.alibaba.druid.pool.DruidDataSource
     druid:
@@ -56,7 +56,7 @@ spring:
      port: 6379
      database: 0
      timeout: 10000
-     password: fly316416
+     password: zzrc123
   resources:
     static-locations: /META-INF/resources/,classpath:/static,classpath:/resources/,file:${upload.filePath},file:static/
 swagger:
