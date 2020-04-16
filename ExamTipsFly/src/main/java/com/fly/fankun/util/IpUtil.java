@@ -1,6 +1,6 @@
-package com.zhaopin.zhaokao.core.utils;
+package com.fly.fankun.util;
 
-import com.zhaopin.zhaokao.core.exception.BizException;
+import com.fly.fankun.exception.BizzException;
 import java.net.InetAddress;
 import javax.servlet.http.HttpServletRequest;
 import lombok.extern.slf4j.Slf4j;
@@ -57,7 +57,7 @@ public class IpUtil {
 					ipAddress = inet.getHostAddress();
 				} catch (Exception e) {
 					log.error("获取IP地址错误", e);
-					throw new BizException("Ip地址有误");
+					throw new BizzException("Ip地址有误");
 				}
 			}
 		}

@@ -60,10 +60,10 @@ public class LoginFilter implements Filter {
         }
         //从header中获取token
         String token = request.getHeader(AuthConstant.HEADER_NAME_TOKEN_REQUEST);
-        //如果为空则校验失败
+        //如果为空则返回
         if(StringUtils.isBlank(token)){
-//            throw  new BizzException(ResultStatus.UNAUTHORIZED.message);
-            onLoginFailure(response, ResultStatus.UNAUTHORIZED);
+//            onLoginFailure(response, ResultStatus.UNAUTHORIZED);
+            filterChain.doFilter(servletRequest, servletResponse);
             return;
         }
         //校验token
